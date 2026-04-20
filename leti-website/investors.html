@@ -1,0 +1,2002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LETI — Invest in Nigeria's Next Short-Let & Service Marketplace</title>
+
+  <!-- FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+
+    /* ============================================================
+       CSS VARIABLES
+    ============================================================ */
+    :root {
+      --purple-deep:   #2D0845;
+      --purple-mid:    #6B1FA1;
+      --purple-bright: #9B30FF;
+      --magenta:       #D946EF;
+      --pink-glow:     #F472B6;
+      --yellow:        #FACC15;
+      --yellow-hover:  #EAB308;
+      --cream:         #FAF7F2;
+      --cream-light:   #FDFCFA;
+      --white:         #FFFFFF;
+      --dark:          #0F0A1A;
+      --text-dark:     #1E1333;
+      --text-mid:      #4A3D5C;
+      --text-light:    #8B7FA0;
+      --text-on-dark:  #E8E0F0;
+
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body:    'DM Sans', system-ui, sans-serif;
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 22px;
+      --radius-xl: 32px;
+
+      --shadow-card:  0 4px 24px rgba(45, 8, 69, 0.07);
+      --shadow-hover: 0 16px 48px rgba(45, 8, 69, 0.14);
+      --transition:   0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      --header-bg:    rgba(45, 8, 69, 0.94);
+    }
+
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *,
+    *::before,
+    *::after {
+      margin:     0;
+      padding:    0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior:          smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family:            var(--font-body);
+      color:                  var(--text-dark);
+      background:             var(--cream);
+      line-height:            1.6;
+      overflow-x:             hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+      max-width: 100%;
+      display:   block;
+    }
+
+    a {
+      text-decoration: none;
+      color:           inherit;
+    }
+
+    button {
+      border:      none;
+      cursor:      pointer;
+      font-family: inherit;
+    }
+
+
+    /* ============================================================
+       HEADER
+    ============================================================ */
+    .header {
+      position:                fixed;
+      top:                     0;
+      left:                    0;
+      right:                   0;
+      z-index:                 1000;
+      background:              var(--header-bg);
+      backdrop-filter:         blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom:           1px solid rgba(155, 48, 255, 0.12);
+      transition:              var(--transition);
+    }
+
+    .header-inner {
+      max-width:       1280px;
+      margin:          0 auto;
+      padding:         0 28px;
+      height:          88px;
+      display:         flex;
+      align-items:     center;
+      justify-content: space-between;
+    }
+
+    .logo-link {
+      display:     flex;
+      align-items: center;
+    }
+
+    .logo-img {
+      height: 50px;
+      width:  auto;
+      filter: brightness(1.1);
+    }
+
+    .nav-desktop {
+      display:     flex;
+      align-items: center;
+      gap:         4px;
+    }
+
+    .nav-desktop a {
+      color:          rgba(255, 255, 255, 0.85);
+      font-size:      13.5px;
+      font-weight:    500;
+      padding:        9px 15px;
+      border-radius:  var(--radius-sm);
+      transition:     var(--transition);
+      white-space:    nowrap;
+      letter-spacing: 0.2px;
+    }
+
+    .nav-desktop a:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color:      #fff;
+    }
+
+    .nav-desktop a.active {
+      color: var(--yellow);
+    }
+
+    .nav-desktop a.nav-highlight {
+      background:    var(--yellow);
+      color:         var(--dark);
+      font-weight:   600;
+      padding:       9px 18px;
+      border-radius: var(--radius-md);
+    }
+
+    .nav-desktop a.nav-highlight:hover {
+      background: var(--yellow-hover);
+      transform:  translateY(-1px);
+    }
+
+    .nav-toggle {
+      display:         none;
+      width:           44px;
+      height:          44px;
+      background:      rgba(255, 255, 255, 0.06);
+      border-radius:   var(--radius-sm);
+      flex-direction:  column;
+      align-items:     center;
+      justify-content: center;
+      gap:             5px;
+      cursor:          pointer;
+      transition:      var(--transition);
+    }
+
+    .nav-toggle:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .nav-toggle span {
+      display:       block;
+      width:         22px;
+      height:        2px;
+      background:    rgba(255, 255, 255, 0.9);
+      border-radius: 2px;
+      transition:    var(--transition);
+    }
+
+    .nav-toggle.open span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .nav-toggle.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-toggle.open span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+
+    /* ============================================================
+       MOBILE NAV
+    ============================================================ */
+    .nav-mobile {
+      display:       none;
+      position:      fixed;
+      top:           88px;
+      left:          0;
+      right:         0;
+      background:    var(--purple-deep);
+      border-bottom: 2px solid rgba(155, 48, 255, 0.15);
+      padding:       12px 24px 20px;
+      transform:     translateY(-120%);
+      transition:    transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index:       999;
+    }
+
+    .nav-mobile.open {
+      transform: translateY(0);
+    }
+
+    .nav-mobile a {
+      display:       block;
+      color:         rgba(255, 255, 255, 0.85);
+      font-size:     15.5px;
+      font-weight:   500;
+      padding:       14px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      transition:    var(--transition);
+    }
+
+    .nav-mobile a:last-child {
+      border-bottom: none;
+    }
+
+    .nav-mobile a:hover,
+    .nav-mobile a.active {
+      color: var(--yellow);
+    }
+
+    .nav-mobile a.nav-highlight {
+      background:    var(--yellow);
+      color:         var(--dark);
+      border-radius: var(--radius-sm);
+      text-align:    center;
+      margin-top:    10px;
+      font-weight:   600;
+      border-bottom: none;
+      padding:       14px;
+    }
+
+
+    /* ============================================================
+       BUTTONS
+    ============================================================ */
+    .btn-primary {
+      display:       inline-flex;
+      align-items:   center;
+      gap:           8px;
+      background:    var(--yellow);
+      color:         var(--dark);
+      font-size:     15px;
+      font-weight:   600;
+      padding:       15px 30px;
+      border-radius: var(--radius-md);
+      transition:    var(--transition);
+      box-shadow:    0 4px 24px rgba(250, 204, 21, 0.25);
+      position:      relative;
+      overflow:      hidden;
+    }
+
+    .btn-primary::before {
+      content:    '';
+      position:   absolute;
+      top:        0;
+      left:       -100%;
+      width:      100%;
+      height:     100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: 0.5s;
+    }
+
+    .btn-primary:hover::before {
+      left: 100%;
+    }
+
+    .btn-primary:hover {
+      background: var(--yellow-hover);
+      transform:  translateY(-2px);
+      box-shadow: 0 8px 32px rgba(250, 204, 21, 0.35);
+    }
+
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    .hero {
+      position:    relative;
+      min-height:  85vh;
+      display:     flex;
+      align-items: center;
+      padding-top: 88px;
+      overflow:    hidden;
+      background:  linear-gradient(
+        155deg,
+        var(--purple-deep)   0%,
+        #3D1260              25%,
+        var(--purple-mid)    45%,
+        var(--purple-bright) 65%,
+        var(--magenta)       85%,
+        var(--pink-glow)     100%
+      );
+    }
+
+    .hero-orb {
+      position:       absolute;
+      border-radius:  50%;
+      filter:         blur(80px);
+      pointer-events: none;
+      animation:      orbFloat 8s ease-in-out infinite;
+    }
+
+    .hero-orb-1 {
+      width:      350px;
+      height:     350px;
+      background: rgba(217, 70, 239, 0.2);
+      top:        -80px;
+      right:      -60px;
+    }
+
+    .hero-orb-2 {
+      width:           250px;
+      height:          250px;
+      background:      rgba(155, 48, 255, 0.15);
+      bottom:          10%;
+      left:            -60px;
+      animation-delay: -3s;
+    }
+
+    @keyframes orbFloat {
+      0%,  100% { transform: translate(0, 0) scale(1); }
+      33%        { transform: translate(30px, -20px) scale(1.05); }
+      66%        { transform: translate(-20px, 15px) scale(0.95); }
+    }
+
+    .hero::before {
+      content:          '';
+      position:         absolute;
+      inset:            0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size:  40px 40px;
+      pointer-events:   none;
+    }
+
+    .hero::after {
+      content:        '';
+      position:       absolute;
+      bottom:         0;
+      left:           0;
+      right:          0;
+      height:         120px;
+      background:     linear-gradient(to top, var(--cream), transparent);
+      pointer-events: none;
+      z-index:        2;
+    }
+
+    .hero-inner {
+      max-width:             1280px;
+      margin:                0 auto;
+      padding:               60px 28px 100px;
+      display:               grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap:                   60px;
+      align-items:           center;
+      position:              relative;
+      z-index:               1;
+    }
+
+    .hero-content {
+      animation: fadeIn 1s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-tag {
+      display:        inline-flex;
+      align-items:    center;
+      gap:            8px;
+      font-size:      13px;
+      font-weight:    600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color:          var(--yellow);
+      margin-bottom:  20px;
+      padding:        6px 14px;
+      background:     rgba(250, 204, 21, 0.1);
+      border:         1px solid rgba(250, 204, 21, 0.2);
+      border-radius:  50px;
+    }
+
+    .hero-tag-dot {
+      width:         6px;
+      height:        6px;
+      background:    var(--yellow);
+      border-radius: 50%;
+      animation:     pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%,  100% { opacity: 1; transform: scale(1); }
+      50%        { opacity: 0.5; transform: scale(1.5); }
+    }
+
+    .hero-title {
+      font-family:   var(--font-display);
+      font-size:     clamp(32px, 4.5vw, 54px);
+      font-weight:   700;
+      line-height:   1.12;
+      color:         var(--white);
+      margin-bottom: 24px;
+    }
+
+    .hero-title em {
+      font-style:              normal;
+      background:              linear-gradient(90deg, var(--yellow), #FDE68A, var(--yellow));
+      background-size:         200% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip:         text;
+      animation:               shimmer 4s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0%   { background-position: 100% 0; }
+      50%  { background-position: 0%   0; }
+      100% { background-position: 100% 0; }
+    }
+
+    .hero-desc {
+      font-size:     17px;
+      line-height:   1.75;
+      color:         rgba(255, 255, 255, 0.78);
+      max-width:     520px;
+      margin-bottom: 40px;
+    }
+
+    .hero-ctas {
+      display:   flex;
+      gap:       14px;
+      flex-wrap: wrap;
+    }
+
+    .hero-img-wrap {
+      animation:       fadeIn 1s ease-out 0.2s both;
+      display:         flex;
+      justify-content: center;
+    }
+
+    .hero-img-wrap img {
+      border-radius: var(--radius-xl);
+      box-shadow:    0 20px 60px rgba(0, 0, 0, 0.3);
+      max-height:    480px;
+      object-fit:    cover;
+    }
+
+
+    /* ============================================================
+       SECTIONS — SHARED STYLES
+    ============================================================ */
+    .section {
+      padding: 100px 28px;
+      width:   100%;
+    }
+
+    .section-inner {
+      max-width: 1280px;
+      margin:    0 auto;
+    }
+
+    .section-tag {
+      display:        inline-flex;
+      align-items:    center;
+      gap:            6px;
+      font-size:      12px;
+      font-weight:    600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color:          var(--purple-bright);
+      margin-bottom:  14px;
+    }
+
+    .section-title {
+      font-family:   var(--font-display);
+      font-size:     clamp(26px, 3.8vw, 42px);
+      font-weight:   700;
+      line-height:   1.2;
+      color:         var(--text-dark);
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      font-size:   16.5px;
+      color:       var(--text-mid);
+      max-width:   640px;
+      line-height: 1.7;
+    }
+
+    .section-title-light    { color: var(--white); }
+    .section-subtitle-light { color: rgba(255, 255, 255, 0.75); }
+
+
+    /* ============================================================
+       THE OPPORTUNITY
+    ============================================================ */
+    .opp-section {
+      background: var(--cream);
+    }
+
+    .opp-grid {
+      display:               grid;
+      grid-template-columns: 1fr 1fr;
+      gap:                   50px;
+      align-items:           start;
+      margin-top:            50px;
+    }
+
+    .opp-card {
+      background:    var(--white);
+      border-radius: var(--radius-lg);
+      padding:       36px;
+      border:        1px solid rgba(45, 8, 69, 0.06);
+      box-shadow:    var(--shadow-card);
+    }
+
+    .opp-card-title {
+      font-family:   var(--font-display);
+      font-size:     21px;
+      font-weight:   700;
+      color:         var(--text-dark);
+      margin-bottom: 14px;
+    }
+
+    .opp-card-text {
+      font-size:     15px;
+      color:         var(--text-mid);
+      line-height:   1.7;
+      margin-bottom: 18px;
+    }
+
+    .opp-list {
+      list-style:     none;
+      display:        flex;
+      flex-direction: column;
+      gap:            10px;
+    }
+
+    .opp-list li {
+      display:     flex;
+      align-items: flex-start;
+      gap:         12px;
+      font-size:   14.5px;
+      color:       var(--text-mid);
+      line-height: 1.55;
+    }
+
+    .opp-list li::before {
+      content:      '';
+      flex-shrink:  0;
+      width:        8px;
+      height:       8px;
+      border-radius: 50%;
+      margin-top:   7px;
+    }
+
+    .opp-list.problems  li::before { background: #EF4444; }
+    .opp-list.solutions li::before { background: var(--purple-bright); }
+
+    .opp-closer {
+      margin-top:  20px;
+      padding-top: 16px;
+      border-top:  1px solid rgba(45, 8, 69, 0.06);
+    }
+
+    .opp-closer p {
+      font-size:   15px;
+      color:       var(--text-mid);
+      line-height: 1.6;
+    }
+
+    .opp-closer strong {
+      color:       var(--purple-bright);
+      font-weight: 600;
+    }
+
+
+    /* ============================================================
+       REVENUE MODEL
+    ============================================================ */
+    .revenue-section {
+      background: var(--white);
+    }
+
+    .revenue-grid {
+      display:               grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:                   24px;
+      margin-top:            50px;
+    }
+
+    .revenue-card {
+      padding:       32px;
+      background:    var(--cream-light);
+      border-radius: var(--radius-lg);
+      border:        1px solid rgba(45, 8, 69, 0.04);
+      transition:    var(--transition);
+      position:      relative;
+      overflow:      hidden;
+    }
+
+    .revenue-card::after {
+      content:          '';
+      position:         absolute;
+      top:              0;
+      left:             0;
+      right:            0;
+      height:           3px;
+      background:       linear-gradient(90deg, var(--purple-bright), var(--magenta));
+      transform:        scaleX(0);
+      transform-origin: left;
+      transition:       transform 0.5s ease;
+    }
+
+    .revenue-card:hover::after {
+      transform: scaleX(1);
+    }
+
+    .revenue-card:hover {
+      transform:  translateY(-6px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .revenue-num {
+      display:         inline-flex;
+      align-items:     center;
+      justify-content: center;
+      width:           44px;
+      height:          44px;
+      background:      linear-gradient(135deg, var(--purple-bright), var(--magenta));
+      color:           var(--white);
+      font-weight:     700;
+      font-size:       18px;
+      border-radius:   12px;
+      margin-bottom:   18px;
+      box-shadow:      0 6px 20px rgba(155, 48, 255, 0.2);
+    }
+
+    .revenue-card-title {
+      font-family:   var(--font-display);
+      font-size:     18px;
+      font-weight:   600;
+      color:         var(--text-dark);
+      margin-bottom: 8px;
+    }
+
+    .revenue-card-text {
+      font-size:   14.5px;
+      color:       var(--text-mid);
+      line-height: 1.65;
+    }
+
+
+    /* ============================================================
+       SERVICE HUB ENGINE
+    ============================================================ */
+    .engine-section {
+      background: linear-gradient(135deg, var(--purple-deep), var(--purple-mid));
+      position:   relative;
+      overflow:   hidden;
+    }
+
+    .engine-section::before {
+      content:          '';
+      position:         absolute;
+      inset:            0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size:  32px 32px;
+    }
+
+    .engine-inner {
+      position:   relative;
+      z-index:    1;
+      text-align: center;
+      max-width:  800px;
+      margin:     0 auto;
+    }
+
+    .engine-loop {
+      display:         flex;
+      flex-wrap:       wrap;
+      justify-content: center;
+      gap:             12px;
+      margin:          36px 0;
+    }
+
+    .engine-item {
+      background:     rgba(255, 255, 255, 0.06);
+      border:         1px solid rgba(255, 255, 255, 0.1);
+      border-radius:  50px;
+      padding:        10px 22px;
+      font-size:      14px;
+      color:          rgba(255, 255, 255, 0.85);
+      font-weight:    500;
+      transition:     var(--transition);
+      position:       relative;
+      overflow:       hidden;
+    }
+
+    .engine-item::before {
+      content:    '';
+      position:   absolute;
+      inset:      0;
+      background: linear-gradient(90deg, transparent, rgba(250, 204, 21, 0.1), transparent);
+      opacity:    0;
+      transition: 0.4s;
+    }
+
+    .engine-item:hover::before {
+      opacity: 1;
+    }
+
+    .engine-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform:  translateY(-2px);
+    }
+
+    .engine-arrow {
+      color:      var(--yellow);
+      font-size:  22px;
+      display:    flex;
+      align-items: center;
+      animation:  arrowBounce 1.5s ease-in-out infinite;
+    }
+
+    @keyframes arrowBounce {
+      0%,  100% { transform: translateY(0); }
+      50%        { transform: translateY(-4px); }
+    }
+
+    .engine-equation {
+      font-family:  var(--font-display);
+      font-size:    clamp(18px, 2.5vw, 24px);
+      color:        var(--yellow);
+      font-weight:  600;
+      line-height:  1.6;
+      margin-top:   20px;
+    }
+
+
+    /* ============================================================
+       INVESTMENT TIERS
+    ============================================================ */
+    .tiers-section {
+      background: var(--cream);
+    }
+
+    .tiers-grid {
+      display:               grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:                   20px;
+      margin-top:            50px;
+    }
+
+    .tier-card {
+      background:    var(--white);
+      border-radius: var(--radius-lg);
+      padding:       32px 24px;
+      text-align:    center;
+      border:        2px solid rgba(45, 8, 69, 0.04);
+      transition:    var(--transition);
+      position:      relative;
+      overflow:      hidden;
+    }
+
+    .tier-card:hover {
+      transform:    translateY(-6px);
+      box-shadow:   var(--shadow-hover);
+      border-color: rgba(155, 48, 255, 0.15);
+    }
+
+    .tier-card.featured {
+      border-color: var(--yellow);
+      background:   linear-gradient(to bottom, rgba(250, 204, 21, 0.03), var(--white));
+    }
+
+    .tier-card.featured::before {
+      content:          'POPULAR';
+      position:         absolute;
+      top:              16px;
+      right:            -28px;
+      background:       var(--yellow);
+      color:            var(--dark);
+      font-size:        10px;
+      font-weight:      700;
+      letter-spacing:   1px;
+      padding:          4px 32px;
+      transform:        rotate(45deg);
+      transform-origin: center;
+    }
+
+    .tier-label {
+      font-size:      12px;
+      font-weight:    600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color:          var(--purple-bright);
+      margin-bottom:  8px;
+    }
+
+    .tier-range {
+      font-family:   var(--font-display);
+      font-size:     clamp(18px, 2vw, 22px);
+      font-weight:   700;
+      color:         var(--text-dark);
+      margin-bottom: 16px;
+      line-height:   1.3;
+    }
+
+    .tier-desc {
+      font-size:   13.5px;
+      color:       var(--text-mid);
+      line-height: 1.6;
+    }
+
+    .tier-divider {
+      width:         40px;
+      height:        2px;
+      background:    linear-gradient(90deg, var(--purple-bright), var(--magenta));
+      margin:        16px auto;
+      border-radius: 2px;
+    }
+
+
+    /* ============================================================
+       PARTICIPATION STRUCTURE
+    ============================================================ */
+    .participation-section {
+      background: var(--white);
+    }
+
+    .participation-grid {
+      display:               grid;
+      grid-template-columns: 1fr 1fr;
+      gap:                   50px;
+      align-items:           center;
+      margin-top:            50px;
+    }
+
+    .participation-options {
+      display:        flex;
+      flex-direction: column;
+      gap:            20px;
+    }
+
+    .participation-option {
+      padding:       28px;
+      background:    var(--cream-light);
+      border-radius: var(--radius-lg);
+      border:        1px solid rgba(45, 8, 69, 0.04);
+      transition:    var(--transition);
+    }
+
+    .participation-option:hover {
+      transform:  translateX(6px);
+      box-shadow: var(--shadow-card);
+    }
+
+    .participation-option-title {
+      font-family:   var(--font-display);
+      font-size:     19px;
+      font-weight:   600;
+      color:         var(--text-dark);
+      margin-bottom: 8px;
+      display:       flex;
+      align-items:   center;
+      gap:           10px;
+    }
+
+    .participation-option-title .badge {
+      display:        inline-flex;
+      padding:        3px 10px;
+      background:     linear-gradient(135deg, var(--purple-bright), var(--magenta));
+      color:          var(--white);
+      font-size:      11px;
+      font-weight:    600;
+      letter-spacing: 0.5px;
+      border-radius:  50px;
+      font-family:    var(--font-body);
+    }
+
+    .participation-option-text {
+      font-size:   14.5px;
+      color:       var(--text-mid);
+      line-height: 1.65;
+    }
+
+
+    /* ============================================================
+       RETURN POTENTIAL
+    ============================================================ */
+    .returns-section {
+      background: linear-gradient(
+        155deg,
+        var(--purple-deep)   0%,
+        var(--purple-mid)    40%,
+        var(--magenta)       80%,
+        var(--purple-bright) 100%
+      );
+      position:   relative;
+      overflow:   hidden;
+    }
+
+    .returns-section::before {
+      content:        '';
+      position:       absolute;
+      top:            -100px;
+      left:           50%;
+      transform:      translateX(-50%);
+      width:          500px;
+      height:         500px;
+      background:     radial-gradient(circle, rgba(250, 204, 21, 0.06), transparent 70%);
+      pointer-events: none;
+    }
+
+    .returns-inner {
+      max-width: 900px;
+      margin:    0 auto;
+      position:  relative;
+      z-index:   1;
+    }
+
+    .returns-grid {
+      display:               grid;
+      grid-template-columns: 1fr 1fr;
+      gap:                   32px;
+      margin-top:            40px;
+    }
+
+    .returns-card {
+      background:    rgba(255, 255, 255, 0.05);
+      border:        1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-lg);
+      padding:       32px;
+      transition:    var(--transition);
+    }
+
+    .returns-card:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform:  translateY(-4px);
+    }
+
+    .returns-card-label {
+      font-size:      12px;
+      font-weight:    600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color:          rgba(255, 255, 255, 0.4);
+      margin-bottom:  8px;
+    }
+
+    .returns-card-value {
+      font-family:   var(--font-display);
+      font-size:     clamp(28px, 3.5vw, 40px);
+      font-weight:   700;
+      color:         var(--yellow);
+      line-height:   1;
+      margin-bottom: 10px;
+    }
+
+    .returns-card-text {
+      font-size:   14px;
+      color:       rgba(255, 255, 255, 0.65);
+      line-height: 1.55;
+    }
+
+    .returns-example {
+      margin-top:    40px;
+      padding:       32px;
+      background:    rgba(250, 204, 21, 0.08);
+      border:        1px solid rgba(250, 204, 21, 0.15);
+      border-radius: var(--radius-lg);
+      text-align:    center;
+    }
+
+    .returns-example-title {
+      font-family:   var(--font-display);
+      font-size:     20px;
+      font-weight:   600;
+      color:         var(--yellow);
+      margin-bottom: 10px;
+    }
+
+    .returns-example-text {
+      font-size:   15px;
+      color:       rgba(255, 255, 255, 0.75);
+      line-height: 1.65;
+    }
+
+    .returns-disclaimer {
+      text-align:   center;
+      margin-top:   24px;
+      font-size:    13px;
+      color:        rgba(255, 255, 255, 0.4);
+      line-height:  1.5;
+      font-style:   italic;
+    }
+
+
+    /* ============================================================
+       FOUNDING INVESTOR CTA
+    ============================================================ */
+    .founding-section {
+      background: var(--cream);
+    }
+
+    .founding-card {
+      max-width:     700px;
+      margin:        50px auto 0;
+      background:    var(--white);
+      border-radius: var(--radius-xl);
+      padding:       48px;
+      border:        2px solid rgba(155, 48, 255, 0.1);
+      box-shadow:    0 12px 40px rgba(45, 8, 69, 0.08);
+      text-align:    center;
+      position:      relative;
+      overflow:      hidden;
+    }
+
+    .founding-card::before {
+      content:    '';
+      position:   absolute;
+      top:        0;
+      left:       0;
+      right:      0;
+      height:     4px;
+      background: linear-gradient(90deg, var(--purple-bright), var(--magenta), var(--yellow));
+    }
+
+    .founding-badge {
+      display:        inline-flex;
+      padding:        6px 16px;
+      background:     linear-gradient(135deg, var(--purple-bright), var(--magenta));
+      color:          var(--white);
+      font-size:      12px;
+      font-weight:    600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border-radius:  50px;
+      margin-bottom:  20px;
+    }
+
+    .founding-title {
+      font-family:   var(--font-display);
+      font-size:     clamp(24px, 3vw, 32px);
+      font-weight:   700;
+      color:         var(--text-dark);
+      margin-bottom: 16px;
+    }
+
+    .founding-features {
+      list-style:     none;
+      text-align:     left;
+      display:        flex;
+      flex-direction: column;
+      gap:            14px;
+      margin:         28px 0 32px;
+    }
+
+    .founding-features li {
+      display:     flex;
+      gap:         12px;
+      align-items: flex-start;
+      font-size:   15px;
+      color:       var(--text-mid);
+      line-height: 1.55;
+    }
+
+    .founding-features li svg {
+      flex-shrink:     0;
+      width:           20px;
+      height:          20px;
+      stroke:          var(--purple-bright);
+      fill:            none;
+      stroke-width:    2.5;
+      stroke-linecap:  round;
+      stroke-linejoin: round;
+      margin-top:      2px;
+    }
+
+    .founding-note {
+      font-size:   14px;
+      color:       var(--text-light);
+      margin-top:  20px;
+      line-height: 1.5;
+    }
+
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    .footer {
+      background:      var(--header-bg);
+      backdrop-filter: blur(20px);
+      color:           var(--text-on-dark);
+      padding:         60px 28px 0;
+      border-top:      1px solid rgba(155, 48, 255, 0.12);
+    }
+
+    .footer-inner {
+      max-width: 1280px;
+      margin:    0 auto;
+    }
+
+    .footer-top {
+      display:               grid;
+      grid-template-columns: 1.6fr 1fr 1fr 1.3fr;
+      gap:                   40px;
+      padding-bottom:        40px;
+      border-bottom:         1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .footer-logo {
+      height:        44px;
+      margin-bottom: 14px;
+      filter:        brightness(1.1);
+    }
+
+    .footer-tagline {
+      font-size:     14px;
+      color:         rgba(255, 255, 255, 0.55);
+      line-height:   1.65;
+      margin-bottom: 22px;
+      max-width:     300px;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap:     10px;
+    }
+
+    .footer-social {
+      width:           42px;
+      height:          42px;
+      border-radius:   12px;
+      display:         flex;
+      align-items:     center;
+      justify-content: center;
+      transition:      var(--transition);
+      overflow:        hidden;
+    }
+
+    .footer-social:hover {
+      transform:  translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .footer-social svg {
+      width:    20px;
+      height:   20px;
+      position: relative;
+      z-index:  1;
+    }
+
+    .footer-social--ig  { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+    .footer-social--ig  svg { fill: #fff; }
+    .footer-social--x   { background: #14171A; }
+    .footer-social--x   svg { fill: #fff; }
+    .footer-social--fb  { background: #1877F2; }
+    .footer-social--fb  svg { fill: #fff; }
+    .footer-social--tk  { background: #111; }
+    .footer-social--tk  svg { fill: #fff; }
+
+    .footer-col-title {
+      font-size:      11.5px;
+      font-weight:    600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color:          rgba(255, 255, 255, 0.35);
+      margin-bottom:  20px;
+      text-align:     left;
+    }
+
+    .footer-links {
+      list-style:   none;
+      text-align:   left;
+      padding-left: 0;
+      margin-left:  0;
+    }
+
+    .footer-links li {
+      margin-bottom: 11px;
+    }
+
+    .footer-links a {
+      font-size:  14.5px;
+      color:      rgba(255, 255, 255, 0.7);
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color:        var(--yellow);
+      padding-left: 4px;
+    }
+
+    .footer-contact-item {
+      display:       flex;
+      gap:           10px;
+      align-items:   flex-start;
+      margin-bottom: 16px;
+      font-size:     14px;
+      color:         rgba(255, 255, 255, 0.7);
+      line-height:   1.55;
+      text-align:    left;
+    }
+
+    .footer-contact-item svg {
+      flex-shrink:     0;
+      width:           16px;
+      height:          16px;
+      margin-top:      3px;
+      stroke:          var(--purple-bright);
+      fill:            none;
+      stroke-width:    2;
+      stroke-linecap:  round;
+      stroke-linejoin: round;
+    }
+
+    .footer-bottom {
+      padding:         22px 0;
+      display:         flex;
+      align-items:     center;
+      justify-content: space-between;
+      flex-wrap:       wrap;
+      gap:             12px;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color:     rgba(255, 255, 255, 0.35);
+    }
+
+    .footer-legal {
+      display: flex;
+      gap:     24px;
+    }
+
+    .footer-legal a {
+      font-size:  13px;
+      color:      rgba(255, 255, 255, 0.4);
+      transition: var(--transition);
+    }
+
+    .footer-legal a:hover {
+      color: var(--yellow);
+    }
+
+
+    /* ============================================================
+       SCROLL REVEAL
+    ============================================================ */
+    .reveal {
+      opacity:    0;
+      transform:  translateY(35px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.vis {
+      opacity:   1;
+      transform: translateY(0);
+    }
+
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+    .reveal-d4 { transition-delay: 0.4s; }
+
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 1024px) {
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        text-align:            center;
+        gap:                   40px;
+      }
+
+      .hero-desc {
+        margin: 0 auto 40px;
+      }
+
+      .hero-ctas {
+        justify-content: center;
+      }
+
+      .hero-img-wrap {
+        order: -1;
+      }
+
+      .opp-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .revenue-grid {
+        grid-template-columns: 1fr;
+        max-width:             500px;
+        margin:                50px auto 0;
+      }
+
+      .tiers-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .participation-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .returns-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+        gap:                   32px;
+      }
+
+    }
+
+    @media (max-width: 768px) {
+
+      .nav-desktop {
+        display: none;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      .nav-mobile {
+        display: block;
+      }
+
+      .header-inner {
+        height: 80px;
+      }
+
+      .logo-img {
+        height: 44px;
+      }
+
+      .nav-mobile {
+        top: 80px;
+      }
+
+      .hero {
+        padding-top: 80px;
+        min-height:  auto;
+      }
+
+      .hero-inner {
+        padding: 36px 20px 60px;
+      }
+
+      .section {
+        padding: 70px 20px;
+      }
+
+      .tiers-grid {
+        grid-template-columns: 1fr 1fr;
+        gap:                   16px;
+      }
+
+      .engine-loop {
+        flex-direction: column;
+        align-items:    center;
+      }
+
+      .engine-arrow {
+        transform: rotate(90deg);
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap:                   28px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align:     center;
+      }
+
+    }
+
+    @media (max-width: 480px) {
+
+      .hero-title {
+        font-size: 28px;
+      }
+
+      .tiers-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-ctas {
+        flex-direction: column;
+        align-items:    center;
+      }
+
+      .btn-primary {
+        width:           100%;
+        justify-content: center;
+      }
+
+      .tier-card {
+        padding: 28px 20px;
+      }
+
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="/" class="logo-link">
+        <img
+          src="https://bookleti.ng/wp-content/uploads/2026/03/20260303_202128-scaled-e1772574399392.png"
+          alt="Leti"
+          class="logo-img"
+        >
+      </a>
+      <nav class="nav-desktop">
+        <a href="/">Home</a>
+        <a href="/property-owner">Property Owner</a>
+        <a href="/investors" class="active">Investors</a>
+        <a href="/service-hub">Service Hub</a>
+        <a href="/contact-us">Contact Us</a>
+        <a href="/leti-stay-management" class="nav-highlight">Leti Stay Management</a>
+      </nav>
+      <div class="nav-toggle" id="navToggle" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE NAV -->
+  <nav class="nav-mobile" id="navMobile">
+    <a href="/">Home</a>
+    <a href="/property-owner">Property Owner</a>
+    <a href="/investors" class="active">Investors</a>
+    <a href="/service-hub">Service Hub</a>
+    <a href="/contact-us">Contact Us</a>
+    <a href="/leti-stay-management" class="nav-highlight">Leti Stay Management</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-inner">
+
+      <div class="hero-content">
+        <span class="hero-tag">
+          <span class="hero-tag-dot"></span>
+          Investment Opportunity
+        </span>
+        <h1 class="hero-title">
+          Invest in Africa's Next<br>
+          <em>Short-Let Infrastructure</em>
+        </h1>
+        <p class="hero-desc">
+          LETI is building the structured marketplace for short-let bookings and on-demand
+          home services in Nigeria — starting with Lagos. We earn on every booking, every
+          service, and every transaction. You can be part of it before we scale.
+        </p>
+        <div class="hero-ctas">
+          <a href="/investors-form" class="btn-primary">
+            Register as an Investor
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-img-wrap">
+        <img
+          src="https://bookleti.ng/wp-content/uploads/2026/03/leti_image_1.png"
+          alt="Leti Investment Opportunity"
+        >
+      </div>
+
+    </div>
+  </section>
+
+  <!-- THE OPPORTUNITY -->
+  <section class="section opp-section">
+    <div class="section-inner">
+      <div style="text-align: center;" class="reveal">
+        <span class="section-tag">&#128200; The Opportunity</span>
+        <h2 class="section-title">A Growing Market with No Real Structure</h2>
+        <p class="section-subtitle" style="margin: 0 auto;">
+          Nigeria's short-let industry is booming — but it's chaotic. Leti is the infrastructure
+          layer that brings order, trust, and revenue to every transaction.
+        </p>
+      </div>
+      <div class="opp-grid">
+
+        <div class="opp-card reveal">
+          <h3 class="opp-card-title">The Market Today</h3>
+          <p class="opp-card-text">Nigeria's short-let and home services market is expanding rapidly, but it remains:</p>
+          <ul class="opp-list problems">
+            <li>Unstructured — no centralised platform for bookings or services</li>
+            <li>Unsafe — no identity verification, no payment protection</li>
+            <li>Fragmented — agents, WhatsApp groups, and scattered listings</li>
+            <li>Unregulated — no accountability, no dispute resolution</li>
+          </ul>
+          <div class="opp-closer">
+            <p>This isn't just a gap — it's a massive, revenue-generating opportunity for the platform that solves it first.</p>
+          </div>
+        </div>
+
+        <div class="opp-card reveal reveal-d2">
+          <h3 class="opp-card-title">What Leti Introduces</h3>
+          <p class="opp-card-text">Leti doesn't just list properties — it builds the entire transaction infrastructure:</p>
+          <ul class="opp-list solutions">
+            <li>Escrow-secured transactions on every booking and service</li>
+            <li>Verified hosts, guests, and service providers with KYC</li>
+            <li>Integrated Service Hub — cleaners, chefs, plumbers, and more</li>
+            <li>Structured onboarding for property owners and providers</li>
+            <li>Live tracking, digital records, and dispute resolution</li>
+          </ul>
+          <div class="opp-closer">
+            <p><strong>We're not just a rental platform. We're building the infrastructure layer for short-lets and home services in Nigeria.</strong></p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- REVENUE MODEL -->
+  <section class="section revenue-section">
+    <div class="section-inner">
+      <div style="text-align: center;" class="reveal">
+        <span class="section-tag">&#128176; Revenue Model</span>
+        <h2 class="section-title">Five Streams of Recurring Revenue</h2>
+        <p class="section-subtitle" style="margin: 0 auto;">
+          Leti earns at every touchpoint in the ecosystem — from bookings to services to featured placements.
+        </p>
+      </div>
+      <div class="revenue-grid">
+
+        <div class="revenue-card reveal reveal-d1">
+          <div class="revenue-num">1</div>
+          <h3 class="revenue-card-title">Booking Commission</h3>
+          <p class="revenue-card-text">
+            5–12% commission on every short-let booking processed through the platform.
+            As properties grow, this scales automatically.
+          </p>
+        </div>
+
+        <div class="revenue-card reveal reveal-d2">
+          <div class="revenue-num">2</div>
+          <h3 class="revenue-card-title">Escrow Processing Fees</h3>
+          <p class="revenue-card-text">
+            A secure payment handling fee on every transaction — bookings and services alike.
+            Protection generates revenue.
+          </p>
+        </div>
+
+        <div class="revenue-card reveal reveal-d3">
+          <div class="revenue-num">3</div>
+          <h3 class="revenue-card-title">Service Hub Registration</h3>
+          <p class="revenue-card-text">
+            &#8358;3,000 one-time early access fee per service provider. Scales as we onboard
+            thousands of professionals across Lagos.
+          </p>
+        </div>
+
+        <div class="revenue-card reveal reveal-d1">
+          <div class="revenue-num">4</div>
+          <h3 class="revenue-card-title">Service Transaction Commission</h3>
+          <p class="revenue-card-text">
+            10% commission on every completed cleaning, chef, plumbing, and maintenance job.
+            Recurring demand means recurring income.
+          </p>
+        </div>
+
+        <div class="revenue-card reveal reveal-d2">
+          <div class="revenue-num">5</div>
+          <h3 class="revenue-card-title">Premium Listings</h3>
+          <p class="revenue-card-text">
+            Property owners and service providers can pay for featured placement and priority
+            visibility in search results.
+          </p>
+        </div>
+
+        <div
+          class="revenue-card reveal reveal-d3"
+          style="background: linear-gradient(135deg, rgba(155,48,255,0.06), rgba(217,70,239,0.06)); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;"
+        >
+          <div style="font-size: 36px; margin-bottom: 12px;">&#128257;</div>
+          <h3 class="revenue-card-title">The Flywheel</h3>
+          <p class="revenue-card-text">
+            More properties attract more guests. More guests need more services. More services
+            bring more providers. Every layer compounds revenue.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICE HUB ENGINE -->
+  <section class="section engine-section">
+    <div class="section-inner">
+      <div class="engine-inner reveal">
+        <span class="section-tag" style="color: var(--yellow);">&#9881;&#65039; The Revenue Engine</span>
+        <h2 class="section-title section-title-light" style="margin: 0 auto 8px;">
+          Why the Service Hub Is the Key
+        </h2>
+        <p class="section-subtitle section-subtitle-light" style="margin: 0 auto;">
+          The Service Hub creates a transaction loop inside the ecosystem. Every booking triggers
+          service demand — and every service earns Leti commission.
+        </p>
+        <div class="engine-loop">
+          <span class="engine-item">Every booking needs cleaning</span>
+          <span class="engine-arrow">&#8594;</span>
+          <span class="engine-item">Many bookings need chefs</span>
+          <span class="engine-arrow">&#8594;</span>
+          <span class="engine-item">Maintenance is constant</span>
+          <span class="engine-arrow">&#8594;</span>
+          <span class="engine-item">Owners prefer verified vendors</span>
+        </div>
+        <div class="engine-equation">
+          More properties on Leti = more service demand.<br>
+          More service demand = more commission revenue.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INVESTMENT TIERS -->
+  <section class="section tiers-section">
+    <div class="section-inner">
+      <div style="text-align: center;" class="reveal">
+        <span class="section-tag">&#127974; Investment Structure</span>
+        <h2 class="section-title">Choose Your Entry Point</h2>
+        <p class="section-subtitle" style="margin: 0 auto;">
+          Leti is raising an early-stage capital round to accelerate app completion, escrow
+          infrastructure, marketing, and service provider expansion.
+        </p>
+      </div>
+      <div class="tiers-grid">
+
+        <div class="tier-card reveal reveal-d1">
+          <div class="tier-label">Tier 1</div>
+          <div class="tier-range">&#8358;500K – &#8358;2M</div>
+          <div class="tier-divider"></div>
+          <p class="tier-desc">Entry-level participation with foundational equity or revenue-share access.</p>
+        </div>
+
+        <div class="tier-card featured reveal reveal-d2">
+          <div class="tier-label">Tier 2</div>
+          <div class="tier-range">&#8358;2M – &#8358;5M</div>
+          <div class="tier-divider"></div>
+          <p class="tier-desc">Mid-range investment with enhanced participation terms and direct founder access.</p>
+        </div>
+
+        <div class="tier-card reveal reveal-d3">
+          <div class="tier-label">Tier 3</div>
+          <div class="tier-range">&#8358;5M – &#8358;10M</div>
+          <div class="tier-divider"></div>
+          <p class="tier-desc">Strategic partnership tier with priority equity allocation and advisory input.</p>
+        </div>
+
+        <div class="tier-card reveal reveal-d4">
+          <div class="tier-label">Tier 4</div>
+          <div class="tier-range">&#8358;10M+</div>
+          <div class="tier-divider"></div>
+          <p class="tier-desc">Institutional-level entry with maximum participation benefits and governance access.</p>
+        </div>
+
+      </div>
+      <p style="text-align: center; margin-top: 28px; font-size: 14px; color: var(--text-light);" class="reveal">
+        Minimum investment: &#8358;500,000. Detailed terms provided after investor registration.
+      </p>
+    </div>
+  </section>
+
+  <!-- PARTICIPATION STRUCTURE -->
+  <section class="section participation-section">
+    <div class="section-inner">
+      <div class="participation-grid">
+
+        <div class="reveal">
+          <span class="section-tag">&#128200; Participation Structure</span>
+          <h2 class="section-title">Two Ways to Participate</h2>
+          <p class="section-subtitle">
+            Investors receive either equity allocation or a revenue-share structure, depending on
+            investment tier. Both are designed to align your returns with Leti's growth.
+          </p>
+        </div>
+
+        <div class="participation-options reveal reveal-d2">
+          <div class="participation-option">
+            <h3 class="participation-option-title">
+              Equity Allocation
+              <span class="badge">Option A</span>
+            </h3>
+            <p class="participation-option-text">
+              Own a share of Leti. As the platform grows, your equity appreciates with it. Ideal
+              for investors who believe in long-term compounding and want ownership in the company.
+            </p>
+          </div>
+          <div class="participation-option">
+            <h3 class="participation-option-title">
+              Revenue-Share
+              <span class="badge">Option B</span>
+            </h3>
+            <p class="participation-option-text">
+              Receive a percentage of platform revenue over a defined period. Performance-based
+              returns tied directly to Leti's transaction volume and growth milestones.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- RETURN POTENTIAL -->
+  <section class="section returns-section">
+    <div class="section-inner">
+      <div class="returns-inner reveal">
+        <div style="text-align: center;">
+          <span class="section-tag" style="color: var(--yellow);">&#128202; Return Potential</span>
+          <h2 class="section-title section-title-light" style="margin: 0 auto 8px;">
+            Projected 24-Month Revenue
+          </h2>
+          <p class="section-subtitle section-subtitle-light" style="margin: 0 auto;">
+            Based on conservative growth assumptions for Lagos alone.
+          </p>
+        </div>
+        <div class="returns-grid">
+
+          <div class="returns-card reveal reveal-d1">
+            <div class="returns-card-label">Active Properties</div>
+            <div class="returns-card-value">300</div>
+            <div class="returns-card-text">
+              Short-let properties listed and generating bookings on the platform.
+            </div>
+          </div>
+
+          <div class="returns-card reveal reveal-d2">
+            <div class="returns-card-label">Avg. Booking Value</div>
+            <div class="returns-card-value">&#8358;120K</div>
+            <div class="returns-card-text">
+              Average revenue per booking across all listed properties.
+            </div>
+          </div>
+
+          <div class="returns-card reveal reveal-d3">
+            <div class="returns-card-label">Monthly Bookings</div>
+            <div class="returns-card-value">8/property</div>
+            <div class="returns-card-text">
+              Average booking frequency per active property per month.
+            </div>
+          </div>
+
+          <div class="returns-card reveal reveal-d4">
+            <div class="returns-card-label">Platform Commission</div>
+            <div class="returns-card-value">7%</div>
+            <div class="returns-card-text">
+              Average commission rate across all booking transactions.
+            </div>
+          </div>
+
+        </div>
+        <div class="returns-example reveal">
+          <div class="returns-example-title">Projected Monthly Commission: &#8358;20M – &#8358;30M+</div>
+          <div class="returns-example-text">
+            Additional Service Hub commissions from cleaning, chef, and maintenance jobs increase
+            this further. A &#8358;1,000,000 investor under a revenue-share structure may receive
+            15–25% return over 18–24 months, performance-based. Higher tiers qualify for higher
+            participation benefits.
+          </div>
+        </div>
+        <p class="returns-disclaimer reveal">
+          Returns depend on platform performance and growth milestones. Past projections are not guarantees of future results.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BECOME A FOUNDING INVESTOR -->
+  <section class="section founding-section">
+    <div class="section-inner">
+      <div style="text-align: center;" class="reveal">
+        <span class="section-tag">&#127942; Founding Investor</span>
+        <h2 class="section-title">Get In Before We Scale</h2>
+        <p class="section-subtitle" style="margin: 0 auto;">
+          This is your opportunity to invest in Leti at the earliest stage — before national
+          expansion, before mass adoption, before the valuation reflects what we're building.
+        </p>
+      </div>
+      <div class="founding-card reveal reveal-d1">
+        <div class="founding-badge">Early Stage</div>
+        <h3 class="founding-title">What Founding Investors Receive</h3>
+        <ul class="founding-features">
+          <li>
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Priority equity allocation at the lowest entry valuation
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Structured participation with clear, transparent terms
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Direct communication channel with the founding team
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Entry before national expansion beyond Lagos
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Quarterly performance reports and growth updates
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Recognition as a founding partner in company history
+          </li>
+        </ul>
+        <a href="/investors-form" class="btn-primary" style="width: 100%; justify-content: center;">
+          Register as an Investor
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <p class="founding-note">
+          This is an opportunity to invest before scale. Early investors benefit most as the platform grows.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+
+        <div class="footer-brand">
+          <img
+            src="https://bookleti.ng/wp-content/uploads/2026/03/20260303_202128-scaled-e1772574399392.png"
+            alt="Leti"
+            class="footer-logo"
+          >
+          <p class="footer-tagline">
+            Africa's first structured short-let and home services marketplace.
+            Book apartments. Hire professionals. All in one app.
+          </p>
+          <div class="footer-socials">
+            <!-- FLAG: Instagram — provide the correct profile URL to replace # -->
+            <a href="#" class="footer-social footer-social--ig" aria-label="Instagram">
+              <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <!-- FLAG: X (Twitter) — provide the correct profile URL to replace # -->
+            <a href="#" class="footer-social footer-social--x" aria-label="X">
+              <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <!-- FLAG: Facebook — provide the correct page URL to replace # -->
+            <a href="#" class="footer-social footer-social--fb" aria-label="Facebook">
+              <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <!-- FLAG: TikTok — provide the correct profile URL to replace # -->
+            <a href="#" class="footer-social footer-social--tk" aria-label="TikTok">
+              <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Platform</h4>
+          <ul class="footer-links">
+            <li><a href="/investors">Investors</a></li>
+            <li><a href="/property-owner">Property Owners</a></li>
+            <li><a href="/service-hub">Service Hub</a></li>
+            <li><a href="/leti-stay-management">Leti Stay Management</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Company</h4>
+          <ul class="footer-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/contact-us">Contact Us</a></li>
+            <li><a href="/faq">FAQs</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Contact</h4>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            <span>294, Herbert Macaulay Way,<br>Sabo Yaba, Lagos</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+            </svg>
+            <span>+234 913 373 0647</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            <span>letiappsocial@gmail.com</span>
+          </div>
+        </div>
+
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">Copyright &copy; 2026 LETI. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="/privacy-policy">Privacy Policy</a>
+          <a href="/terms-and-conditions">Terms &amp; Conditions</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+
+    // NAV TOGGLE
+    function toggleMenu() {
+      document.getElementById('navToggle').classList.toggle('open');
+      document.getElementById('navMobile').classList.toggle('open');
+    }
+
+    document.querySelectorAll('.nav-mobile a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        document.getElementById('navToggle').classList.remove('open');
+        document.getElementById('navMobile').classList.remove('open');
+      });
+    });
+
+
+    // SCROLL REVEAL
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) e.target.classList.add('vis');
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(function (el) { obs.observe(el); });
+
+
+    // HEADER SCROLL
+    window.addEventListener('scroll', function () {
+      var h = document.getElementById('header');
+      h.style.background = window.pageYOffset > 80
+        ? 'rgba(45, 8, 69, 0.97)'
+        : 'rgba(45, 8, 69, 0.94)';
+    }, { passive: true });
+
+  </script>
+</body>
+</html>

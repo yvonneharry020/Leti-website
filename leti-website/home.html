@@ -1,0 +1,2143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LETI — Book Apartments. Hire Professionals. All in One App.</title>
+
+  <!-- FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+
+    /* ============================================================
+       CSS VARIABLES
+    ============================================================ */
+    :root {
+      --purple-deep:   #2D0845;
+      --purple-mid:    #6B1FA1;
+      --purple-bright: #9B30FF;
+      --magenta:       #D946EF;
+      --pink-glow:     #F472B6;
+      --yellow:        #FACC15;
+      --yellow-hover:  #EAB308;
+      --cream:         #FAF7F2;
+      --cream-light:   #FDFCFA;
+      --white:         #FFFFFF;
+      --dark:          #0F0A1A;
+      --text-dark:     #1E1333;
+      --text-mid:      #4A3D5C;
+      --text-light:    #8B7FA0;
+      --text-on-dark:  #E8E0F0;
+
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body:    'DM Sans', system-ui, sans-serif;
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 22px;
+      --radius-xl: 32px;
+
+      --shadow-card:  0 4px 24px rgba(45, 8, 69, 0.07);
+      --shadow-hover: 0 16px 48px rgba(45, 8, 69, 0.14);
+      --transition:   0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      --header-bg:    rgba(45, 8, 69, 0.94);
+    }
+
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *,
+    *::before,
+    *::after {
+      margin:     0;
+      padding:    0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior:          smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family:            var(--font-body);
+      color:                  var(--text-dark);
+      background:             var(--cream);
+      line-height:            1.6;
+      overflow-x:             hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+      max-width: 100%;
+      display:   block;
+    }
+
+    a {
+      text-decoration: none;
+      color:           inherit;
+    }
+
+    button {
+      border:      none;
+      cursor:      pointer;
+      font-family: inherit;
+    }
+
+
+    /* ============================================================
+       HEADER
+    ============================================================ */
+    .header {
+      position:                fixed;
+      top:                     0;
+      left:                    0;
+      right:                   0;
+      z-index:                 1000;
+      background:              var(--header-bg);
+      backdrop-filter:         blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom:           1px solid rgba(155, 48, 255, 0.12);
+      transition:              var(--transition);
+    }
+
+    .header-inner {
+      max-width:       1280px;
+      margin:          0 auto;
+      padding:         0 28px;
+      height:          88px;
+      display:         flex;
+      align-items:     center;
+      justify-content: space-between;
+    }
+
+    .logo-link {
+      display:     flex;
+      align-items: center;
+    }
+
+    .logo-img {
+      height: 50px;
+      width:  auto;
+      filter: brightness(1.1);
+    }
+
+    .nav-desktop {
+      display:     flex;
+      align-items: center;
+      gap:         4px;
+    }
+
+    .nav-desktop a {
+      color:          rgba(255, 255, 255, 0.85);
+      font-size:      13.5px;
+      font-weight:    500;
+      padding:        9px 15px;
+      border-radius:  var(--radius-sm);
+      transition:     var(--transition);
+      white-space:    nowrap;
+      letter-spacing: 0.2px;
+    }
+
+    .nav-desktop a:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color:      #fff;
+    }
+
+    .nav-desktop a.active {
+      color: var(--yellow);
+    }
+
+    .nav-desktop a.nav-highlight {
+      background:    var(--yellow);
+      color:         var(--dark);
+      font-weight:   600;
+      padding:       9px 18px;
+      border-radius: var(--radius-md);
+    }
+
+    .nav-desktop a.nav-highlight:hover {
+      background: var(--yellow-hover);
+      transform:  translateY(-1px);
+    }
+
+    .nav-toggle {
+      display:         none;
+      width:           44px;
+      height:          44px;
+      background:      rgba(255, 255, 255, 0.06);
+      border-radius:   var(--radius-sm);
+      flex-direction:  column;
+      align-items:     center;
+      justify-content: center;
+      gap:             5px;
+      cursor:          pointer;
+      transition:      var(--transition);
+    }
+
+    .nav-toggle:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .nav-toggle span {
+      display:       block;
+      width:         22px;
+      height:        2px;
+      background:    rgba(255, 255, 255, 0.9);
+      border-radius: 2px;
+      transition:    var(--transition);
+    }
+
+    .nav-toggle.open span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .nav-toggle.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-toggle.open span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+
+    /* ============================================================
+       MOBILE NAV
+    ============================================================ */
+    .nav-mobile {
+      display:       none;
+      position:      fixed;
+      top:           88px;
+      left:          0;
+      right:         0;
+      background:    var(--purple-deep);
+      border-bottom: 2px solid rgba(155, 48, 255, 0.15);
+      padding:       12px 24px 20px;
+      transform:     translateY(-120%);
+      transition:    transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index:       999;
+    }
+
+    .nav-mobile.open {
+      transform: translateY(0);
+    }
+
+    .nav-mobile a {
+      display:       block;
+      color:         rgba(255, 255, 255, 0.85);
+      font-size:     15.5px;
+      font-weight:   500;
+      padding:       14px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      transition:    var(--transition);
+    }
+
+    .nav-mobile a:last-child {
+      border-bottom: none;
+    }
+
+    .nav-mobile a:hover,
+    .nav-mobile a.active {
+      color: var(--yellow);
+    }
+
+    .nav-mobile a.nav-highlight {
+      background:    var(--yellow);
+      color:         var(--dark);
+      border-radius: var(--radius-sm);
+      text-align:    center;
+      margin-top:    10px;
+      font-weight:   600;
+      border-bottom: none;
+      padding:       14px;
+    }
+
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    .hero {
+      position:    relative;
+      min-height:  100vh;
+      display:     flex;
+      align-items: center;
+      padding-top: 88px;
+      overflow:    hidden;
+      background:  linear-gradient(
+        155deg,
+        var(--purple-deep)   0%,
+        #3D1260              25%,
+        var(--purple-mid)    45%,
+        var(--purple-bright) 65%,
+        var(--magenta)       85%,
+        var(--pink-glow)     100%
+      );
+    }
+
+    .hero-orb {
+      position:       absolute;
+      border-radius:  50%;
+      filter:         blur(80px);
+      pointer-events: none;
+      animation:      orbFloat 8s ease-in-out infinite;
+    }
+
+    .hero-orb-1 {
+      width:           400px;
+      height:          400px;
+      background:      rgba(217, 70, 239, 0.2);
+      top:             -100px;
+      right:           -100px;
+      animation-delay: 0s;
+    }
+
+    .hero-orb-2 {
+      width:           300px;
+      height:          300px;
+      background:      rgba(155, 48, 255, 0.15);
+      bottom:          10%;
+      left:            -80px;
+      animation-delay: -3s;
+    }
+
+    .hero-orb-3 {
+      width:           200px;
+      height:          200px;
+      background:      rgba(250, 204, 21, 0.08);
+      top:             40%;
+      right:           20%;
+      animation-delay: -5s;
+    }
+
+    @keyframes orbFloat {
+      0%,  100% { transform: translate(0, 0) scale(1); }
+      33%        { transform: translate(30px, -20px) scale(1.05); }
+      66%        { transform: translate(-20px, 15px) scale(0.95); }
+    }
+
+    .hero::before {
+      content:          '';
+      position:         absolute;
+      inset:            0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size:  40px 40px;
+      pointer-events:   none;
+    }
+
+    .hero::after {
+      content:        '';
+      position:       absolute;
+      bottom:         0;
+      left:           0;
+      right:          0;
+      height:         140px;
+      background:     linear-gradient(to top, var(--cream), transparent);
+      pointer-events: none;
+      z-index:        2;
+    }
+
+    .hero-inner {
+      max-width:             1280px;
+      margin:                0 auto;
+      padding:               60px 28px 100px;
+      display:               grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap:                   60px;
+      align-items:           center;
+      position:              relative;
+      z-index:               1;
+    }
+
+    .hero-content {
+      animation: heroFadeIn 1s ease-out;
+    }
+
+    @keyframes heroFadeIn {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-tag {
+      display:        inline-flex;
+      align-items:    center;
+      gap:            8px;
+      font-size:      13px;
+      font-weight:    600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color:          var(--yellow);
+      margin-bottom:  20px;
+      padding:        6px 14px;
+      background:     rgba(250, 204, 21, 0.1);
+      border:         1px solid rgba(250, 204, 21, 0.2);
+      border-radius:  50px;
+    }
+
+    .hero-tag-dot {
+      width:         6px;
+      height:        6px;
+      background:    var(--yellow);
+      border-radius: 50%;
+      animation:     pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%,  100% { opacity: 1; transform: scale(1); }
+      50%        { opacity: 0.5; transform: scale(1.5); }
+    }
+
+    .hero-title {
+      font-family:   var(--font-display);
+      font-size:     clamp(34px, 4.8vw, 56px);
+      font-weight:   700;
+      line-height:   1.12;
+      color:         var(--white);
+      margin-bottom: 24px;
+    }
+
+    .hero-title em {
+      font-style:              normal;
+      background:              linear-gradient(90deg, var(--yellow), #FDE68A, var(--yellow));
+      background-size:         200% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip:         text;
+      animation:               shimmer 4s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0%   { background-position: 100% 0; }
+      50%  { background-position: 0%   0; }
+      100% { background-position: 100% 0; }
+    }
+
+    .hero-desc {
+      font-size:     17px;
+      line-height:   1.75;
+      color:         rgba(255, 255, 255, 0.78);
+      max-width:     520px;
+      margin-bottom: 40px;
+    }
+
+    .hero-ctas {
+      display:   flex;
+      gap:       14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display:       inline-flex;
+      align-items:   center;
+      gap:           8px;
+      background:    var(--yellow);
+      color:         var(--dark);
+      font-size:     15px;
+      font-weight:   600;
+      padding:       15px 30px;
+      border-radius: var(--radius-md);
+      transition:    var(--transition);
+      box-shadow:    0 4px 24px rgba(250, 204, 21, 0.25);
+      position:      relative;
+      overflow:      hidden;
+    }
+
+    .btn-primary::before {
+      content:    '';
+      position:   absolute;
+      top:        0;
+      left:       -100%;
+      width:      100%;
+      height:     100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: 0.5s;
+    }
+
+    .btn-primary:hover::before {
+      left: 100%;
+    }
+
+    .btn-primary:hover {
+      background: var(--yellow-hover);
+      transform:  translateY(-2px);
+      box-shadow: 0 8px 32px rgba(250, 204, 21, 0.35);
+    }
+
+    .btn-secondary {
+      display:         inline-flex;
+      align-items:     center;
+      gap:             8px;
+      background:      rgba(255, 255, 255, 0.08);
+      color:           var(--white);
+      font-size:       15px;
+      font-weight:     500;
+      padding:         15px 30px;
+      border-radius:   var(--radius-md);
+      border:          1px solid rgba(255, 255, 255, 0.18);
+      transition:      var(--transition);
+      backdrop-filter: blur(8px);
+    }
+
+    .btn-secondary:hover {
+      background:   rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform:    translateY(-2px);
+    }
+
+
+    /* ============================================================
+       PHONE MOCKUP
+    ============================================================ */
+    .hero-phone-wrap {
+      display:         flex;
+      justify-content: center;
+      align-items:     center;
+      animation:       heroFadeIn 1s ease-out 0.25s both;
+    }
+
+    .phone-container {
+      position: relative;
+    }
+
+    .phone-glow {
+      position:       absolute;
+      inset:          -40px;
+      background:     radial-gradient(ellipse, rgba(155, 48, 255, 0.2), transparent 70%);
+      border-radius:  50%;
+      filter:         blur(40px);
+      animation:      glowPulse 4s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes glowPulse {
+      0%,  100% { opacity: 0.6; transform: scale(1); }
+      50%        { opacity: 1;   transform: scale(1.05); }
+    }
+
+    .phone-mockup {
+      position:      relative;
+      width:         280px;
+      aspect-ratio:  9 / 19.5;
+      background:    linear-gradient(145deg, #1a1a2e, #16213e);
+      border-radius: 44px;
+      padding:       10px;
+      box-shadow:
+        0 0 0 1.5px rgba(255, 255, 255, 0.12),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+        0 25px 70px rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+
+    .phone-inner {
+      width:         100%;
+      height:        100%;
+      border-radius: 36px;
+      overflow:      hidden;
+      position:      relative;
+      background:    #111;
+    }
+
+    .phone-notch {
+      position:      absolute;
+      top:           0;
+      left:          50%;
+      transform:     translateX(-50%);
+      width:         120px;
+      height:        30px;
+      background:    #111;
+      border-radius: 0 0 20px 20px;
+      z-index:       10;
+    }
+
+    .phone-notch::before {
+      content:       '';
+      position:      absolute;
+      top:           8px;
+      left:          50%;
+      transform:     translateX(-50%);
+      width:         60px;
+      height:        5px;
+      background:    #1a1a2e;
+      border-radius: 3px;
+    }
+
+    .phone-notch::after {
+      content:       '';
+      position:      absolute;
+      top:           9px;
+      right:         22px;
+      width:         7px;
+      height:        7px;
+      background:    #1a1a2e;
+      border-radius: 50%;
+    }
+
+    .phone-slider {
+      display:    flex;
+      height:     100%;
+      transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .phone-slide {
+      min-width: 100%;
+      height:    100%;
+    }
+
+    .phone-slide img {
+      width:           100%;
+      height:          100%;
+      object-fit:      cover;
+      object-position: top center;
+    }
+
+    .phone-dots {
+      position:  absolute;
+      bottom:    14px;
+      left:      50%;
+      transform: translateX(-50%);
+      display:   flex;
+      gap:       5px;
+      z-index:   10;
+    }
+
+    .phone-dot {
+      width:         6px;
+      height:        6px;
+      border-radius: 50%;
+      background:    rgba(255, 255, 255, 0.3);
+      transition:    var(--transition);
+      cursor:        pointer;
+    }
+
+    .phone-dot.active {
+      background:    var(--yellow);
+      width:         20px;
+      border-radius: 3px;
+    }
+
+    .phone-btn-side {
+      position:      absolute;
+      right:         -3px;
+      top:           120px;
+      width:         3px;
+      height:        40px;
+      background:    rgba(255, 255, 255, 0.08);
+      border-radius: 0 2px 2px 0;
+    }
+
+    .phone-btn-vol1 {
+      position:      absolute;
+      left:          -3px;
+      top:           100px;
+      width:         3px;
+      height:        28px;
+      background:    rgba(255, 255, 255, 0.08);
+      border-radius: 2px 0 0 2px;
+    }
+
+    .phone-btn-vol2 {
+      position:      absolute;
+      left:          -3px;
+      top:           140px;
+      width:         3px;
+      height:        28px;
+      background:    rgba(255, 255, 255, 0.08);
+      border-radius: 2px 0 0 2px;
+    }
+
+    @keyframes phoneFloat {
+      0%,  100% { transform: translateY(0) rotate(0deg); }
+      25%        { transform: translateY(-8px) rotate(0.5deg); }
+      75%        { transform: translateY(-4px) rotate(-0.3deg); }
+    }
+
+
+    /* ============================================================
+       SECTIONS — SHARED STYLES
+    ============================================================ */
+    .section {
+      padding: 100px 28px;
+    }
+
+    .section-inner {
+      max-width: 1280px;
+      margin:    0 auto;
+    }
+
+    .section-tag {
+      display:        inline-flex;
+      align-items:    center;
+      gap:            6px;
+      font-size:      12px;
+      font-weight:    600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color:          var(--purple-bright);
+      margin-bottom:  14px;
+    }
+
+    .section-title {
+      font-family:   var(--font-display);
+      font-size:     clamp(26px, 3.8vw, 42px);
+      font-weight:   700;
+      line-height:   1.2;
+      color:         var(--text-dark);
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      font-size:   16.5px;
+      color:       var(--text-mid);
+      max-width:   600px;
+      line-height: 1.7;
+    }
+
+
+    /* ============================================================
+       WHAT WE OFFER
+    ============================================================ */
+    .offer-section {
+      background: var(--cream);
+      position:   relative;
+      overflow:   hidden;
+    }
+
+    .offer-section::before {
+      content:        '';
+      position:       absolute;
+      top:            -200px;
+      right:          -200px;
+      width:          500px;
+      height:         500px;
+      background:     radial-gradient(circle, rgba(155, 48, 255, 0.04), transparent 70%);
+      pointer-events: none;
+    }
+
+    .offer-grid {
+      display:               grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:                   24px;
+      margin-top:            50px;
+    }
+
+    .offer-card {
+      background:    var(--white);
+      border-radius: var(--radius-lg);
+      overflow:      hidden;
+      box-shadow:    var(--shadow-card);
+      transition:    var(--transition);
+      cursor:        pointer;
+      position:      relative;
+      border:        1px solid rgba(45, 8, 69, 0.04);
+    }
+
+    .offer-card::after {
+      content:        '';
+      position:       absolute;
+      inset:          0;
+      border-radius:  var(--radius-lg);
+      opacity:        0;
+      background:     linear-gradient(135deg, rgba(155, 48, 255, 0.05), rgba(217, 70, 239, 0.05));
+      transition:     var(--transition);
+      pointer-events: none;
+    }
+
+    .offer-card:hover {
+      transform:  translateY(-10px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .offer-card:hover::after {
+      opacity: 1;
+    }
+
+    .offer-card-img {
+      width:    100%;
+      height:   220px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .offer-card-img img {
+      width:           100%;
+      height:          100%;
+      object-fit:      cover;
+      object-position: center 30%;
+      transition:      transform 0.7s ease;
+    }
+
+    .offer-card:hover .offer-card-img img {
+      transform: scale(1.08);
+    }
+
+    .offer-card-img-overlay {
+      position:       absolute;
+      inset:          0;
+      background:     linear-gradient(to top, rgba(0, 0, 0, 0.15), transparent 50%);
+      pointer-events: none;
+    }
+
+    .offer-card-body {
+      padding: 24px;
+    }
+
+    .offer-card-title {
+      font-family:   var(--font-display);
+      font-size:     19px;
+      font-weight:   600;
+      color:         var(--text-dark);
+      margin-bottom: 10px;
+    }
+
+    .offer-card-text {
+      font-size:     14.5px;
+      color:         var(--text-mid);
+      line-height:   1.65;
+      margin-bottom: 18px;
+    }
+
+    .offer-card-link {
+      display:     inline-flex;
+      align-items: center;
+      gap:         6px;
+      font-size:   14px;
+      font-weight: 600;
+      color:       var(--purple-bright);
+      transition:  var(--transition);
+    }
+
+    .offer-card-link:hover {
+      gap:   12px;
+      color: var(--purple-mid);
+    }
+
+    .offer-card-link svg {
+      transition: var(--transition);
+    }
+
+
+    /* ============================================================
+       HOW IT WORKS
+    ============================================================ */
+    .how-section {
+      background: var(--white);
+      position:   relative;
+    }
+
+    .how-steps {
+      display:               grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:                   28px;
+      margin-top:            50px;
+    }
+
+    .how-step {
+      text-align:    center;
+      padding:       40px 28px;
+      background:    var(--cream-light);
+      border-radius: var(--radius-lg);
+      border:        1px solid rgba(45, 8, 69, 0.04);
+      transition:    var(--transition);
+      position:      relative;
+      overflow:      hidden;
+    }
+
+    .how-step::before {
+      content:          '';
+      position:         absolute;
+      top:              0;
+      left:             0;
+      right:            0;
+      height:           3px;
+      background:       linear-gradient(90deg, var(--purple-bright), var(--magenta));
+      transform:        scaleX(0);
+      transform-origin: left;
+      transition:       transform 0.5s ease;
+    }
+
+    .how-step:hover::before {
+      transform: scaleX(1);
+    }
+
+    .how-step:hover {
+      transform:  translateY(-6px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .how-step-num {
+      display:         inline-flex;
+      align-items:     center;
+      justify-content: center;
+      width:           52px;
+      height:          52px;
+      background:      linear-gradient(135deg, var(--purple-bright), var(--magenta));
+      color:           var(--white);
+      font-weight:     700;
+      font-size:       20px;
+      border-radius:   16px;
+      margin-bottom:   20px;
+      box-shadow:      0 8px 24px rgba(155, 48, 255, 0.2);
+    }
+
+    .how-step-title {
+      font-family:   var(--font-display);
+      font-size:     19px;
+      font-weight:   600;
+      color:         var(--text-dark);
+      margin-bottom: 10px;
+    }
+
+    .how-step-text {
+      font-size:   14.5px;
+      color:       var(--text-mid);
+      line-height: 1.65;
+    }
+
+
+    /* ============================================================
+       TRUST & SAFETY
+    ============================================================ */
+    .trust-section {
+      background: var(--cream);
+      overflow:   hidden;
+    }
+
+    .trust-grid {
+      display:               grid;
+      grid-template-columns: 1fr 1fr;
+      gap:                   60px;
+      align-items:           center;
+      margin-top:            50px;
+    }
+
+    .trust-image {
+      border-radius: var(--radius-xl);
+      overflow:      hidden;
+      position:      relative;
+    }
+
+    .trust-image img {
+      width:      100%;
+      transition: transform 0.6s ease;
+    }
+
+    .trust-image:hover img {
+      transform: scale(1.03);
+    }
+
+    .trust-image::after {
+      content:        '';
+      position:       absolute;
+      inset:          0;
+      box-shadow:     inset 0 0 60px rgba(155, 48, 255, 0.08);
+      border-radius:  var(--radius-xl);
+      pointer-events: none;
+    }
+
+    .trust-features {
+      display:        flex;
+      flex-direction: column;
+      gap:            26px;
+    }
+
+    .trust-item {
+      display:       flex;
+      gap:           18px;
+      align-items:   flex-start;
+      padding:       16px;
+      border-radius: var(--radius-md);
+      transition:    var(--transition);
+    }
+
+    .trust-item:hover {
+      background: rgba(155, 48, 255, 0.03);
+    }
+
+    .trust-icon {
+      flex-shrink:     0;
+      width:           52px;
+      height:          52px;
+      background:      var(--yellow);
+      border-radius:   14px;
+      display:         flex;
+      align-items:     center;
+      justify-content: center;
+      box-shadow:      0 4px 12px rgba(250, 204, 21, 0.2);
+    }
+
+    .trust-icon svg {
+      width:           24px;
+      height:          24px;
+      stroke:          var(--dark);
+      fill:            none;
+      stroke-width:    2;
+      stroke-linecap:  round;
+      stroke-linejoin: round;
+    }
+
+    .trust-item-title {
+      font-size:     16.5px;
+      font-weight:   600;
+      color:         var(--text-dark);
+      margin-bottom: 4px;
+    }
+
+    .trust-item-text {
+      font-size:   14px;
+      color:       var(--text-mid);
+      line-height: 1.6;
+    }
+
+
+    /* ============================================================
+       STATS
+    ============================================================ */
+    .stats-section {
+      background: linear-gradient(135deg, var(--purple-deep), var(--purple-mid), var(--purple-bright));
+      padding:    70px 28px;
+      position:   relative;
+      overflow:   hidden;
+    }
+
+    .stats-section::before {
+      content:          '';
+      position:         absolute;
+      inset:            0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size:  32px 32px;
+    }
+
+    .stats-grid {
+      max-width:             1280px;
+      margin:                0 auto;
+      display:               grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:                   32px;
+      text-align:            center;
+      position:              relative;
+      z-index:               1;
+    }
+
+    .stat-item {
+      padding: 20px;
+    }
+
+    .stat-num {
+      font-family:   var(--font-display);
+      font-size:     clamp(30px, 3.5vw, 46px);
+      font-weight:   700;
+      color:         var(--yellow);
+      line-height:   1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size:      13.5px;
+      color:          rgba(255, 255, 255, 0.65);
+      font-weight:    500;
+      letter-spacing: 0.3px;
+    }
+
+    .stat-divider {
+      width:      1px;
+      background: rgba(255, 255, 255, 0.1);
+      margin:     10px 0;
+    }
+
+
+    /* ============================================================
+       NEWSLETTER
+    ============================================================ */
+    .newsletter-section {
+      background: linear-gradient(
+        155deg,
+        var(--purple-deep)   0%,
+        var(--purple-mid)    40%,
+        var(--magenta)       80%,
+        var(--purple-bright) 100%
+      );
+      padding:    90px 28px;
+      text-align: center;
+      position:   relative;
+      overflow:   hidden;
+    }
+
+    .newsletter-section::before {
+      content:        '';
+      position:       absolute;
+      top:            -150px;
+      left:           50%;
+      transform:      translateX(-50%);
+      width:          600px;
+      height:         600px;
+      background:     radial-gradient(circle, rgba(250, 204, 21, 0.06), transparent 70%);
+      pointer-events: none;
+    }
+
+    .newsletter-inner {
+      max-width: 540px;
+      margin:    0 auto;
+      position:  relative;
+      z-index:   1;
+    }
+
+    .newsletter-icon {
+      width:           68px;
+      height:          68px;
+      background:      var(--yellow);
+      border-radius:   50%;
+      display:         flex;
+      align-items:     center;
+      justify-content: center;
+      margin:          0 auto 22px;
+      box-shadow:      0 8px 30px rgba(250, 204, 21, 0.25);
+    }
+
+    .newsletter-icon svg {
+      width:           28px;
+      height:          28px;
+      stroke:          var(--dark);
+      fill:            none;
+      stroke-width:    2;
+      stroke-linecap:  round;
+      stroke-linejoin: round;
+    }
+
+    .newsletter-title {
+      font-family:   var(--font-display);
+      font-size:     clamp(24px, 3.5vw, 34px);
+      font-weight:   700;
+      color:         var(--white);
+      margin-bottom: 12px;
+    }
+
+    .newsletter-text {
+      font-size:     15.5px;
+      color:         rgba(255, 255, 255, 0.75);
+      margin-bottom: 32px;
+      line-height:   1.65;
+    }
+
+    .newsletter-form {
+      display:    flex;
+      gap:        12px;
+      max-width:  460px;
+      margin:     0 auto;
+    }
+
+    .newsletter-input {
+      flex:          1;
+      padding:       15px 20px;
+      border-radius: var(--radius-md);
+      border:        2px solid transparent;
+      background:    var(--white);
+      font-size:     15px;
+      font-family:   var(--font-body);
+      color:         var(--text-dark);
+      outline:       none;
+      transition:    var(--transition);
+    }
+
+    .newsletter-input::placeholder {
+      color: var(--text-light);
+    }
+
+    .newsletter-input:focus {
+      border-color: var(--yellow);
+      box-shadow:   0 0 0 4px rgba(250, 204, 21, 0.15);
+    }
+
+    .newsletter-btn {
+      background:    var(--yellow);
+      color:         var(--dark);
+      font-weight:   600;
+      font-size:     15px;
+      padding:       15px 28px;
+      border-radius: var(--radius-md);
+      white-space:   nowrap;
+      transition:    var(--transition);
+    }
+
+    .newsletter-btn:hover {
+      background: var(--yellow-hover);
+      transform:  translateY(-1px);
+    }
+
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    .footer {
+      background:      var(--header-bg);
+      backdrop-filter: blur(20px);
+      color:           var(--text-on-dark);
+      padding:         60px 28px 0;
+      border-top:      1px solid rgba(155, 48, 255, 0.12);
+    }
+
+    .footer-inner {
+      max-width: 1280px;
+      margin:    0 auto;
+    }
+
+    .footer-top {
+      display:               grid;
+      grid-template-columns: 1.6fr 1fr 1fr 1.3fr;
+      gap:                   40px;
+      padding-bottom:        40px;
+      border-bottom:         1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .footer-logo {
+      height:        44px;
+      margin-bottom: 14px;
+      filter:        brightness(1.1);
+    }
+
+    .footer-tagline {
+      font-size:     14px;
+      color:         rgba(255, 255, 255, 0.55);
+      line-height:   1.65;
+      margin-bottom: 22px;
+      max-width:     300px;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap:     10px;
+    }
+
+    .footer-social {
+      width:           42px;
+      height:          42px;
+      border-radius:   12px;
+      display:         flex;
+      align-items:     center;
+      justify-content: center;
+      transition:      var(--transition);
+      overflow:        hidden;
+      position:        relative;
+    }
+
+    .footer-social:hover {
+      transform:  translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .footer-social svg {
+      width:    20px;
+      height:   20px;
+      position: relative;
+      z-index:  1;
+    }
+
+    .footer-social--ig  { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+    .footer-social--ig  svg { fill: #fff; }
+    .footer-social--x   { background: #14171A; }
+    .footer-social--x   svg { fill: #fff; }
+    .footer-social--fb  { background: #1877F2; }
+    .footer-social--fb  svg { fill: #fff; }
+    .footer-social--tk  { background: #111; }
+    .footer-social--tk  svg { fill: #fff; }
+
+    .footer-col-title {
+      font-size:      11.5px;
+      font-weight:    600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color:          rgba(255, 255, 255, 0.35);
+      margin-bottom:  20px;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 11px;
+    }
+
+    .footer-links a {
+      font-size:  14.5px;
+      color:      rgba(255, 255, 255, 0.7);
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color:        var(--yellow);
+      padding-left: 4px;
+    }
+
+    .footer-contact-item {
+      display:       flex;
+      gap:           10px;
+      align-items:   flex-start;
+      margin-bottom: 16px;
+      font-size:     14px;
+      color:         rgba(255, 255, 255, 0.7);
+      line-height:   1.55;
+    }
+
+    .footer-contact-item svg {
+      flex-shrink:     0;
+      width:           16px;
+      height:          16px;
+      margin-top:      3px;
+      stroke:          var(--purple-bright);
+      fill:            none;
+      stroke-width:    2;
+      stroke-linecap:  round;
+      stroke-linejoin: round;
+    }
+
+    .footer-bottom {
+      padding:         22px 0;
+      display:         flex;
+      align-items:     center;
+      justify-content: space-between;
+      flex-wrap:       wrap;
+      gap:             12px;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color:     rgba(255, 255, 255, 0.35);
+    }
+
+    .footer-legal {
+      display: flex;
+      gap:     24px;
+    }
+
+    .footer-legal a {
+      font-size:  13px;
+      color:      rgba(255, 255, 255, 0.4);
+      transition: var(--transition);
+    }
+
+    .footer-legal a:hover {
+      color: var(--yellow);
+    }
+
+
+    /* ============================================================
+       SCROLL REVEAL
+    ============================================================ */
+    .reveal {
+      opacity:    0;
+      transform:  translateY(35px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.vis {
+      opacity:   1;
+      transform: translateY(0);
+    }
+
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+    .reveal-d4 { transition-delay: 0.4s; }
+
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 1024px) {
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        text-align:            center;
+        gap:                   44px;
+      }
+
+      .hero-desc {
+        margin: 0 auto 40px;
+      }
+
+      .hero-ctas {
+        justify-content: center;
+      }
+
+      .offer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .trust-grid {
+        grid-template-columns: 1fr;
+        gap:                   40px;
+      }
+
+      .trust-image {
+        order:     -1;
+        max-width: 500px;
+        margin:    0 auto;
+      }
+
+      .how-steps {
+        grid-template-columns: 1fr;
+        max-width:             480px;
+        margin:                50px auto 0;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap:                   20px;
+      }
+
+      .stat-divider {
+        display: none;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+        gap:                   32px;
+      }
+
+    }
+
+    @media (max-width: 768px) {
+
+      .nav-desktop {
+        display: none;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      .nav-mobile {
+        display: block;
+      }
+
+      .header-inner {
+        height: 80px;
+      }
+
+      .logo-img {
+        height: 44px;
+      }
+
+      .nav-mobile {
+        top: 80px;
+      }
+
+      .hero {
+        padding-top: 80px;
+        min-height:  auto;
+      }
+
+      .hero-inner {
+        padding: 36px 20px 60px;
+      }
+
+      .section {
+        padding: 70px 20px;
+      }
+
+      .phone-mockup {
+        width: 250px;
+      }
+
+      .offer-grid {
+        grid-template-columns: 1fr;
+        max-width:             420px;
+        margin:                40px auto 0;
+      }
+
+      .offer-card-img {
+        height: 240px;
+      }
+
+      .offer-card-img img {
+        object-position: center 20%;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .newsletter-form {
+        flex-direction: column;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap:                   28px;
+        text-align:            left;
+      }
+
+      .footer-links {
+        text-align: left;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align:     center;
+      }
+
+    }
+
+    @media (max-width: 480px) {
+
+      .hero-title {
+        font-size: 28px;
+      }
+
+      .phone-mockup {
+        width: 230px;
+      }
+
+      .hero-ctas {
+        flex-direction: column;
+        align-items:    center;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        width:           100%;
+        justify-content: center;
+      }
+
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="/" class="logo-link">
+        <img
+          src="https://bookleti.ng/wp-content/uploads/2026/03/20260303_202128-scaled-e1772574399392.png"
+          alt="Leti"
+          class="logo-img"
+        >
+      </a>
+      <nav class="nav-desktop">
+        <a href="/" class="active">Home</a>
+        <a href="/property-owner">Property Owner</a>
+        <a href="/investors">Investors</a>
+        <a href="/service-hub">Service Hub</a>
+        <a href="/contact-us">Contact Us</a>
+        <a href="/leti-stay-management" class="nav-highlight">Leti Stay Management</a>
+      </nav>
+      <div class="nav-toggle" id="navToggle" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE NAV -->
+  <nav class="nav-mobile" id="navMobile">
+    <a href="/" class="active">Home</a>
+    <a href="/property-owner">Property Owner</a>
+    <a href="/investors">Investors</a>
+    <a href="/service-hub">Service Hub</a>
+    <a href="/contact-us">Contact Us</a>
+    <a href="/leti-stay-management" class="nav-highlight">Leti Stay Management</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-orb hero-orb-3"></div>
+    <div class="hero-inner">
+
+      <div class="hero-content">
+        <span class="hero-tag">
+          <span class="hero-tag-dot"></span>
+          Now Onboarding Early Users
+        </span>
+        <h1 class="hero-title">
+          Book Apartments.<br>
+          Hire Professionals.<br>
+          <em>All in One App.</em>
+        </h1>
+        <p class="hero-desc">
+          LETI is Africa's first structured short-let and home services marketplace.
+          We connect you directly with verified property owners and certified service
+          providers — no agents, no inflated prices, no guesswork. Just secure bookings,
+          escrow-protected payments, and real accountability.
+        </p>
+        <div class="hero-ctas">
+          <a href="/service-hub" class="btn-primary">
+            Register as a Service Provider
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+          <a href="/property-owner" class="btn-secondary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+            List Your Property Now
+          </a>
+        </div>
+      </div>
+
+      <!-- PHONE MOCKUP -->
+      <div class="hero-phone-wrap">
+        <div class="phone-container">
+          <div class="phone-glow"></div>
+          <div class="phone-mockup" id="phoneMockup" style="animation: phoneFloat 5s ease-in-out infinite;">
+            <div class="phone-btn-side"></div>
+            <div class="phone-btn-vol1"></div>
+            <div class="phone-btn-vol2"></div>
+            <div class="phone-inner">
+              <div class="phone-notch"></div>
+              <div class="phone-slider" id="phoneSlider">
+                <div class="phone-slide">
+                  <img src="https://bookleti.ng/wp-content/uploads/2026/04/Splash-screen.0-scaled.png" alt="Leti Splash" loading="lazy">
+                </div>
+                <div class="phone-slide">
+                  <img src="https://bookleti.ng/wp-content/uploads/2026/04/Splash-screen-v-1-scaled.png" alt="Leti Welcome" loading="lazy">
+                </div>
+                <div class="phone-slide">
+                  <img src="https://bookleti.ng/wp-content/uploads/2026/04/Onboarding-2-scaled.png" alt="Onboarding" loading="lazy">
+                </div>
+                <div class="phone-slide">
+                  <img src="https://bookleti.ng/wp-content/uploads/2026/04/Sign-up-scaled.png" alt="Sign Up" loading="lazy">
+                </div>
+                <div class="phone-slide">
+                  <img src="https://bookleti.ng/wp-content/uploads/2026/04/Home-stay-mode-scaled.png" alt="Leti Stay" loading="lazy">
+                </div>
+                <div class="phone-slide">
+                  <img src="https://bookleti.ng/wp-content/uploads/2026/04/Property-details-screen-scaled.png" alt="Property Details" loading="lazy">
+                </div>
+                <div class="phone-slide">
+                  <img src="https://bookleti.ng/wp-content/uploads/2026/04/Service-provider-dashboard-scaled.png" alt="Service Dashboard" loading="lazy">
+                </div>
+                <div class="phone-slide">
+                  <img src="https://bookleti.ng/wp-content/uploads/2026/04/Booking-summary-scaled.png" alt="Booking Summary" loading="lazy">
+                </div>
+                <div class="phone-slide">
+                  <img src="https://bookleti.ng/wp-content/uploads/2026/04/Tracking-screen-scaled.png" alt="Tracking" loading="lazy">
+                </div>
+                <div class="phone-slide">
+                  <img src="https://bookleti.ng/wp-content/uploads/2026/04/Job-done-screen-scaled.png" alt="Job Complete" loading="lazy">
+                </div>
+                <div class="phone-slide">
+                  <img src="https://bookleti.ng/wp-content/uploads/2026/04/Payment-success.l-scaled.png" alt="Payment" loading="lazy">
+                </div>
+                <div class="phone-slide">
+                  <img src="https://bookleti.ng/wp-content/uploads/2026/04/Client-Profile-scaled.png" alt="Profile" loading="lazy">
+                </div>
+                <div class="phone-slide">
+                  <img src="https://bookleti.ng/wp-content/uploads/2026/04/Wallet-scaled.png" alt="Wallet" loading="lazy">
+                </div>
+              </div>
+              <div class="phone-dots" id="phoneDots"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- WHAT WE OFFER -->
+  <section class="section offer-section" id="offers">
+    <div class="section-inner">
+      <div style="text-align: center;" class="reveal">
+        <span class="section-tag">&#10024; What We Offer</span>
+        <h2 class="section-title" style="margin: 0 auto 16px;">Four Ways to Grow with Leti</h2>
+        <p class="section-subtitle" style="margin: 0 auto;">
+          Whether you want to invest, list your property, offer your skills, or need someone
+          to manage it all — Leti has a seat for you.
+        </p>
+      </div>
+      <div class="offer-grid">
+
+        <a href="/investors" class="offer-card reveal reveal-d1" style="color: inherit;">
+          <div class="offer-card-img">
+            <img src="https://bookleti.ng/wp-content/uploads/2026/03/leti_image_1.png" alt="For Investors">
+            <div class="offer-card-img-overlay"></div>
+          </div>
+          <div class="offer-card-body">
+            <h3 class="offer-card-title">For Investors</h3>
+            <p class="offer-card-text">
+              Back a platform that earns on every booking and every service.
+              Get equity or revenue-share with transparent terms and real growth projections.
+            </p>
+            <span class="offer-card-link">
+              Learn More
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </span>
+          </div>
+        </a>
+
+        <a href="/property-owner" class="offer-card reveal reveal-d2" style="color: inherit;">
+          <div class="offer-card-img">
+            <img src="https://bookleti.ng/wp-content/uploads/2026/03/leti_image_5.png" alt="For Property Owners">
+            <div class="offer-card-img-overlay"></div>
+          </div>
+          <div class="offer-card-body">
+            <h3 class="offer-card-title">For Property Owners</h3>
+            <p class="offer-card-text">
+              List your apartment directly to verified guests. No middlemen inflating your price.
+              Escrow-secured payments, structured bookings, and built-in services.
+            </p>
+            <span class="offer-card-link">
+              Learn More
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </span>
+          </div>
+        </a>
+
+        <a href="/service-hub" class="offer-card reveal reveal-d3" style="color: inherit;">
+          <div class="offer-card-img">
+            <img src="https://bookleti.ng/wp-content/uploads/2026/03/leti_image_2.png" alt="For Service Providers">
+            <div class="offer-card-img-overlay"></div>
+          </div>
+          <div class="offer-card-body">
+            <h3 class="offer-card-title">For Service Providers</h3>
+            <p class="offer-card-text">
+              Join Leti Hub — get matched with real jobs from property owners and guests.
+              Chefs, cleaners, plumbers, DJs, braiders and more. Escrow-guaranteed pay, every time.
+            </p>
+            <span class="offer-card-link">
+              Learn More
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </span>
+          </div>
+        </a>
+
+        <a href="/leti-stay-management" class="offer-card reveal reveal-d4" style="color: inherit;">
+          <div
+            class="offer-card-img"
+            style="background: linear-gradient(135deg, var(--purple-mid), var(--magenta)); display: flex; align-items: center; justify-content: center;"
+          >
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </div>
+          <div class="offer-card-body">
+            <h3 class="offer-card-title">Leti Stay Management</h3>
+            <p class="offer-card-text">
+              Want to start or scale a short-let business? We source apartments, design interiors,
+              install smart locks, and manage everything — so you earn while we work.
+            </p>
+            <span class="offer-card-link" style="color: var(--magenta);">
+              Coming Soon
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section how-section" id="how">
+    <div class="section-inner">
+      <div style="text-align: center;" class="reveal">
+        <span class="section-tag">How It Works</span>
+        <h2 class="section-title" style="margin: 0 auto 16px;">Three Steps. Zero Stress.</h2>
+        <p class="section-subtitle" style="margin: 0 auto;">
+          Whether you're booking a stay or hiring a professional — Leti makes it simple, secure, and fast.
+        </p>
+      </div>
+      <div class="how-steps">
+        <div class="how-step reveal reveal-d1">
+          <div class="how-step-num">1</div>
+          <h3 class="how-step-title">Sign Up &amp; Verify</h3>
+          <p class="how-step-text">
+            Create your account in minutes. Verify your identity with BVN and a valid ID.
+            This keeps everyone on the platform safe and accountable.
+          </p>
+        </div>
+        <div class="how-step reveal reveal-d2">
+          <div class="how-step-num">2</div>
+          <h3 class="how-step-title">Book or Request</h3>
+          <p class="how-step-text">
+            Find a short-let apartment by location and budget, or request a service provider —
+            chef, cleaner, plumber, and more — sorted by distance to you.
+          </p>
+        </div>
+        <div class="how-step reveal reveal-d3">
+          <div class="how-step-num">3</div>
+          <h3 class="how-step-title">Pay Securely &amp; Enjoy</h3>
+          <p class="how-step-text">
+            All payments go through escrow. Money is only released when the stay is confirmed
+            or the job is marked complete by both parties. No disputes.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST & SAFETY -->
+  <section class="section trust-section" id="trust">
+    <div class="section-inner">
+      <div class="trust-grid">
+        <div class="trust-image reveal">
+          <img src="https://bookleti.ng/wp-content/uploads/2026/03/leti_image_3.png" alt="Trust and Safety">
+        </div>
+        <div>
+          <div class="reveal">
+            <span class="section-tag">&#128274; Trust &amp; Safety</span>
+            <h2 class="section-title">Built Into Every Transaction</h2>
+            <p class="section-subtitle" style="margin-bottom: 32px;">
+              Leti isn't just a marketplace — it's a trust engine. Every booking and service request
+              is backed by identity verification, escrow protection, and transparent accountability.
+            </p>
+          </div>
+          <div class="trust-features">
+            <div class="trust-item reveal reveal-d1">
+              <div class="trust-icon">
+                <svg viewBox="0 0 24 24">
+                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+                  <path d="M16 3.13a4 4 0 010 7.75"/>
+                </svg>
+              </div>
+              <div>
+                <div class="trust-item-title">Verified Users</div>
+                <p class="trust-item-text">
+                  KYC-level verification for all participants — property owners, renters,
+                  and service providers. Real identity locked in the system.
+                </p>
+              </div>
+            </div>
+            <div class="trust-item reveal reveal-d2">
+              <div class="trust-icon">
+                <svg viewBox="0 0 24 24">
+                  <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                  <line x1="1" y1="10" x2="23" y2="10"/>
+                </svg>
+              </div>
+              <div>
+                <div class="trust-item-title">Escrow Payments</div>
+                <p class="trust-item-text">
+                  Funds held securely until the stay is confirmed or service delivered.
+                  No fake alerts. No transfer stories. Guaranteed payment.
+                </p>
+              </div>
+            </div>
+            <div class="trust-item reveal reveal-d3">
+              <div class="trust-icon">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+              </div>
+              <div>
+                <div class="trust-item-title">Certified Service Hub</div>
+                <p class="trust-item-text">
+                  Only vetted professionals join Leti Hub. Clear standards, performance
+                  tracking, and accountability on every job.
+                </p>
+              </div>
+            </div>
+            <div class="trust-item reveal reveal-d4">
+              <div class="trust-icon">
+                <svg viewBox="0 0 24 24">
+                  <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+                </svg>
+              </div>
+              <div>
+                <div class="trust-item-title">Transparent Reviews</div>
+                <p class="trust-item-text">
+                  After every stay or service, verified reviews help the community
+                  make better, more informed decisions.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats-section">
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <div class="stat-num">10</div>
+        <div class="stat-label">Service Categories</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item reveal reveal-d1">
+        <div class="stat-num">&#8358;3K</div>
+        <div class="stat-label">One-Time Early Access</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item reveal reveal-d2">
+        <div class="stat-num">0%</div>
+        <div class="stat-label">First Month Commission</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item reveal reveal-d3">
+        <div class="stat-num">24/7</div>
+        <div class="stat-label">Escrow Protection</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <!-- FLAG: Newsletter form has no submission handler. Provide a form action URL or mailing list integration. -->
+  <section class="newsletter-section" id="newsletter">
+    <div class="newsletter-inner reveal">
+      <div class="newsletter-icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+          <polyline points="22,6 12,13 2,6"/>
+        </svg>
+      </div>
+      <h2 class="newsletter-title">Stay Ahead with Leti</h2>
+      <p class="newsletter-text">
+        Get early access updates, exclusive offers, and be the first to know when
+        Leti launches new features across Lagos and beyond.
+      </p>
+      <div class="newsletter-form">
+        <input type="email" class="newsletter-input" placeholder="Enter your email address">
+        <button class="newsletter-btn">Subscribe</button>
+      </div>
+      <p style="font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 16px;">
+        We respect your inbox. No spam, ever.
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer" id="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+
+        <div class="footer-brand">
+          <img
+            src="https://bookleti.ng/wp-content/uploads/2026/03/20260303_202128-scaled-e1772574399392.png"
+            alt="Leti"
+            class="footer-logo"
+          >
+          <p class="footer-tagline">
+            Africa's first structured short-let and home services marketplace.
+            Book apartments. Hire professionals. All in one app.
+          </p>
+          <div class="footer-socials">
+            <a href="https://www.instagram.com/letiapp.ng?igsh=MWxqY2p4ZjA3OXh2bA==" class="footer-social footer-social--ig" aria-label="Instagram">
+              <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <!-- FLAG: X (Twitter) — please provide the correct profile URL to replace # -->
+            <a href="#" class="footer-social footer-social--x" aria-label="X">
+              <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <!-- FLAG: Facebook — please provide the correct page URL to replace # -->
+            <a href="#" class="footer-social footer-social--fb" aria-label="Facebook">
+              <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <!-- FLAG: TikTok — please provide the correct profile URL to replace # -->
+            <a href="#" class="footer-social footer-social--tk" aria-label="TikTok">
+              <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Platform</h4>
+          <ul class="footer-links">
+            <li><a href="/investors">Investors</a></li>
+            <li><a href="/property-owner">Property Owners</a></li>
+            <li><a href="/service-hub">Service Hub</a></li>
+            <li><a href="/leti-stay-management">Leti Stay Management</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Company</h4>
+          <ul class="footer-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/contact-us">Contact Us</a></li>
+            <li><a href="/faq">FAQs</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Contact</h4>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            <span>294, Herbert Macaulay Way,<br>Sabo Yaba, Lagos</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+            </svg>
+            <span>+234 913 373 0647</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            <span>letiappsocial@gmail.com</span>
+          </div>
+        </div>
+
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">Copyright &copy; 2026 LETI. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="/privacy-policy">Privacy Policy</a>
+          <a href="/terms-and-conditions">Terms &amp; Conditions</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+
+    // NAV TOGGLE
+    function toggleMenu() {
+      document.getElementById('navToggle').classList.toggle('open');
+      document.getElementById('navMobile').classList.toggle('open');
+    }
+
+    document.querySelectorAll('.nav-mobile a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        document.getElementById('navToggle').classList.remove('open');
+        document.getElementById('navMobile').classList.remove('open');
+      });
+    });
+
+
+    // PHONE SLIDER
+    (function () {
+      var slider   = document.getElementById('phoneSlider');
+      var dotsWrap = document.getElementById('phoneDots');
+      var slides   = slider.querySelectorAll('.phone-slide');
+      var total    = slides.length;
+      var cur      = 0;
+      var auto;
+
+      for (var i = 0; i < total; i++) {
+        (function (index) {
+          var d = document.createElement('div');
+          d.className = 'phone-dot' + (index === 0 ? ' active' : '');
+          d.addEventListener('click', function () { goTo(index, true); });
+          dotsWrap.appendChild(d);
+        })(i);
+      }
+
+      function goTo(i, withSound) {
+        cur = i;
+        slider.style.transform = 'translateX(-' + (cur * 100) + '%)';
+        dotsWrap.querySelectorAll('.phone-dot').forEach(function (d, j) {
+          d.classList.toggle('active', j === cur);
+        });
+        if (withSound) playSound();
+      }
+
+      function next(withSound) {
+        goTo((cur + 1) % total, withSound);
+      }
+
+      function playSound() {
+        try {
+          var ctx     = new (window.AudioContext || window.webkitAudioContext)();
+          var bufSize = ctx.sampleRate * 0.08;
+          var buf     = ctx.createBuffer(1, bufSize, ctx.sampleRate);
+          var data    = buf.getChannelData(0);
+          for (var i = 0; i < bufSize; i++) {
+            data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / bufSize, 3);
+          }
+          var src    = ctx.createBufferSource();
+          src.buffer = buf;
+          var gain   = ctx.createGain();
+          gain.gain.setValueAtTime(0.04, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
+          var filter       = ctx.createBiquadFilter();
+          filter.type      = 'lowpass';
+          filter.frequency.setValueAtTime(3000, ctx.currentTime);
+          filter.frequency.exponentialRampToValueAtTime(800, ctx.currentTime + 0.08);
+          src.connect(filter);
+          filter.connect(gain);
+          gain.connect(ctx.destination);
+          src.start();
+        } catch (e) {}
+      }
+
+      auto = setInterval(function () { next(false); }, 3500);
+
+      var mock = document.getElementById('phoneMockup');
+      var tx   = 0;
+
+      mock.addEventListener('touchstart', function (e) {
+        tx = e.touches[0].clientX;
+        clearInterval(auto);
+      }, { passive: true });
+
+      mock.addEventListener('touchend', function (e) {
+        var diff = tx - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 30) {
+          if (diff > 0) {
+            next(true);
+          } else {
+            goTo((cur - 1 + total) % total, true);
+          }
+        }
+        auto = setInterval(function () { next(false); }, 3500);
+      }, { passive: true });
+
+      mock.addEventListener('mouseenter', function () { clearInterval(auto); });
+      mock.addEventListener('mouseleave', function () {
+        auto = setInterval(function () { next(false); }, 3500);
+      });
+      mock.addEventListener('click', function (e) {
+        var rect = mock.getBoundingClientRect();
+        var x    = e.clientX - rect.left;
+        if (x > rect.width / 2) {
+          next(true);
+        } else {
+          goTo((cur - 1 + total) % total, true);
+        }
+      });
+
+    })();
+
+
+    // SCROLL REVEAL
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) e.target.classList.add('vis');
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(function (el) { obs.observe(el); });
+
+
+    // HEADER SCROLL
+    window.addEventListener('scroll', function () {
+      var h = document.getElementById('header');
+      h.style.background = window.pageYOffset > 80
+        ? 'rgba(45, 8, 69, 0.97)'
+        : 'rgba(45, 8, 69, 0.94)';
+    }, { passive: true });
+
+  </script>
+</body>
+</html>

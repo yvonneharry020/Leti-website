@@ -1,0 +1,1744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LETI &mdash; Leti Stay Management | Coming Soon July 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+
+    /* ============================================================
+       CSS CUSTOM PROPERTIES
+       ============================================================ */
+    :root {
+      --purple-deep:   #2D0845;
+      --purple-mid:    #6B1FA1;
+      --purple-bright: #9B30FF;
+      --magenta:       #D946EF;
+      --pink-glow:     #F472B6;
+      --yellow:        #FACC15;
+      --yellow-hover:  #EAB308;
+      --cream:         #FAF7F2;
+      --cream-light:   #FDFCFA;
+      --white:         #FFFFFF;
+      --dark:          #0F0A1A;
+      --text-dark:     #1E1333;
+      --text-mid:      #4A3D5C;
+      --text-light:    #8B7FA0;
+      --text-on-dark:  #E8E0F0;
+      --font-display:  'Playfair Display', Georgia, serif;
+      --font-body:     'DM Sans', system-ui, sans-serif;
+      --radius-sm:     8px;
+      --radius-md:     14px;
+      --radius-lg:     22px;
+      --radius-xl:     32px;
+      --shadow-card:   0 4px 24px rgba(45, 8, 69, 0.07);
+      --shadow-hover:  0 16px 48px rgba(45, 8, 69, 0.14);
+      --transition:    0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      --header-bg:     rgba(45, 8, 69, 0.94);
+    }
+
+    /* ============================================================
+       RESET & BASE
+       ============================================================ */
+    *, *::before, *::after {
+      margin:     0;
+      padding:    0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior:          smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family:            var(--font-body);
+      color:                  var(--text-dark);
+      background:             var(--cream);
+      line-height:            1.6;
+      overflow-x:             hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+      max-width: 100%;
+      display:   block;
+    }
+
+    a {
+      text-decoration: none;
+      color:           inherit;
+    }
+
+    button {
+      border:      none;
+      cursor:      pointer;
+      font-family: inherit;
+    }
+
+    /* ============================================================
+       HEADER
+       ============================================================ */
+    .header {
+      position:                fixed;
+      top:                     0;
+      left:                    0;
+      right:                   0;
+      z-index:                 1000;
+      background:              var(--header-bg);
+      backdrop-filter:         blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom:           1px solid rgba(155, 48, 255, 0.12);
+      transition:              var(--transition);
+    }
+
+    .header-inner {
+      max-width:       1280px;
+      margin:          0 auto;
+      padding:         0 28px;
+      height:          88px;
+      display:         flex;
+      align-items:     center;
+      justify-content: space-between;
+    }
+
+    .logo-link {
+      display:     flex;
+      align-items: center;
+    }
+
+    .logo-img {
+      height: 50px;
+      width:  auto;
+      filter: brightness(1.1);
+    }
+
+    .nav-desktop {
+      display:     flex;
+      align-items: center;
+      gap:         4px;
+    }
+
+    .nav-desktop a {
+      color:          rgba(255, 255, 255, 0.85);
+      font-size:      13.5px;
+      font-weight:    500;
+      padding:        9px 15px;
+      border-radius:  var(--radius-sm);
+      transition:     var(--transition);
+      white-space:    nowrap;
+      letter-spacing: 0.2px;
+    }
+
+    .nav-desktop a:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color:      #fff;
+    }
+
+    .nav-desktop a.active {
+      color: var(--yellow);
+    }
+
+    .nav-desktop a.nav-highlight {
+      background:    var(--yellow);
+      color:         var(--dark);
+      font-weight:   600;
+      padding:       9px 18px;
+      border-radius: var(--radius-md);
+    }
+
+    .nav-desktop a.nav-highlight:hover {
+      background: var(--yellow-hover);
+    }
+
+    .nav-toggle {
+      display:         none;
+      width:           44px;
+      height:          44px;
+      background:      rgba(255, 255, 255, 0.06);
+      border-radius:   var(--radius-sm);
+      flex-direction:  column;
+      align-items:     center;
+      justify-content: center;
+      gap:             5px;
+      cursor:          pointer;
+      transition:      var(--transition);
+    }
+
+    .nav-toggle:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .nav-toggle span {
+      display:       block;
+      width:         22px;
+      height:        2px;
+      background:    rgba(255, 255, 255, 0.9);
+      border-radius: 2px;
+      transition:    var(--transition);
+    }
+
+    .nav-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    .nav-mobile {
+      display:       none;
+      position:      fixed;
+      top:           88px;
+      left:          0;
+      right:         0;
+      background:    var(--purple-deep);
+      border-bottom: 2px solid rgba(155, 48, 255, 0.15);
+      padding:       12px 24px 20px;
+      transform:     translateY(-120%);
+      transition:    transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index:       999;
+    }
+
+    .nav-mobile.open {
+      transform: translateY(0);
+    }
+
+    .nav-mobile a {
+      display:       block;
+      color:         rgba(255, 255, 255, 0.85);
+      font-size:     15.5px;
+      font-weight:   500;
+      padding:       14px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      transition:    var(--transition);
+    }
+
+    .nav-mobile a:last-child {
+      border-bottom: none;
+    }
+
+    .nav-mobile a:hover,
+    .nav-mobile a.active {
+      color: var(--yellow);
+    }
+
+    .nav-mobile a.nav-highlight {
+      background:    var(--yellow);
+      color:         var(--dark);
+      border-radius: var(--radius-sm);
+      text-align:    center;
+      margin-top:    10px;
+      font-weight:   600;
+      border-bottom: none;
+      padding:       14px;
+    }
+
+    /* ============================================================
+       HERO
+       ============================================================ */
+    .hero {
+      position:        relative;
+      min-height:      100vh;
+      display:         flex;
+      align-items:     center;
+      justify-content: center;
+      padding-top:     88px;
+      overflow:        hidden;
+      background:      linear-gradient(155deg,
+        var(--purple-deep)   0%,
+        #3D1260              20%,
+        var(--purple-mid)    40%,
+        var(--purple-bright) 60%,
+        var(--magenta)       80%,
+        var(--pink-glow)     100%
+      );
+      text-align: center;
+    }
+
+    .hero::before {
+      content:          '';
+      position:         absolute;
+      inset:            0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size:  36px 36px;
+      pointer-events:   none;
+    }
+
+    .hero::after {
+      content:        '';
+      position:       absolute;
+      bottom:         0;
+      left:           0;
+      right:          0;
+      height:         140px;
+      background:     linear-gradient(to top, var(--purple-deep), transparent);
+      pointer-events: none;
+      z-index:        2;
+    }
+
+    /* ============================================================
+       FLOATING PARTICLES
+       ============================================================ */
+    .particle {
+      position:       absolute;
+      border-radius:  50%;
+      pointer-events: none;
+      opacity:        0.5;
+    }
+
+    .particle-1 { width: 12px; height: 12px; background: var(--yellow);               top: 15%; left: 10%;   animation: floatP 7s  ease-in-out infinite; }
+    .particle-2 { width:  8px; height:  8px; background: var(--magenta);              top: 25%; right: 15%;  animation: floatP 9s  ease-in-out infinite 1s; }
+    .particle-3 { width: 16px; height: 16px; background: rgba(250, 204, 21, 0.4);     bottom: 25%; left: 20%; animation: floatP 6s ease-in-out infinite 2s; }
+    .particle-4 { width:  6px; height:  6px; background: var(--pink-glow);            top: 60%; right: 10%;  animation: floatP 8s  ease-in-out infinite 0.5s; }
+    .particle-5 { width: 10px; height: 10px; background: rgba(155, 48, 255, 0.6);     top: 40%; left: 5%;    animation: floatP 10s ease-in-out infinite 3s; }
+    .particle-6 { width: 14px; height: 14px; background: rgba(250, 204, 21, 0.3);     bottom: 15%; right: 25%; animation: floatP 7s ease-in-out infinite 1.5s; }
+
+    @keyframes floatP {
+      0%   { transform: translate(0, 0) rotate(0deg); }
+      25%  { transform: translate(20px, -30px) rotate(90deg); }
+      50%  { transform: translate(-15px, -50px) rotate(180deg); }
+      75%  { transform: translate(25px, -20px) rotate(270deg); }
+      100% { transform: translate(0, 0) rotate(0deg); }
+    }
+
+    /* ============================================================
+       HERO ORBS
+       ============================================================ */
+    .hero-orb {
+      position:       absolute;
+      border-radius:  50%;
+      filter:         blur(80px);
+      pointer-events: none;
+      animation:      orbFloat 8s ease-in-out infinite;
+    }
+
+    .hero-orb-1 {
+      width:      400px;
+      height:     400px;
+      background: rgba(250, 204, 21, 0.1);
+      top:        -100px;
+      right:      -100px;
+    }
+
+    .hero-orb-2 {
+      width:           300px;
+      height:          300px;
+      background:      rgba(217, 70, 239, 0.15);
+      bottom:          5%;
+      left:            -80px;
+      animation-delay: -3s;
+    }
+
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33%       { transform: translate(30px, -20px) scale(1.05); }
+      66%       { transform: translate(-20px, 15px) scale(0.95); }
+    }
+
+    .hero-inner {
+      position:   relative;
+      z-index:    3;
+      max-width:  800px;
+      padding:    40px 28px 80px;
+    }
+
+    /* ============================================================
+       HERO — COMING SOON BADGE
+       ============================================================ */
+    .coming-badge {
+      display:       inline-flex;
+      align-items:   center;
+      gap:           10px;
+      padding:       10px 24px;
+      background:    rgba(250, 204, 21, 0.15);
+      border:        2px solid rgba(250, 204, 21, 0.3);
+      border-radius: 50px;
+      margin-bottom: 28px;
+      animation:     badgePulse 2s ease-in-out infinite;
+    }
+
+    @keyframes badgePulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(250, 204, 21, 0.3); }
+      50%       { box-shadow: 0 0 0 12px rgba(250, 204, 21, 0); }
+    }
+
+    .coming-badge-dot {
+      width:         10px;
+      height:        10px;
+      background:    var(--yellow);
+      border-radius: 50%;
+      animation:     blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0; }
+    }
+
+    .coming-badge-text {
+      font-size:      14px;
+      font-weight:    700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color:          var(--yellow);
+    }
+
+    /* ============================================================
+       HERO — TYPEWRITER
+       ============================================================ */
+    .hero-typewriter {
+      font-family: var(--font-display);
+      font-size:   clamp(28px, 4.5vw, 52px);
+      font-weight: 700;
+      color:       var(--white);
+      line-height: 1.15;
+      margin-bottom: 12px;
+      min-height:  1.3em;
+    }
+
+    .hero-typewriter .yellow { color: var(--yellow); }
+
+    .tw-cursor {
+      display:        inline-block;
+      width:          3px;
+      height:         1em;
+      background:     var(--yellow);
+      margin-left:    4px;
+      animation:      cursorBlink 0.6s step-end infinite;
+      vertical-align: text-bottom;
+    }
+
+    @keyframes cursorBlink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0; }
+    }
+
+    /* ============================================================
+       HERO — BOUNCING GLOW TEXT
+       ============================================================ */
+    .hero-bounce {
+      font-family:  var(--font-display);
+      font-size:    clamp(32px, 5vw, 60px);
+      font-weight:  700;
+      margin-top:   8px;
+      display:      inline-block;
+      animation:    bounceGlow 1.5s ease-in-out infinite;
+      cursor:       default;
+    }
+
+    .hero-bounce span {
+      display:                 inline-block;
+      background:              linear-gradient(90deg, var(--yellow), #FDE68A, var(--yellow));
+      background-size:         200% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip:         text;
+      animation:               shimmer 3s ease-in-out infinite;
+      filter:                  drop-shadow(0 0 20px rgba(250, 204, 21, 0.4));
+    }
+
+    @keyframes bounceGlow {
+      0%, 100% { transform: translateY(0) scale(1); }
+      30%       { transform: translateY(-16px) scale(1.03); }
+      60%       { transform: translateY(-4px) scale(0.99); }
+    }
+
+    @keyframes shimmer {
+      0%   { background-position: 100% 0; }
+      50%  { background-position: 0% 0; }
+      100% { background-position: 100% 0; }
+    }
+
+    .hero-desc {
+      font-size:   17px;
+      line-height: 1.75;
+      color:       rgba(255, 255, 255, 0.75);
+      max-width:   600px;
+      margin:      28px auto 0;
+    }
+
+    /* ============================================================
+       SHARED SECTION STYLES
+       ============================================================ */
+    .section {
+      padding: 100px 28px;
+      width:   100%;
+    }
+
+    .section-inner {
+      max-width: 1280px;
+      margin:    0 auto;
+    }
+
+    .section-tag {
+      display:        inline-flex;
+      align-items:    center;
+      gap:            6px;
+      font-size:      12px;
+      font-weight:    600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      margin-bottom:  14px;
+    }
+
+    .section-title {
+      font-family:   var(--font-display);
+      font-size:     clamp(26px, 3.8vw, 42px);
+      font-weight:   700;
+      line-height:   1.2;
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      font-size:   16.5px;
+      max-width:   640px;
+      line-height: 1.7;
+    }
+
+    /* ============================================================
+       WHO IS IT FOR SECTION
+       ============================================================ */
+    .who-section {
+      background: var(--purple-deep);
+      position:   relative;
+      overflow:   hidden;
+    }
+
+    .who-section::before {
+      content:          '';
+      position:         absolute;
+      inset:            0;
+      background-image: radial-gradient(rgba(250, 204, 21, 0.02) 1px, transparent 1px);
+      background-size:  32px 32px;
+    }
+
+    .who-grid {
+      display:               grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:                   24px;
+      margin-top:            50px;
+      position:              relative;
+      z-index:               1;
+    }
+
+    .who-card {
+      background:    rgba(255, 255, 255, 0.04);
+      border:        1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-lg);
+      padding:       36px 28px;
+      transition:    var(--transition);
+      position:      relative;
+      overflow:      hidden;
+    }
+
+    .who-card::before {
+      content:          '';
+      position:         absolute;
+      top:              0;
+      left:             0;
+      right:            0;
+      height:           3px;
+      background:       linear-gradient(90deg, var(--yellow), var(--magenta));
+      transform:        scaleX(0);
+      transform-origin: left;
+      transition:       transform 0.6s ease;
+    }
+
+    .who-card:hover::before { transform: scaleX(1); }
+
+    .who-card:hover {
+      background:  rgba(255, 255, 255, 0.07);
+      transform:   translateY(-8px) rotateX(2deg);
+      box-shadow:  0 20px 50px rgba(0, 0, 0, 0.3);
+    }
+
+    .who-card-emoji {
+      font-size:     44px;
+      margin-bottom: 16px;
+      display:       block;
+      animation:     emojiFloat 3s ease-in-out infinite;
+    }
+
+    @keyframes emojiFloat {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-8px); }
+    }
+
+    .who-card:nth-child(2) .who-card-emoji { animation-delay: -1s; }
+    .who-card:nth-child(3) .who-card-emoji { animation-delay: -2s; }
+
+    .who-card-title {
+      font-family:   var(--font-display);
+      font-size:     19px;
+      font-weight:   600;
+      color:         var(--yellow);
+      margin-bottom: 10px;
+    }
+
+    .who-card-text {
+      font-size:   14.5px;
+      color:       rgba(255, 255, 255, 0.7);
+      line-height: 1.65;
+    }
+
+    /* ============================================================
+       WHAT WE DO — TIMELINE SECTION
+       ============================================================ */
+    .whatwedo-section {
+      background: linear-gradient(180deg, var(--purple-deep), var(--purple-mid));
+    }
+
+    .steps-timeline {
+      position:   relative;
+      max-width:  700px;
+      margin:     50px auto 0;
+      padding-left: 40px;
+    }
+
+    .steps-timeline::before {
+      content:    '';
+      position:   absolute;
+      left:       15px;
+      top:        0;
+      bottom:     0;
+      width:      2px;
+      background: linear-gradient(to bottom, var(--yellow), var(--magenta), var(--purple-bright));
+    }
+
+    .step-item {
+      position: relative;
+      padding:  0 0 40px 30px;
+    }
+
+    .step-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .step-dot {
+      position:     absolute;
+      left:         -26px;
+      top:          4px;
+      width:        24px;
+      height:       24px;
+      background:   var(--yellow);
+      border-radius: 50%;
+      border:       3px solid var(--purple-deep);
+      box-shadow:   0 0 15px rgba(250, 204, 21, 0.4);
+      z-index:      1;
+    }
+
+    .step-item:hover .step-dot {
+      animation: dotPop 0.4s ease;
+    }
+
+    @keyframes dotPop {
+      0%   { transform: scale(1); }
+      50%  { transform: scale(1.4); }
+      100% { transform: scale(1); }
+    }
+
+    .step-title {
+      font-family:   var(--font-display);
+      font-size:     18px;
+      font-weight:   600;
+      color:         var(--white);
+      margin-bottom: 6px;
+    }
+
+    .step-text {
+      font-size:   14.5px;
+      color:       rgba(255, 255, 255, 0.7);
+      line-height: 1.65;
+    }
+
+    /* ============================================================
+       SMART LOCK SECTION
+       ============================================================ */
+    .smartlock-section {
+      background: var(--cream);
+      position:   relative;
+      overflow:   hidden;
+    }
+
+    .smartlock-grid {
+      display:               grid;
+      grid-template-columns: 1fr 1fr;
+      gap:                   60px;
+      align-items:           center;
+    }
+
+    .smartlock-visual {
+      display:         flex;
+      justify-content: center;
+      position:        relative;
+    }
+
+    .lock-ring {
+      width:           220px;
+      height:          220px;
+      border-radius:   50%;
+      border:          3px solid var(--purple-bright);
+      display:         flex;
+      align-items:     center;
+      justify-content: center;
+      position:        relative;
+      animation:       ringRotate 12s linear infinite;
+    }
+
+    @keyframes ringRotate {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    .lock-ring::before {
+      content:       '';
+      position:      absolute;
+      top:           -6px;
+      left:          50%;
+      transform:     translateX(-50%);
+      width:         12px;
+      height:        12px;
+      background:    var(--yellow);
+      border-radius: 50%;
+      box-shadow:    0 0 12px rgba(250, 204, 21, 0.6);
+    }
+
+    .lock-icon-inner {
+      width:         120px;
+      height:        120px;
+      background:    linear-gradient(135deg, var(--purple-bright), var(--magenta));
+      border-radius: 28px;
+      display:       flex;
+      align-items:   center;
+      justify-content: center;
+      animation:     lockShake 4s ease-in-out infinite;
+      box-shadow:    0 12px 40px rgba(155, 48, 255, 0.25);
+    }
+
+    @keyframes lockShake {
+      0%, 100% { transform: rotate(0deg); }
+      10%       { transform: rotate(-3deg); }
+      20%       { transform: rotate(3deg); }
+      30%       { transform: rotate(-2deg); }
+      40%       { transform: rotate(0deg); }
+    }
+
+    .lock-icon-inner svg {
+      width:        56px;
+      height:       56px;
+      stroke:       var(--white);
+      fill:         none;
+      stroke-width: 1.8;
+    }
+
+    .smartlock-features {
+      display:        flex;
+      flex-direction: column;
+      gap:            16px;
+      margin-top:     28px;
+    }
+
+    .sl-feat {
+      display:       flex;
+      gap:           14px;
+      align-items:   flex-start;
+      padding:       14px;
+      background:    var(--white);
+      border-radius: var(--radius-md);
+      border:        1px solid rgba(45, 8, 69, 0.04);
+      transition:    var(--transition);
+    }
+
+    .sl-feat:hover {
+      transform:  translateX(6px);
+      box-shadow: var(--shadow-card);
+    }
+
+    .sl-feat-icon {
+      flex-shrink:     0;
+      width:           36px;
+      height:          36px;
+      background:      var(--yellow);
+      border-radius:   10px;
+      display:         flex;
+      align-items:     center;
+      justify-content: center;
+    }
+
+    .sl-feat-icon svg {
+      width:           18px;
+      height:          18px;
+      stroke:          var(--dark);
+      fill:            none;
+      stroke-width:    2.5;
+      stroke-linecap:  round;
+      stroke-linejoin: round;
+    }
+
+    .sl-feat-text {
+      font-size:   14.5px;
+      color:       var(--text-mid);
+      line-height: 1.55;
+    }
+
+    .sl-feat-text strong { color: var(--text-dark); }
+
+    /* ============================================================
+       CUSTOM PLAN SECTION
+       ============================================================ */
+    .custom-section {
+      background: linear-gradient(135deg, var(--purple-mid), var(--magenta));
+      position:   relative;
+      overflow:   hidden;
+    }
+
+    .custom-section::before {
+      content:          '';
+      position:         absolute;
+      inset:            0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size:  32px 32px;
+    }
+
+    .custom-grid {
+      display:               grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap:                   24px;
+      margin-top:            50px;
+      position:              relative;
+      z-index:               1;
+    }
+
+    .custom-card {
+      background:    rgba(255, 255, 255, 0.06);
+      border:        1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-lg);
+      padding:       32px;
+      transition:    all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      position:      relative;
+      overflow:      hidden;
+    }
+
+    .custom-card::after {
+      content:    '';
+      position:   absolute;
+      inset:      0;
+      background: linear-gradient(135deg, transparent, rgba(250, 204, 21, 0.04));
+      opacity:    0;
+      transition: 0.4s;
+    }
+
+    .custom-card:hover {
+      transform:  translateY(-8px) scale(1.02);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .custom-card:hover::after { opacity: 1; }
+
+    .custom-card-emoji {
+      font-size:     36px;
+      margin-bottom: 14px;
+      display:       block;
+    }
+
+    .custom-card-title {
+      font-family:   var(--font-display);
+      font-size:     18px;
+      font-weight:   600;
+      color:         var(--white);
+      margin-bottom: 8px;
+    }
+
+    .custom-card-text {
+      font-size:   14.5px;
+      color:       rgba(255, 255, 255, 0.72);
+      line-height: 1.65;
+    }
+
+    /* ============================================================
+       PROCESS NUMBERS SECTION
+       ============================================================ */
+    .process-section { background: var(--cream-light); }
+
+    .process-nums {
+      display:               grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:                   24px;
+      margin-top:            50px;
+      text-align:            center;
+    }
+
+    .process-num-card {
+      padding:       32px 20px;
+      background:    var(--white);
+      border-radius: var(--radius-lg);
+      border:        1px solid rgba(45, 8, 69, 0.04);
+      transition:    var(--transition);
+      position:      relative;
+      overflow:      hidden;
+    }
+
+    .process-num-card::before {
+      content:    '';
+      position:   absolute;
+      bottom:     0;
+      left:       0;
+      right:      0;
+      height:     4px;
+      background: linear-gradient(90deg, var(--purple-bright), var(--yellow));
+      transform:  scaleX(0);
+      transition: transform 0.5s;
+    }
+
+    .process-num-card:hover::before { transform: scaleX(1); }
+
+    .process-num-card:hover {
+      transform:  translateY(-6px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .process-big {
+      font-family:   var(--font-display);
+      font-size:     clamp(36px, 4vw, 52px);
+      font-weight:   700;
+      color:         var(--purple-bright);
+      line-height:   1;
+      margin-bottom: 10px;
+    }
+
+    .process-label {
+      font-size:     14px;
+      font-weight:   600;
+      color:         var(--text-dark);
+      margin-bottom: 4px;
+    }
+
+    .process-desc {
+      font-size:   13px;
+      color:       var(--text-mid);
+      line-height: 1.5;
+    }
+
+    /* ============================================================
+       CLOSING — WAVE TEXT SECTION
+       ============================================================ */
+    .closing-section {
+      background: linear-gradient(155deg,
+        var(--purple-deep),
+        var(--purple-mid),
+        var(--purple-bright)
+      );
+      text-align: center;
+      position:   relative;
+      overflow:   hidden;
+    }
+
+    .closing-section::before {
+      content:          '';
+      position:         absolute;
+      inset:            0;
+      background-image: radial-gradient(rgba(250, 204, 21, 0.03) 1px, transparent 1px);
+      background-size:  28px 28px;
+    }
+
+    .closing-inner {
+      max-width: 700px;
+      margin:    0 auto;
+      position:  relative;
+      z-index:   1;
+    }
+
+    .wave-text {
+      font-family:   var(--font-display);
+      font-size:     clamp(24px, 3.5vw, 38px);
+      font-weight:   700;
+      color:         var(--white);
+      line-height:   1.3;
+      margin-bottom: 20px;
+    }
+
+    .wave-text span {
+      display:          inline-block;
+      animation:        wave 2.5s ease-in-out infinite;
+      animation-delay:  calc(var(--i) * 0.08s);
+    }
+
+    @keyframes wave {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-8px); }
+    }
+
+    .closing-text {
+      font-size:   16px;
+      color:       rgba(255, 255, 255, 0.7);
+      line-height: 1.7;
+      max-width:   550px;
+      margin:      0 auto;
+    }
+
+    .closing-badge {
+      display:       inline-flex;
+      align-items:   center;
+      gap:           8px;
+      margin-top:    28px;
+      padding:       12px 28px;
+      background:    rgba(250, 204, 21, 0.12);
+      border:        2px solid rgba(250, 204, 21, 0.25);
+      border-radius: 50px;
+      font-size:     15px;
+      font-weight:   600;
+      color:         var(--yellow);
+      animation:     badgePulse 2s ease-in-out infinite;
+    }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    .footer {
+      background:  var(--header-bg);
+      backdrop-filter: blur(20px);
+      color:       var(--text-on-dark);
+      padding:     60px 28px 0;
+      border-top:  1px solid rgba(155, 48, 255, 0.12);
+    }
+
+    .footer-inner {
+      max-width: 1280px;
+      margin:    0 auto;
+    }
+
+    .footer-top {
+      display:               grid;
+      grid-template-columns: 1.6fr 1fr 1fr 1.3fr;
+      gap:                   40px;
+      padding-bottom:        40px;
+      border-bottom:         1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .footer-logo {
+      height:        44px;
+      margin-bottom: 14px;
+      filter:        brightness(1.1);
+    }
+
+    .footer-tagline {
+      font-size:     14px;
+      color:         rgba(255, 255, 255, 0.55);
+      line-height:   1.65;
+      margin-bottom: 22px;
+      max-width:     300px;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap:     10px;
+    }
+
+    .footer-social {
+      width:           42px;
+      height:          42px;
+      border-radius:   12px;
+      display:         flex;
+      align-items:     center;
+      justify-content: center;
+      transition:      var(--transition);
+      overflow:        hidden;
+    }
+
+    .footer-social:hover {
+      transform:  translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .footer-social svg {
+      width:  20px;
+      height: 20px;
+      fill:   #fff;
+    }
+
+    .footer-social--ig { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+    .footer-social--x  { background: #14171A; }
+    .footer-social--fb { background: #1877F2; }
+    .footer-social--tk { background: #111; }
+
+    .footer-col-title {
+      font-size:      11.5px;
+      font-weight:    600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color:          rgba(255, 255, 255, 0.35);
+      margin-bottom:  20px;
+      text-align:     left;
+    }
+
+    .footer-links {
+      list-style:   none;
+      text-align:   left;
+      padding-left: 0;
+      margin-left:  0;
+    }
+
+    .footer-links li { margin-bottom: 11px; }
+
+    .footer-links a {
+      font-size:  14.5px;
+      color:      rgba(255, 255, 255, 0.7);
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color:        var(--yellow);
+      padding-left: 4px;
+    }
+
+    .footer-contact-item {
+      display:       flex;
+      gap:           10px;
+      align-items:   flex-start;
+      margin-bottom: 16px;
+      font-size:     14px;
+      color:         rgba(255, 255, 255, 0.7);
+      line-height:   1.55;
+      text-align:    left;
+    }
+
+    .footer-contact-item svg {
+      flex-shrink:     0;
+      width:           16px;
+      height:          16px;
+      margin-top:      3px;
+      stroke:          var(--purple-bright);
+      fill:            none;
+      stroke-width:    2;
+      stroke-linecap:  round;
+      stroke-linejoin: round;
+    }
+
+    .footer-bottom {
+      padding:         22px 0;
+      display:         flex;
+      align-items:     center;
+      justify-content: space-between;
+      flex-wrap:       wrap;
+      gap:             12px;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color:     rgba(255, 255, 255, 0.35);
+    }
+
+    .footer-legal {
+      display: flex;
+      gap:     24px;
+    }
+
+    .footer-legal a {
+      font-size:  13px;
+      color:      rgba(255, 255, 255, 0.4);
+      transition: var(--transition);
+    }
+
+    .footer-legal a:hover { color: var(--yellow); }
+
+    /* ============================================================
+       SCROLL REVEAL
+       ============================================================ */
+    .reveal {
+      opacity:    0;
+      transform:  translateY(35px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.vis {
+      opacity:   1;
+      transform: translateY(0);
+    }
+
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+    .reveal-d4 { transition-delay: 0.4s; }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 1024px) {
+      .who-grid {
+        grid-template-columns: 1fr;
+        max-width:             500px;
+        margin:                50px auto 0;
+      }
+
+      .smartlock-grid {
+        grid-template-columns: 1fr;
+        text-align:            center;
+      }
+
+      .smartlock-visual { order: -1; margin-bottom: 20px; }
+
+      .smartlock-features { align-items: center; }
+
+      .sl-feat { max-width: 440px; }
+
+      .custom-grid   { grid-template-columns: 1fr; }
+      .process-nums  { grid-template-columns: repeat(2, 1fr); }
+
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+        gap:                   32px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-desktop { display: none; }
+      .nav-toggle  { display: flex; }
+      .nav-mobile  { display: block; }
+
+      .header-inner  { height: 80px; }
+      .logo-img      { height: 44px; }
+      .nav-mobile    { top: 80px; }
+      .hero          { padding-top: 80px; }
+      .section       { padding: 70px 20px; }
+      .steps-timeline { padding-left: 36px; }
+
+      .footer-top    { grid-template-columns: 1fr; gap: 28px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-typewriter { font-size: 24px; }
+      .hero-bounce     { font-size: 28px; }
+      .process-nums    { grid-template-columns: 1fr 1fr; }
+
+      .lock-ring { width: 170px; height: 170px; }
+
+      .lock-icon-inner {
+        width:         90px;
+        height:        90px;
+        border-radius: 20px;
+      }
+
+      .lock-icon-inner svg { width: 40px; height: 40px; }
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header class="header" id="header">
+  <div class="header-inner">
+    <a href="/" class="logo-link">
+      <img src="https://bookleti.ng/wp-content/uploads/2026/03/20260303_202128-scaled-e1772574399392.png" alt="Leti" class="logo-img">
+    </a>
+    <nav class="nav-desktop">
+      <a href="/">Home</a>
+      <a href="/property-owner">Property Owner</a>
+      <a href="/investors">Investors</a>
+      <a href="/service-hub">Service Hub</a>
+      <a href="/contact-us">Contact Us</a>
+      <a href="/leti-stay-management" class="nav-highlight active">Leti Stay Management</a>
+    </nav>
+    <div class="nav-toggle" id="navToggle" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</header>
+
+<nav class="nav-mobile" id="navMobile">
+  <a href="/">Home</a>
+  <a href="/property-owner">Property Owner</a>
+  <a href="/investors">Investors</a>
+  <a href="/service-hub">Service Hub</a>
+  <a href="/contact-us">Contact Us</a>
+  <a href="/leti-stay-management" class="nav-highlight active">Leti Stay Management</a>
+</nav>
+
+<!-- ============================================================
+     HERO — TYPEWRITER + BOUNCING TEXT + FLOATING PARTICLES
+     ============================================================ -->
+<section class="hero" id="heroSection">
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="particle particle-1"></div>
+  <div class="particle particle-2"></div>
+  <div class="particle particle-3"></div>
+  <div class="particle particle-4"></div>
+  <div class="particle particle-5"></div>
+  <div class="particle particle-6"></div>
+  <div class="hero-inner">
+    <div class="coming-badge">
+      <span class="coming-badge-dot"></span>
+      <span class="coming-badge-text">Coming July 2026</span>
+    </div>
+    <div class="hero-typewriter" id="typewriter"></div>
+    <div class="hero-bounce" id="bounceText" style="opacity: 0;">
+      <span>Leti Stay Management</span>
+    </div>
+    <p class="hero-desc" id="heroDesc" style="opacity: 0;">
+      Your complete short-let business partner. From sourcing apartments to designing interiors to managing bookings &mdash; we handle everything so you earn while we work.
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================
+     WHO IS THIS FOR
+     ============================================================ -->
+<section class="section who-section">
+  <div class="section-inner">
+    <div style="text-align: center;" class="reveal">
+      <span class="section-tag" style="color: var(--yellow);">&#127919; Who Is This For</span>
+      <h2 class="section-title" style="color: var(--white);">Three Types of People We Serve</h2>
+      <p class="section-subtitle" style="color: rgba(255,255,255,0.65); margin: 0 auto;">Whether you're starting from zero, already running a short-let, or need someone to take over &mdash; Leti Stay Management meets you where you are.</p>
+    </div>
+    <div class="who-grid">
+      <div class="who-card reveal reveal-d1">
+        <span class="who-card-emoji">&#127793;</span>
+        <h3 class="who-card-title">Starting From Scratch</h3>
+        <p class="who-card-text">You want to get into the short-let business but don't know where to begin. We handle everything from finding the right apartment and location, to furnishing the interior, to getting you live on the Leti platform with your first booking.</p>
+      </div>
+      <div class="who-card reveal reveal-d2">
+        <span class="who-card-emoji">&#127968;</span>
+        <h3 class="who-card-title">Already Have Property</h3>
+        <p class="who-card-text">You own or rent a property and want to convert it into a short-let. We help you design the interior to attract guests, set up smart lock access, list on Leti, and run your first 3 months of promotion free of charge.</p>
+      </div>
+      <div class="who-card reveal reveal-d3">
+        <span class="who-card-emoji">&#129309;</span>
+        <h3 class="who-card-title">Need a Manager</h3>
+        <p class="who-card-text">You're already in the short-let game but can't keep up &mdash; maybe you're abroad, too busy, or just want a structured team. We manage your property end-to-end: bookings, cleanings, maintenance, guest communication, and revenue.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     WHAT WE DO — TIMELINE
+     ============================================================ -->
+<section class="section whatwedo-section">
+  <div class="section-inner">
+    <div style="text-align: center;" class="reveal">
+      <span class="section-tag" style="color: var(--yellow);">&#128736;&#65039; What We Do</span>
+      <h2 class="section-title" style="color: var(--white);">End-to-End Short-Let Services</h2>
+      <p class="section-subtitle" style="color: rgba(255,255,255,0.65); margin: 0 auto;">From consultation to your first guest &mdash; here's the full journey with Leti Stay Management.</p>
+    </div>
+    <div class="steps-timeline">
+      <div class="step-item reveal reveal-d1">
+        <div class="step-dot"></div>
+        <h3 class="step-title">Consultation &amp; Vision</h3>
+        <p class="step-text">Tell us what you want &mdash; oceanfront view, Lekki Phase 1, budget of &#8358;X. We listen, advise, and create a plan tailored to your vision and budget.</p>
+      </div>
+      <div class="step-item reveal reveal-d2">
+        <div class="step-dot"></div>
+        <h3 class="step-title">Property Sourcing</h3>
+        <p class="step-text">We scout the best apartments or land in your preferred location. Whether you're renting, buying, or building custom &mdash; we find the right fit at the right price.</p>
+      </div>
+      <div class="step-item reveal reveal-d3">
+        <div class="step-dot"></div>
+        <h3 class="step-title">Interior Design &amp; Setup</h3>
+        <p class="step-text">Our interior team transforms the space into a guest-ready short-let. Furniture, decor, photography &mdash; everything designed to attract bookings and five-star reviews.</p>
+      </div>
+      <div class="step-item reveal reveal-d4">
+        <div class="step-dot"></div>
+        <h3 class="step-title">Smart Lock Installation</h3>
+        <p class="step-text">We install the Leti Smart Lock &mdash; keyless, self-managed access with timed passwords. No agents running keys. Guests let themselves in, and access expires automatically.</p>
+      </div>
+      <div class="step-item reveal">
+        <div class="step-dot"></div>
+        <h3 class="step-title">Platform Onboarding</h3>
+        <p class="step-text">We register your property on the Leti app, link your bank account for direct payouts, and create your listing with professional photos and descriptions.</p>
+      </div>
+      <div class="step-item reveal reveal-d1">
+        <div class="step-dot"></div>
+        <h3 class="step-title">3-Month Free Promotion</h3>
+        <p class="step-text">Your property gets featured placement and marketing push for the first 3 months &mdash; completely free. We drive traffic so you start earning from day one.</p>
+      </div>
+      <div class="step-item reveal reveal-d2">
+        <div class="step-dot"></div>
+        <h3 class="step-title">Ongoing Management</h3>
+        <p class="step-text">If you choose full management: we handle bookings, guest communication, cleaning coordination, maintenance, and revenue reporting. You just earn.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SMART LOCK
+     ============================================================ -->
+<section class="section smartlock-section">
+  <div class="section-inner">
+    <div class="smartlock-grid">
+      <div class="smartlock-visual reveal">
+        <div class="lock-ring">
+          <div class="lock-icon-inner">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0110 0v4"/>
+              <circle cx="12" cy="16" r="1"/>
+              <path d="M12 17v2"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="reveal reveal-d2">
+        <span class="section-tag" style="color: var(--purple-bright);">&#128273; Smart Lock Technology</span>
+        <h2 class="section-title">The Key to Self-Managed Properties</h2>
+        <p class="section-subtitle" style="margin-bottom: 28px;">The Leti Smart Lock eliminates the need for physical key handoffs. Manage your property's access from anywhere in the world &mdash; securely and automatically.</p>
+        <div class="smartlock-features">
+          <div class="sl-feat">
+            <div class="sl-feat-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <p class="sl-feat-text"><strong>Generate timed passwords</strong> &mdash; create a unique code for each guest that expires when their booking ends</p>
+          </div>
+          <div class="sl-feat">
+            <div class="sl-feat-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <p class="sl-feat-text"><strong>One-time access codes</strong> &mdash; guest uses it once to enter, and the code is permanently invalidated after</p>
+          </div>
+          <div class="sl-feat">
+            <div class="sl-feat-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <p class="sl-feat-text"><strong>Revoke access instantly</strong> &mdash; invalidate any password from your phone, anywhere in the world</p>
+          </div>
+          <div class="sl-feat">
+            <div class="sl-feat-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <p class="sl-feat-text"><strong>Multiple access methods</strong> &mdash; password, physical key backup, and card reader all built into one device</p>
+          </div>
+          <div class="sl-feat">
+            <div class="sl-feat-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <p class="sl-feat-text"><strong>Long-lasting battery</strong> &mdash; charges once and lasts months. Works on your existing door with no major renovation</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CUSTOM PLAN
+     ============================================================ -->
+<section class="section custom-section">
+  <div class="section-inner">
+    <div style="text-align: center;" class="reveal">
+      <span class="section-tag" style="color: var(--yellow);">&#9889; Custom Options</span>
+      <h2 class="section-title" style="color: var(--white);">Pick What You Need. We Deliver.</h2>
+      <p class="section-subtitle" style="color: rgba(255,255,255,0.65); margin: 0 auto;">You don't have to take the full package. Choose the services that fit your situation &mdash; and we'll handle the rest.</p>
+    </div>
+    <div class="custom-grid">
+      <div class="custom-card reveal reveal-d1">
+        <span class="custom-card-emoji">&#128269;</span>
+        <h3 class="custom-card-title">Property Sourcing Only</h3>
+        <p class="custom-card-text">We find the perfect apartment or land in your preferred location. You handle the rest.</p>
+      </div>
+      <div class="custom-card reveal reveal-d2">
+        <span class="custom-card-emoji">&#127912;</span>
+        <h3 class="custom-card-title">Interior Design Only</h3>
+        <p class="custom-card-text">You already have the property. We send our design team to transform it into a bookable space.</p>
+      </div>
+      <div class="custom-card reveal reveal-d3">
+        <span class="custom-card-emoji">&#128274;</span>
+        <h3 class="custom-card-title">Smart Lock Setup Only</h3>
+        <p class="custom-card-text">Just want the keyless system? We install the Leti Smart Lock and show you how to manage it.</p>
+      </div>
+      <div class="custom-card reveal reveal-d4">
+        <span class="custom-card-emoji">&#128188;</span>
+        <h3 class="custom-card-title">Full Management</h3>
+        <p class="custom-card-text">The complete package. Sourcing, design, smart lock, onboarding, promotion, and ongoing management. You just earn.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PROCESS NUMBERS
+     ============================================================ -->
+<section class="section process-section">
+  <div class="section-inner">
+    <div style="text-align: center;" class="reveal">
+      <span class="section-tag" style="color: var(--purple-bright);">&#128200; By the Numbers</span>
+      <h2 class="section-title">Transparent. Structured. Professional.</h2>
+    </div>
+    <div class="process-nums">
+      <div class="process-num-card reveal reveal-d1">
+        <div class="process-big">&#8358;0</div>
+        <div class="process-label">Hidden Fees</div>
+        <div class="process-desc">You see every cost upfront. Sourcing fee, interior fee, management fee &mdash; all separate and transparent.</div>
+      </div>
+      <div class="process-num-card reveal reveal-d2">
+        <div class="process-big">3</div>
+        <div class="process-label">Months Free Promo</div>
+        <div class="process-desc">Every managed property gets 3 months of featured placement and marketing at no extra cost.</div>
+      </div>
+      <div class="process-num-card reveal reveal-d3">
+        <div class="process-big">Direct</div>
+        <div class="process-label">Payouts</div>
+        <div class="process-desc">Booking revenue goes straight to your linked account. We never hold your money.</div>
+      </div>
+      <div class="process-num-card reveal reveal-d4">
+        <div class="process-big">Lagos</div>
+        <div class="process-label">First Market</div>
+        <div class="process-desc">Leti Stay Management launches in Lagos first, with plans to expand across Nigeria and Africa.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CLOSING — WAVE TEXT
+     ============================================================ -->
+<section class="section closing-section">
+  <div class="closing-inner reveal">
+    <span class="section-tag" style="color: var(--yellow);">&#128640; Coming Soon</span>
+    <div class="wave-text" id="waveText"></div>
+    <p class="closing-text">Leti Stay Management is currently in development and will launch in July 2026. This page is here to give you a clear picture of what's coming &mdash; so when we open, you'll be ready to move.</p>
+    <div class="closing-badge">
+      <span class="coming-badge-dot"></span>
+      Opening July 2026
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="https://bookleti.ng/wp-content/uploads/2026/03/20260303_202128-scaled-e1772574399392.png" alt="Leti" class="footer-logo">
+        <p class="footer-tagline">Africa's first structured short-let and home services marketplace. Book apartments. Hire professionals. All in one app.</p>
+        <div class="footer-socials">
+          <a href="https://www.instagram.com/letiapp.ng?igsh=MWxqY2p4ZjA3OXh2bA==" class="footer-social footer-social--ig" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+          <!-- FLAG: X (Twitter) — provide the correct profile URL to replace # -->
+          <a href="#" class="footer-social footer-social--x" aria-label="X">
+            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <!-- FLAG: Facebook — provide the correct page URL to replace # -->
+          <a href="#" class="footer-social footer-social--fb" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <!-- FLAG: TikTok — provide the correct profile URL to replace # -->
+          <a href="#" class="footer-social footer-social--tk" aria-label="TikTok">
+            <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Platform</h4>
+        <ul class="footer-links">
+          <li><a href="/investors">Investors</a></li>
+          <li><a href="/property-owner">Property Owners</a></li>
+          <li><a href="/service-hub">Service Hub</a></li>
+          <li><a href="/leti-stay-management">Leti Stay Management</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Company</h4>
+        <ul class="footer-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/contact-us">Contact Us</a></li>
+          <li><a href="/faq">FAQs</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Contact</h4>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>294, Herbert Macaulay Way,<br>Sabo Yaba, Lagos</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          <span>+234 913 373 0647</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span>letiappsocial@gmail.com</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">Copyright &copy; 2026 LETI. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="/privacy-policy">Privacy Policy</a>
+        <a href="/terms-and-conditions">Terms &amp; Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+
+  /* ============================================================
+     NAV TOGGLE
+     ============================================================ */
+  function toggleMenu() {
+    document.getElementById('navToggle').classList.toggle('open');
+    document.getElementById('navMobile').classList.toggle('open');
+  }
+
+  document.querySelectorAll('.nav-mobile a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      document.getElementById('navToggle').classList.remove('open');
+      document.getElementById('navMobile').classList.remove('open');
+    });
+  });
+
+  /* ============================================================
+     SCROLL REVEAL
+     ============================================================ */
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('vis');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(function(el) {
+    revealObserver.observe(el);
+  });
+
+  /* ============================================================
+     HEADER SCROLL DARKENING
+     ============================================================ */
+  window.addEventListener('scroll', function() {
+    document.getElementById('header').style.background =
+      window.pageYOffset > 80 ? 'rgba(45,8,69,0.97)' : 'rgba(45,8,69,0.94)';
+  }, { passive: true });
+
+  /* ============================================================
+     TYPEWRITER WITH WEB AUDIO (HERO ANIMATION)
+     ============================================================ */
+  (function() {
+    var el       = document.getElementById('typewriter');
+    var text1    = 'Welcome to ';
+    var text2    = 'LETI';
+    var i        = 0;
+    var phase    = 1;
+    var audioCtx = null;
+    var started  = false;
+
+    function initAudio() {
+      if (audioCtx) return;
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+
+    function typeSound() {
+      if (!audioCtx) return;
+      try {
+        var o = audioCtx.createOscillator();
+        var g = audioCtx.createGain();
+        o.connect(g);
+        g.connect(audioCtx.destination);
+        o.frequency.setValueAtTime(600 + Math.random() * 400, audioCtx.currentTime);
+        o.frequency.exponentialRampToValueAtTime(200, audioCtx.currentTime + 0.04);
+        g.gain.setValueAtTime(0.35, audioCtx.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.06);
+        o.start();
+        o.stop(audioCtx.currentTime + 0.06);
+      } catch(e) {}
+    }
+
+    function playBounceSound() {
+      if (!audioCtx) return;
+      try {
+        [400, 600, 800, 1000].forEach(function(f, idx) {
+          var o = audioCtx.createOscillator();
+          var g = audioCtx.createGain();
+          o.type = 'sine';
+          o.connect(g);
+          g.connect(audioCtx.destination);
+          o.frequency.setValueAtTime(f, audioCtx.currentTime + idx * 0.12);
+          g.gain.setValueAtTime(0.2, audioCtx.currentTime + idx * 0.12);
+          g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + idx * 0.12 + 0.4);
+          o.start(audioCtx.currentTime + idx * 0.12);
+          o.stop(audioCtx.currentTime + idx * 0.12 + 0.4);
+        });
+      } catch(e) {}
+    }
+
+    function type() {
+      if (phase === 1) {
+        if (i <= text1.length) {
+          el.innerHTML = text1.substring(0, i) + '<span class="tw-cursor"></span>';
+          typeSound();
+          i++;
+          setTimeout(type, 70 + Math.random() * 40);
+        } else {
+          phase = 2;
+          i     = 0;
+          setTimeout(type, 100);
+        }
+      } else {
+        if (i <= text2.length) {
+          el.innerHTML = text1 + '<span class="yellow">' + text2.substring(0, i) + '</span><span class="tw-cursor"></span>';
+          typeSound();
+          i++;
+          setTimeout(type, 70 + Math.random() * 40);
+        } else {
+          el.innerHTML = text1 + '<span class="yellow">' + text2 + '</span>';
+          setTimeout(function() {
+            var bounce = document.getElementById('bounceText');
+            bounce.style.opacity    = '1';
+            bounce.style.transition = 'opacity 0.6s ease';
+            playBounceSound();
+          }, 300);
+          setTimeout(function() {
+            var desc = document.getElementById('heroDesc');
+            desc.style.opacity    = '1';
+            desc.style.transition = 'opacity 0.8s ease';
+          }, 800);
+        }
+      }
+    }
+
+    function startTypewriter() {
+      if (started) return;
+      started = true;
+      initAudio();
+      setTimeout(type, 500);
+    }
+
+    if (/Mobi|Android/i.test(navigator.userAgent)) {
+      ['touchstart', 'click'].forEach(function(evt) {
+        document.addEventListener(evt, function handler() {
+          startTypewriter();
+          document.removeEventListener(evt, handler);
+        }, { once: true });
+      });
+      /* Fallback: start after 2 s without interaction (silent) */
+      setTimeout(function() {
+        if (!started) {
+          started = true;
+          setTimeout(type, 200);
+        }
+      }, 2000);
+    } else {
+      startTypewriter();
+    }
+  })();
+
+  /* ============================================================
+     WAVE TEXT (CLOSING SECTION)
+     ============================================================ */
+  (function() {
+    var text      = 'Your Short-Let Business, Handled.';
+    var container = document.getElementById('waveText');
+    var html      = '';
+    var idx       = 0;
+    text.split('').forEach(function(ch) {
+      if (ch === ' ') {
+        html += ' ';
+      } else {
+        html += '<span style="--i:' + idx + '">' + ch + '</span>';
+        idx++;
+      }
+    });
+    container.innerHTML = html;
+  })();
+
+</script>
+</body>
+</html>

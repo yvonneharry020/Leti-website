@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LETI — Contact Us</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+
+    /* ============================================================
+       DESIGN TOKENS
+    ============================================================ */
+    :root {
+      --purple-deep:    #2D0845;
+      --purple-mid:     #6B1FA1;
+      --purple-bright:  #9B30FF;
+      --magenta:        #D946EF;
+      --pink-glow:      #F472B6;
+      --yellow:         #FACC15;
+      --yellow-hover:   #EAB308;
+      --cream:          #FAF7F2;
+      --cream-light:    #FDFCFA;
+      --white:          #FFFFFF;
+      --dark:           #0F0A1A;
+      --text-dark:      #1E1333;
+      --text-mid:       #4A3D5C;
+      --text-light:     #8B7FA0;
+      --text-on-dark:   #E8E0F0;
+      --font-display:   'Playfair Display', Georgia, serif;
+      --font-body:      'DM Sans', system-ui, sans-serif;
+      --radius-sm:      8px;
+      --radius-md:      14px;
+      --radius-lg:      22px;
+      --radius-xl:      32px;
+      --shadow-card:    0 4px 24px rgba(45, 8, 69, 0.07);
+      --shadow-hover:   0 16px 48px rgba(45, 8, 69, 0.14);
+      --transition:     0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      --header-bg:      rgba(45, 8, 69, 0.94);
+    }
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after {
+      margin:     0;
+      padding:    0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior:       smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family:              var(--font-body);
+      color:                    var(--text-dark);
+      background:               var(--cream);
+      line-height:              1.6;
+      overflow-x:               hidden;
+      -webkit-font-smoothing:   antialiased;
+    }
+
+    img {
+      max-width: 100%;
+      display:   block;
+    }
+
+    a {
+      text-decoration: none;
+      color:           inherit;
+    }
+
+    button {
+      border:      none;
+      cursor:      pointer;
+      font-family: inherit;
+    }
+
+    /* ============================================================
+       HEADER & NAVIGATION
+    ============================================================ */
+    .header {
+      position:          fixed;
+      top:               0;
+      left:              0;
+      right:             0;
+      z-index:           1000;
+      background:        var(--header-bg);
+      backdrop-filter:   blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom:     1px solid rgba(155, 48, 255, 0.12);
+      transition:        var(--transition);
+    }
+
+    .header-inner {
+      max-width:       1280px;
+      margin:          0 auto;
+      padding:         0 28px;
+      height:          88px;
+      display:         flex;
+      align-items:     center;
+      justify-content: space-between;
+    }
+
+    .logo-link {
+      display:     flex;
+      align-items: center;
+    }
+
+    .logo-img {
+      height: 50px;
+      width:  auto;
+      filter: brightness(1.1);
+    }
+
+    /* Desktop nav */
+    .nav-desktop {
+      display:     flex;
+      align-items: center;
+      gap:         4px;
+    }
+
+    .nav-desktop a {
+      color:         rgba(255, 255, 255, 0.85);
+      font-size:     13.5px;
+      font-weight:   500;
+      padding:       9px 15px;
+      border-radius: var(--radius-sm);
+      transition:    var(--transition);
+      white-space:   nowrap;
+      letter-spacing: 0.2px;
+    }
+
+    .nav-desktop a:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color:      #fff;
+    }
+
+    .nav-desktop a.active {
+      color: var(--yellow);
+    }
+
+    .nav-desktop a.nav-highlight {
+      background:    var(--yellow);
+      color:         var(--dark);
+      font-weight:   600;
+      padding:       9px 18px;
+      border-radius: var(--radius-md);
+    }
+
+    .nav-desktop a.nav-highlight:hover {
+      background: var(--yellow-hover);
+    }
+
+    /* Hamburger toggle */
+    .nav-toggle {
+      display:         none;
+      width:           44px;
+      height:          44px;
+      background:      rgba(255, 255, 255, 0.06);
+      border-radius:   var(--radius-sm);
+      flex-direction:  column;
+      align-items:     center;
+      justify-content: center;
+      gap:             5px;
+      cursor:          pointer;
+      transition:      var(--transition);
+    }
+
+    .nav-toggle:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .nav-toggle span {
+      display:       block;
+      width:         22px;
+      height:        2px;
+      background:    rgba(255, 255, 255, 0.9);
+      border-radius: 2px;
+      transition:    var(--transition);
+    }
+
+    .nav-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    /* Mobile nav drawer */
+    .nav-mobile {
+      display:     none;
+      position:    fixed;
+      top:         88px;
+      left:        0;
+      right:       0;
+      background:  var(--purple-deep);
+      border-bottom: 2px solid rgba(155, 48, 255, 0.15);
+      padding:     12px 24px 20px;
+      transform:   translateY(-120%);
+      transition:  transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index:     999;
+    }
+
+    .nav-mobile.open {
+      transform: translateY(0);
+    }
+
+    .nav-mobile a {
+      display:       block;
+      color:         rgba(255, 255, 255, 0.85);
+      font-size:     15.5px;
+      font-weight:   500;
+      padding:       14px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      transition:    var(--transition);
+    }
+
+    .nav-mobile a:last-child {
+      border-bottom: none;
+    }
+
+    .nav-mobile a:hover,
+    .nav-mobile a.active {
+      color: var(--yellow);
+    }
+
+    .nav-mobile a.nav-highlight {
+      background:    var(--yellow);
+      color:         var(--dark);
+      border-radius: var(--radius-sm);
+      text-align:    center;
+      margin-top:    10px;
+      font-weight:   600;
+      border-bottom: none;
+      padding:       14px;
+    }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    .hero {
+      position:   relative;
+      padding-top: 88px;
+      overflow:   hidden;
+      background: linear-gradient(
+        155deg,
+        var(--purple-deep) 0%,
+        #3D1260 25%,
+        var(--purple-mid) 50%,
+        var(--purple-bright) 75%,
+        var(--magenta) 100%
+      );
+    }
+
+    .hero::before {
+      content:              '';
+      position:             absolute;
+      inset:                0;
+      background-image:     radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size:      40px 40px;
+      pointer-events:       none;
+    }
+
+    .hero::after {
+      content:        '';
+      position:       absolute;
+      bottom:         0;
+      left:           0;
+      right:          0;
+      height:         120px;
+      background:     linear-gradient(to top, var(--cream), transparent);
+      pointer-events: none;
+      z-index:        2;
+    }
+
+    /* Floating orbs */
+    .hero-orb {
+      position:       absolute;
+      border-radius:  50%;
+      filter:         blur(80px);
+      pointer-events: none;
+      animation:      orbF 8s ease-in-out infinite;
+    }
+
+    .hero-orb-1 {
+      width:      350px;
+      height:     350px;
+      background: rgba(217, 70, 239, 0.2);
+      top:        -80px;
+      right:      -60px;
+    }
+
+    .hero-orb-2 {
+      width:            250px;
+      height:           250px;
+      background:       rgba(155, 48, 255, 0.15);
+      bottom:           10%;
+      left:             -60px;
+      animation-delay:  -3s;
+    }
+
+    @keyframes orbF {
+      0%,  100% { transform: translate(0, 0) scale(1); }
+      33%        { transform: translate(30px, -20px) scale(1.05); }
+      66%        { transform: translate(-20px, 15px) scale(0.95); }
+    }
+
+    .hero-inner {
+      max-width:  1280px;
+      margin:     0 auto;
+      padding:    60px 28px 100px;
+      text-align: center;
+      position:   relative;
+      z-index:    1;
+    }
+
+    .hero-tag {
+      display:       inline-flex;
+      align-items:   center;
+      gap:           8px;
+      font-size:     13px;
+      font-weight:   600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color:         var(--yellow);
+      margin-bottom: 20px;
+      padding:       6px 14px;
+      background:    rgba(250, 204, 21, 0.1);
+      border:        1px solid rgba(250, 204, 21, 0.2);
+      border-radius: 50px;
+      animation:     fadeIn 0.8s ease-out;
+    }
+
+    .hero-tag-dot {
+      width:         6px;
+      height:        6px;
+      background:    var(--yellow);
+      border-radius: 50%;
+      animation:     pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%,  100% { opacity: 1;   transform: scale(1);   }
+      50%        { opacity: 0.5; transform: scale(1.5); }
+    }
+
+    .hero-title {
+      font-family:   var(--font-display);
+      font-size:     clamp(32px, 4.5vw, 54px);
+      font-weight:   700;
+      line-height:   1.15;
+      color:         var(--white);
+      margin-bottom: 20px;
+      animation:     fadeIn 0.8s ease-out 0.1s both;
+    }
+
+    .hero-title em {
+      font-style:              normal;
+      background:              linear-gradient(90deg, var(--yellow), #FDE68A, var(--yellow));
+      background-size:         200% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip:         text;
+      animation:               shimmer 4s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0%   { background-position: 100% 0; }
+      50%  { background-position: 0% 0;   }
+      100% { background-position: 100% 0; }
+    }
+
+    .hero-desc {
+      font-size:   17px;
+      line-height: 1.75;
+      color:       rgba(255, 255, 255, 0.78);
+      max-width:   560px;
+      margin:      0 auto;
+      animation:   fadeIn 0.8s ease-out 0.2s both;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0);    }
+    }
+
+    /* ============================================================
+       SECTION BASE
+    ============================================================ */
+    .section {
+      padding: 100px 28px;
+      width:   100%;
+    }
+
+    .section-inner {
+      max-width: 1280px;
+      margin:    0 auto;
+    }
+
+    .section-tag {
+      display:        inline-flex;
+      align-items:    center;
+      gap:            6px;
+      font-size:      12px;
+      font-weight:    600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color:          var(--purple-bright);
+      margin-bottom:  14px;
+    }
+
+    .section-title {
+      font-family:   var(--font-display);
+      font-size:     clamp(26px, 3.8vw, 42px);
+      font-weight:   700;
+      line-height:   1.2;
+      color:         var(--text-dark);
+      margin-bottom: 16px;
+    }
+
+    /* ============================================================
+       CONTACT GRID
+    ============================================================ */
+    .contact-section {
+      background: var(--cream);
+    }
+
+    .contact-grid {
+      display:               grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap:                   50px;
+      margin-top:            50px;
+      align-items:           start;
+    }
+
+    /* Info side */
+    .contact-info {
+      display:        flex;
+      flex-direction: column;
+      gap:            24px;
+    }
+
+    .info-card {
+      display:       flex;
+      gap:           18px;
+      align-items:   flex-start;
+      padding:       24px;
+      background:    var(--white);
+      border-radius: var(--radius-lg);
+      border:        1px solid rgba(45, 8, 69, 0.04);
+      box-shadow:    var(--shadow-card);
+      transition:    var(--transition);
+    }
+
+    .info-card:hover {
+      transform:  translateY(-4px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .info-icon {
+      flex-shrink:   0;
+      width:         52px;
+      height:        52px;
+      background:    var(--yellow);
+      border-radius: 14px;
+      display:       flex;
+      align-items:   center;
+      justify-content: center;
+      box-shadow:    0 4px 12px rgba(250, 204, 21, 0.2);
+    }
+
+    .info-icon svg {
+      width:            24px;
+      height:           24px;
+      stroke:           var(--dark);
+      fill:             none;
+      stroke-width:     2;
+      stroke-linecap:   round;
+      stroke-linejoin:  round;
+    }
+
+    .info-label {
+      font-size:      13px;
+      font-weight:    600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color:          var(--purple-bright);
+      margin-bottom:  4px;
+    }
+
+    .info-value {
+      font-size:   15.5px;
+      color:       var(--text-dark);
+      line-height: 1.55;
+      font-weight: 500;
+    }
+
+    .info-value a {
+      color:      var(--text-dark);
+      transition: var(--transition);
+    }
+
+    .info-value a:hover {
+      color: var(--purple-bright);
+    }
+
+    /* Social strip */
+    .social-strip {
+      padding:       24px;
+      background:    var(--white);
+      border-radius: var(--radius-lg);
+      border:        1px solid rgba(45, 8, 69, 0.04);
+      box-shadow:    var(--shadow-card);
+    }
+
+    .social-strip-title {
+      font-size:     14px;
+      font-weight:   600;
+      color:         var(--text-dark);
+      margin-bottom: 16px;
+    }
+
+    .social-icons {
+      display: flex;
+      gap:     12px;
+    }
+
+    .social-icon {
+      width:         48px;
+      height:        48px;
+      border-radius: 14px;
+      display:       flex;
+      align-items:   center;
+      justify-content: center;
+      transition:    var(--transition);
+    }
+
+    .social-icon:hover {
+      transform:  translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .social-icon svg {
+      width:  22px;
+      height: 22px;
+      fill:   #fff;
+    }
+
+    .si-ig { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+    .si-x  { background: #14171A; }
+    .si-fb { background: #1877F2; }
+    .si-tk { background: #111; }
+
+    /* Map embed */
+    .map-wrap {
+      margin-top:     24px;
+      border-radius:  var(--radius-lg);
+      overflow:       hidden;
+      border:         1px solid rgba(45, 8, 69, 0.06);
+      box-shadow:     var(--shadow-card);
+      height:         220px;
+      background:     linear-gradient(135deg, rgba(45, 8, 69, 0.04), rgba(45, 8, 69, 0.02));
+      display:        flex;
+      align-items:    center;
+      justify-content: center;
+    }
+
+    .map-wrap iframe {
+      width:  100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* ============================================================
+       CONTACT FORM CARD
+    ============================================================ */
+    .contact-form-card {
+      background:    var(--white);
+      border-radius: var(--radius-xl);
+      padding:       40px;
+      border:        1px solid rgba(45, 8, 69, 0.06);
+      box-shadow:    var(--shadow-card);
+      position:      relative;
+      overflow:      hidden;
+    }
+
+    .contact-form-card::before {
+      content:    '';
+      position:   absolute;
+      top:        0;
+      left:       0;
+      right:      0;
+      height:     4px;
+      background: linear-gradient(90deg, var(--purple-bright), var(--magenta), var(--yellow));
+    }
+
+    .form-title {
+      font-family:   var(--font-display);
+      font-size:     22px;
+      font-weight:   600;
+      color:         var(--text-dark);
+      margin-bottom: 8px;
+    }
+
+    .form-subtitle {
+      font-size:     14.5px;
+      color:         var(--text-mid);
+      margin-bottom: 28px;
+      line-height:   1.6;
+    }
+
+    .form-placeholder {
+      min-height:    250px;
+      display:       flex;
+      align-items:   center;
+      justify-content: center;
+      color:         var(--text-light);
+      font-size:     14px;
+      border:        2px dashed rgba(45, 8, 69, 0.08);
+      border-radius: var(--radius-lg);
+      padding:       40px;
+      text-align:    center;
+      line-height:   1.6;
+    }
+
+    /* Fluent Form overrides for light background */
+    .contact-form-card label,
+    .contact-form-card .ff-el-input--label {
+      color:       var(--text-dark) !important;
+      font-size:   14px !important;
+      font-weight: 500 !important;
+    }
+
+    .contact-form-card input,
+    .contact-form-card select,
+    .contact-form-card textarea {
+      background:    var(--cream-light) !important;
+      border:        1px solid rgba(45, 8, 69, 0.1) !important;
+      color:         var(--text-dark) !important;
+      border-radius: var(--radius-md) !important;
+      padding:       14px 16px !important;
+      font-size:     15px !important;
+      font-family:   var(--font-body) !important;
+      transition:    var(--transition) !important;
+    }
+
+    .contact-form-card input:focus,
+    .contact-form-card select:focus,
+    .contact-form-card textarea:focus {
+      border-color: var(--purple-bright) !important;
+      box-shadow:   0 0 0 3px rgba(155, 48, 255, 0.1) !important;
+      outline:      none !important;
+    }
+
+    .contact-form-card input::placeholder,
+    .contact-form-card textarea::placeholder {
+      color: var(--text-light) !important;
+    }
+
+    .contact-form-card .ff-btn-submit,
+    .contact-form-card button[type="submit"] {
+      background:    var(--yellow) !important;
+      color:         var(--dark) !important;
+      font-size:     16px !important;
+      font-weight:   600 !important;
+      padding:       16px 32px !important;
+      border-radius: var(--radius-md) !important;
+      border:        none !important;
+      width:         100% !important;
+      cursor:        pointer !important;
+      transition:    all 0.3s ease !important;
+      box-shadow:    0 4px 20px rgba(250, 204, 21, 0.25) !important;
+    }
+
+    .contact-form-card .ff-btn-submit:hover,
+    .contact-form-card button[type="submit"]:hover {
+      background:  var(--yellow-hover) !important;
+      transform:   translateY(-2px) !important;
+    }
+
+    /* ============================================================
+       HOURS / AVAILABILITY SECTION
+    ============================================================ */
+    .hours-section {
+      background: linear-gradient(135deg, var(--purple-deep), var(--purple-mid));
+      position:   relative;
+      overflow:   hidden;
+    }
+
+    .hours-section::before {
+      content:          '';
+      position:         absolute;
+      inset:            0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size:  32px 32px;
+    }
+
+    .hours-inner {
+      max-width: 900px;
+      margin:    0 auto;
+      position:  relative;
+      z-index:   1;
+    }
+
+    .hours-grid {
+      display:               grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:                   24px;
+      margin-top:            40px;
+    }
+
+    .hours-card {
+      background:    rgba(255, 255, 255, 0.05);
+      border:        1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-lg);
+      padding:       28px;
+      text-align:    center;
+      transition:    var(--transition);
+    }
+
+    .hours-card:hover {
+      background:  rgba(255, 255, 255, 0.08);
+      transform:   translateY(-4px);
+    }
+
+    .hours-card-icon {
+      font-size:     32px;
+      margin-bottom: 12px;
+      display:       block;
+    }
+
+    .hours-card-title {
+      font-size:     15px;
+      font-weight:   600;
+      color:         var(--white);
+      margin-bottom: 6px;
+    }
+
+    .hours-card-text {
+      font-size:   14px;
+      color:       rgba(255, 255, 255, 0.65);
+      line-height: 1.5;
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    .footer {
+      background:        var(--header-bg);
+      backdrop-filter:   blur(20px);
+      color:             var(--text-on-dark);
+      padding:           60px 28px 0;
+      border-top:        1px solid rgba(155, 48, 255, 0.12);
+    }
+
+    .footer-inner {
+      max-width: 1280px;
+      margin:    0 auto;
+    }
+
+    .footer-top {
+      display:               grid;
+      grid-template-columns: 1.6fr 1fr 1fr 1.3fr;
+      gap:                   40px;
+      padding-bottom:        40px;
+      border-bottom:         1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .footer-logo {
+      height:        44px;
+      margin-bottom: 14px;
+      filter:        brightness(1.1);
+    }
+
+    .footer-tagline {
+      font-size:     14px;
+      color:         rgba(255, 255, 255, 0.55);
+      line-height:   1.65;
+      margin-bottom: 22px;
+      max-width:     300px;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap:     10px;
+    }
+
+    /* Shorthand footer social classes (kept from source) */
+    .fs {
+      width:         42px;
+      height:        42px;
+      border-radius: 12px;
+      display:       flex;
+      align-items:   center;
+      justify-content: center;
+      transition:    var(--transition);
+    }
+
+    .fs:hover {
+      transform:  translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .fs svg {
+      width:  20px;
+      height: 20px;
+      fill:   #fff;
+    }
+
+    .fs-ig { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+    .fs-x  { background: #14171A; }
+    .fs-fb { background: #1877F2; }
+    .fs-tk { background: #111; }
+
+    .footer-col-title {
+      font-size:      11.5px;
+      font-weight:    600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color:          rgba(255, 255, 255, 0.35);
+      margin-bottom:  20px;
+      text-align:     left;
+    }
+
+    .footer-links {
+      list-style: none;
+      text-align: left;
+    }
+
+    .footer-links li {
+      margin-bottom: 11px;
+    }
+
+    .footer-links a {
+      font-size:  14.5px;
+      color:      rgba(255, 255, 255, 0.7);
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color:        var(--yellow);
+      padding-left: 4px;
+    }
+
+    /* Shorthand footer contact info class (kept from source) */
+    .fci {
+      display:       flex;
+      gap:           10px;
+      align-items:   flex-start;
+      margin-bottom: 16px;
+      font-size:     14px;
+      color:         rgba(255, 255, 255, 0.7);
+      line-height:   1.55;
+      text-align:    left;
+    }
+
+    .fci svg {
+      flex-shrink:     0;
+      width:           16px;
+      height:          16px;
+      margin-top:      3px;
+      stroke:          var(--purple-bright);
+      fill:            none;
+      stroke-width:    2;
+      stroke-linecap:  round;
+      stroke-linejoin: round;
+    }
+
+    .footer-bottom {
+      padding:         22px 0;
+      display:         flex;
+      align-items:     center;
+      justify-content: space-between;
+      flex-wrap:       wrap;
+      gap:             12px;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color:     rgba(255, 255, 255, 0.35);
+    }
+
+    .footer-legal {
+      display: flex;
+      gap:     24px;
+    }
+
+    .footer-legal a {
+      font-size:  13px;
+      color:      rgba(255, 255, 255, 0.4);
+      transition: var(--transition);
+    }
+
+    .footer-legal a:hover {
+      color: var(--yellow);
+    }
+
+    /* ============================================================
+       SCROLL REVEAL
+    ============================================================ */
+    .reveal {
+      opacity:    0;
+      transform:  translateY(35px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.vis {
+      opacity:   1;
+      transform: translateY(0);
+    }
+
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 1024px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hours-grid {
+        grid-template-columns: 1fr;
+        max-width:             400px;
+        margin:                40px auto 0;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+        gap:                   32px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-desktop  { display: none; }
+      .nav-toggle   { display: flex; }
+      .nav-mobile   { display: block; }
+      .header-inner { height: 80px; }
+      .logo-img     { height: 44px; }
+      .nav-mobile   { top: 80px; }
+      .hero         { padding-top: 80px; }
+
+      .hero-inner {
+        padding: 40px 20px 70px;
+      }
+
+      .section {
+        padding: 70px 20px;
+      }
+
+      .contact-form-card {
+        padding: 28px 20px;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap:                   28px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align:     center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title   { font-size: 28px; }
+      .social-icons { flex-wrap: wrap; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       HEADER
+  ============================================================ -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="/" class="logo-link">
+        <img src="https://bookleti.ng/wp-content/uploads/2026/03/20260303_202128-scaled-e1772574399392.png" alt="Leti" class="logo-img">
+      </a>
+
+      <nav class="nav-desktop">
+        <a href="/">Home</a>
+        <a href="/property-owner">Property Owner</a>
+        <a href="/investors">Investors</a>
+        <a href="/service-hub">Service Hub</a>
+        <a href="/contact-us" class="active">Contact Us</a>
+        <a href="/leti-stay-management" class="nav-highlight">Leti Stay Management</a>
+      </nav>
+
+      <div class="nav-toggle" id="navToggle" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </header>
+
+  <nav class="nav-mobile" id="navMobile">
+    <a href="/">Home</a>
+    <a href="/property-owner">Property Owner</a>
+    <a href="/investors">Investors</a>
+    <a href="/service-hub">Service Hub</a>
+    <a href="/contact-us" class="active">Contact Us</a>
+    <a href="/leti-stay-management" class="nav-highlight">Leti Stay Management</a>
+  </nav>
+
+
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+  <section class="hero">
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+
+    <div class="hero-inner">
+      <span class="hero-tag">
+        <span class="hero-tag-dot"></span>
+        Get In Touch
+      </span>
+      <h1 class="hero-title">We'd Love to <em>Hear from You</em></h1>
+      <p class="hero-desc">Have a question about listing your property, joining the Service Hub, investing, or our Smart Lock Kit? Reach out &mdash; our team is here to help you get started.</p>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       CONTACT SECTION
+  ============================================================ -->
+  <section class="section contact-section">
+    <div class="section-inner">
+      <div class="contact-grid">
+
+        <!-- Left: contact info -->
+        <div class="contact-info">
+
+          <div class="info-card reveal">
+            <div class="info-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <div>
+              <div class="info-label">Address</div>
+              <div class="info-value">294, Herbert Macaulay Way,<br>Sabo Yaba, Lagos, Nigeria</div>
+            </div>
+          </div>
+
+          <div class="info-card reveal reveal-d1">
+            <div class="info-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="info-label">Phone</div>
+              <div class="info-value"><a href="tel:+2349133730647">+234 913 373 0647</a></div>
+            </div>
+          </div>
+
+          <div class="info-card reveal reveal-d2">
+            <div class="info-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </div>
+            <div>
+              <div class="info-label">Email</div>
+              <div class="info-value"><a href="mailto:letiappsocial@gmail.com">letiappsocial@gmail.com</a></div>
+            </div>
+          </div>
+
+          <!-- Social strip -->
+          <div class="social-strip reveal reveal-d3">
+            <div class="social-strip-title">Follow Us</div>
+            <div class="social-icons">
+              <!-- Instagram -->
+              <a href="https://www.instagram.com/letiapp.ng?igsh=MWxqY2p4ZjA3OXh2bA==" class="social-icon si-ig" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+              </a>
+              <!-- FLAG: replace # with Leti X (Twitter) profile URL -->
+              <a href="#" class="social-icon si-x" aria-label="X (Twitter)" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              </a>
+              <!-- FLAG: replace # with Leti Facebook profile URL -->
+              <a href="#" class="social-icon si-fb" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              </a>
+              <!-- FLAG: replace # with Leti TikTok profile URL -->
+              <a href="#" class="social-icon si-tk" aria-label="TikTok" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Map embed -->
+          <div class="map-wrap reveal">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.0!2d3.3792!3d6.5095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s294+Herbert+Macaulay+Way+Sabo+Yaba+Lagos!5e0!3m2!1sen!2sng!4v1"
+              allowfullscreen
+              loading="lazy">
+            </iframe>
+          </div>
+
+        </div><!-- /contact-info -->
+
+        <!-- Right: contact form -->
+        <div class="contact-form-card reveal reveal-d1">
+          <h2 class="form-title">Send Us a Message</h2>
+          <p class="form-subtitle">Fill out the form below and we'll get back to you within 24 hours. Whether it's a question, a partnership inquiry, or a Smart Lock request &mdash; we're listening.</p>
+
+          <!-- Replace with Fluent Form shortcode: [fluentform id="1"] -->
+          <div class="form-placeholder">
+            [fluentform id="1"]<br><br>
+            <small>Replace this with your Fluent Form shortcode</small>
+          </div>
+        </div>
+
+      </div><!-- /contact-grid -->
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       HOURS / AVAILABILITY
+  ============================================================ -->
+  <section class="section hours-section">
+    <div class="hours-inner">
+
+      <div style="text-align: center;" class="reveal">
+        <span class="section-tag" style="color: var(--yellow);">&#128337; Availability</span>
+        <h2 class="section-title" style="color: var(--white);">When You Can Reach Us</h2>
+      </div>
+
+      <div class="hours-grid">
+        <div class="hours-card reveal reveal-d1">
+          <span class="hours-card-icon">&#128222;</span>
+          <h3 class="hours-card-title">Phone Support</h3>
+          <p class="hours-card-text">Monday &ndash; Friday<br>9:00 AM &ndash; 6:00 PM WAT</p>
+        </div>
+        <div class="hours-card reveal reveal-d2">
+          <span class="hours-card-icon">&#128231;</span>
+          <h3 class="hours-card-title">Email Response</h3>
+          <p class="hours-card-text">Within 24 hours<br>7 days a week</p>
+        </div>
+        <div class="hours-card reveal reveal-d3">
+          <span class="hours-card-icon">&#128205;</span>
+          <h3 class="hours-card-title">Office Visits</h3>
+          <p class="hours-card-text">By appointment only<br>294 Herbert Macaulay Way, Yaba</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer">
+    <div class="footer-inner">
+
+      <div class="footer-top">
+
+        <!-- Brand column -->
+        <div>
+          <img src="https://bookleti.ng/wp-content/uploads/2026/03/20260303_202128-scaled-e1772574399392.png" alt="Leti" class="footer-logo">
+          <p class="footer-tagline">Africa's first structured short-let and home services marketplace. Book apartments. Hire professionals. All in one app.</p>
+          <div class="footer-socials">
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/letiapp.ng?igsh=MWxqY2p4ZjA3OXh2bA==" class="fs fs-ig" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <!-- FLAG: replace # with Leti X (Twitter) profile URL -->
+            <a href="#" class="fs fs-x" aria-label="X (Twitter)" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <!-- FLAG: replace # with Leti Facebook profile URL -->
+            <a href="#" class="fs fs-fb" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <!-- FLAG: replace # with Leti TikTok profile URL -->
+            <a href="#" class="fs fs-tk" aria-label="TikTok" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Platform links -->
+        <div>
+          <h4 class="footer-col-title">Platform</h4>
+          <ul class="footer-links">
+            <li><a href="/investors">Investors</a></li>
+            <li><a href="/property-owner">Property Owners</a></li>
+            <li><a href="/service-hub">Service Hub</a></li>
+            <li><a href="/leti-stay-management">Leti Stay Management</a></li>
+          </ul>
+        </div>
+
+        <!-- Company links -->
+        <div>
+          <h4 class="footer-col-title">Company</h4>
+          <ul class="footer-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/contact-us">Contact Us</a></li>
+            <li><a href="/faq">FAQs</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact details -->
+        <div>
+          <h4 class="footer-col-title">Contact</h4>
+          <div class="fci">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>294, Herbert Macaulay Way,<br>Sabo Yaba, Lagos</span>
+          </div>
+          <div class="fci">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            <span>+234 913 373 0647</span>
+          </div>
+          <div class="fci">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span>letiappsocial@gmail.com</span>
+          </div>
+        </div>
+
+      </div><!-- /footer-top -->
+
+      <div class="footer-bottom">
+        <p class="footer-copy">Copyright &copy; 2026 LETI. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="/privacy-policy">Privacy Policy</a>
+          <a href="/terms-and-conditions">Terms &amp; Conditions</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+    function toggleMenu() {
+      document.getElementById('navToggle').classList.toggle('open');
+      document.getElementById('navMobile').classList.toggle('open');
+    }
+
+    document.querySelectorAll('.nav-mobile a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        document.getElementById('navToggle').classList.remove('open');
+        document.getElementById('navMobile').classList.remove('open');
+      });
+    });
+
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('vis');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(function(el) {
+      obs.observe(el);
+    });
+
+    window.addEventListener('scroll', function() {
+      document.getElementById('header').style.background =
+        window.pageYOffset > 80 ? 'rgba(45,8,69,0.97)' : 'rgba(45,8,69,0.94)';
+    }, { passive: true });
+  </script>
+
+</body>
+</html>

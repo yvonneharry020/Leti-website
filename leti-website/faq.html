@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LETI &mdash; Frequently Asked Questions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+
+    /* ============================================================
+       CSS CUSTOM PROPERTIES
+       ============================================================ */
+    :root {
+      --purple-deep:   #2D0845;
+      --purple-mid:    #6B1FA1;
+      --purple-bright: #9B30FF;
+      --magenta:       #D946EF;
+      --pink-glow:     #F472B6;
+      --yellow:        #FACC15;
+      --yellow-hover:  #EAB308;
+      --cream:         #FAF7F2;
+      --white:         #FFFFFF;
+      --dark:          #0F0A1A;
+      --text-on-dark:  #E8E0F0;
+      --font-display:  'Playfair Display', Georgia, serif;
+      --font-body:     'DM Sans', system-ui, sans-serif;
+      --radius-sm:     8px;
+      --radius-md:     14px;
+      --radius-lg:     22px;
+      --radius-xl:     32px;
+      --transition:    0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      --header-bg:     rgba(45, 8, 69, 0.94);
+    }
+
+    /* ============================================================
+       RESET & BASE
+       ============================================================ */
+    *, *::before, *::after {
+      margin:     0;
+      padding:    0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior:          smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family:            var(--font-body);
+      color:                  var(--white);
+      background:             var(--purple-deep);
+      line-height:            1.6;
+      overflow-x:             hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+      max-width: 100%;
+      display:   block;
+    }
+
+    a {
+      text-decoration: none;
+      color:           inherit;
+    }
+
+    button {
+      border:      none;
+      cursor:      pointer;
+      font-family: inherit;
+    }
+
+    /* ============================================================
+       HEADER
+       ============================================================ */
+    .header {
+      position:                fixed;
+      top:                     0;
+      left:                    0;
+      right:                   0;
+      z-index:                 1000;
+      background:              var(--header-bg);
+      backdrop-filter:         blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom:           1px solid rgba(155, 48, 255, 0.12);
+      transition:              var(--transition);
+    }
+
+    .header-inner {
+      max-width:       1280px;
+      margin:          0 auto;
+      padding:         0 28px;
+      height:          88px;
+      display:         flex;
+      align-items:     center;
+      justify-content: space-between;
+    }
+
+    .logo-link {
+      display:     flex;
+      align-items: center;
+    }
+
+    .logo-img {
+      height: 50px;
+      width:  auto;
+      filter: brightness(1.1);
+    }
+
+    .nav-desktop {
+      display:     flex;
+      align-items: center;
+      gap:         4px;
+    }
+
+    .nav-desktop a {
+      color:          rgba(255, 255, 255, 0.85);
+      font-size:      13.5px;
+      font-weight:    500;
+      padding:        9px 15px;
+      border-radius:  var(--radius-sm);
+      transition:     var(--transition);
+      white-space:    nowrap;
+      letter-spacing: 0.2px;
+    }
+
+    .nav-desktop a:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color:      #fff;
+    }
+
+    .nav-desktop a.active {
+      color: var(--yellow);
+    }
+
+    .nav-desktop a.nav-highlight {
+      background:    var(--yellow);
+      color:         var(--dark);
+      font-weight:   600;
+      padding:       9px 18px;
+      border-radius: var(--radius-md);
+    }
+
+    .nav-desktop a.nav-highlight:hover {
+      background: var(--yellow-hover);
+    }
+
+    .nav-toggle {
+      display:         none;
+      width:           44px;
+      height:          44px;
+      background:      rgba(255, 255, 255, 0.06);
+      border-radius:   var(--radius-sm);
+      flex-direction:  column;
+      align-items:     center;
+      justify-content: center;
+      gap:             5px;
+      cursor:          pointer;
+      transition:      var(--transition);
+    }
+
+    .nav-toggle:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .nav-toggle span {
+      display:       block;
+      width:         22px;
+      height:        2px;
+      background:    rgba(255, 255, 255, 0.9);
+      border-radius: 2px;
+      transition:    var(--transition);
+    }
+
+    .nav-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    .nav-mobile {
+      display:       none;
+      position:      fixed;
+      top:           88px;
+      left:          0;
+      right:         0;
+      background:    var(--purple-deep);
+      border-bottom: 2px solid rgba(155, 48, 255, 0.15);
+      padding:       12px 24px 20px;
+      transform:     translateY(-120%);
+      transition:    transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index:       999;
+    }
+
+    .nav-mobile.open {
+      transform: translateY(0);
+    }
+
+    .nav-mobile a {
+      display:       block;
+      color:         rgba(255, 255, 255, 0.85);
+      font-size:     15.5px;
+      font-weight:   500;
+      padding:       14px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      transition:    var(--transition);
+    }
+
+    .nav-mobile a:last-child {
+      border-bottom: none;
+    }
+
+    .nav-mobile a:hover,
+    .nav-mobile a.active {
+      color: var(--yellow);
+    }
+
+    .nav-mobile a.nav-highlight {
+      background:    var(--yellow);
+      color:         var(--dark);
+      border-radius: var(--radius-sm);
+      text-align:    center;
+      margin-top:    10px;
+      font-weight:   600;
+      border-bottom: none;
+      padding:       14px;
+    }
+
+    /* ============================================================
+       HERO
+       ============================================================ */
+    .hero {
+      position:   relative;
+      padding-top: 88px;
+      overflow:   hidden;
+      background: linear-gradient(155deg,
+        var(--purple-deep)   0%,
+        #3D1260              20%,
+        var(--purple-mid)    40%,
+        var(--purple-bright) 60%,
+        var(--magenta)       80%,
+        var(--pink-glow)     100%
+      );
+      text-align: center;
+    }
+
+    .hero::before {
+      content:          '';
+      position:         absolute;
+      inset:            0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size:  36px 36px;
+      pointer-events:   none;
+    }
+
+    .hero::after {
+      content:        '';
+      position:       absolute;
+      bottom:         0;
+      left:           0;
+      right:          0;
+      height:         100px;
+      background:     linear-gradient(to top, var(--purple-deep), transparent);
+      pointer-events: none;
+      z-index:        2;
+    }
+
+    .hero-orb {
+      position:       absolute;
+      border-radius:  50%;
+      filter:         blur(80px);
+      pointer-events: none;
+      animation:      orbF 8s ease-in-out infinite;
+    }
+
+    .hero-orb-1 {
+      width:      350px;
+      height:     350px;
+      background: rgba(250, 204, 21, 0.08);
+      top:        -80px;
+      right:      -60px;
+    }
+
+    .hero-orb-2 {
+      width:           250px;
+      height:          250px;
+      background:      rgba(217, 70, 239, 0.12);
+      bottom:          5%;
+      left:            -60px;
+      animation-delay: -3s;
+    }
+
+    @keyframes orbF {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33%       { transform: translate(30px, -20px) scale(1.05); }
+      66%       { transform: translate(-20px, 15px) scale(0.95); }
+    }
+
+    .hero-inner {
+      max-width:  800px;
+      margin:     0 auto;
+      padding:    60px 28px 90px;
+      position:   relative;
+      z-index:    1;
+      animation:  fadeIn 0.9s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-tag {
+      display:        inline-flex;
+      align-items:    center;
+      gap:            8px;
+      font-size:      13px;
+      font-weight:    600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color:          var(--yellow);
+      margin-bottom:  20px;
+      padding:        6px 14px;
+      background:     rgba(250, 204, 21, 0.1);
+      border:         1px solid rgba(250, 204, 21, 0.2);
+      border-radius:  50px;
+    }
+
+    .hero-tag-dot {
+      width:         6px;
+      height:        6px;
+      background:    var(--yellow);
+      border-radius: 50%;
+      animation:     pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(1.5); }
+    }
+
+    .hero-title {
+      font-family:   var(--font-display);
+      font-size:     clamp(32px, 4.5vw, 54px);
+      font-weight:   700;
+      line-height:   1.15;
+      color:         var(--white);
+      margin-bottom: 20px;
+    }
+
+    .hero-title em {
+      font-style:              normal;
+      background:              linear-gradient(90deg, var(--yellow), #FDE68A, var(--yellow));
+      background-size:         200% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip:         text;
+      animation:               shimmer 4s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0%   { background-position: 100% 0; }
+      50%  { background-position: 0% 0; }
+      100% { background-position: 100% 0; }
+    }
+
+    .hero-desc {
+      font-size:   17px;
+      color:       rgba(255, 255, 255, 0.75);
+      max-width:   580px;
+      margin:      0 auto;
+      line-height: 1.7;
+    }
+
+    /* ============================================================
+       FILTER TABS BAR
+       ============================================================ */
+    .tabs-bar {
+      position:        sticky;
+      top:             88px;
+      z-index:         100;
+      background:      rgba(45, 8, 69, 0.95);
+      backdrop-filter: blur(16px);
+      border-bottom:   1px solid rgba(155, 48, 255, 0.12);
+      padding:         0 28px;
+    }
+
+    .tabs-inner {
+      max-width:      1000px;
+      margin:         0 auto;
+      display:        flex;
+      gap:            4px;
+      overflow-x:     auto;
+      scrollbar-width: none;
+      padding:        12px 0;
+    }
+
+    .tabs-inner::-webkit-scrollbar { display: none; }
+
+    .tab-btn {
+      flex-shrink:   0;
+      padding:       10px 22px;
+      border-radius: 50px;
+      font-size:     14px;
+      font-weight:   500;
+      color:         rgba(255, 255, 255, 0.65);
+      background:    rgba(255, 255, 255, 0.05);
+      border:        1px solid rgba(255, 255, 255, 0.08);
+      cursor:        pointer;
+      transition:    var(--transition);
+      white-space:   nowrap;
+    }
+
+    .tab-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color:      var(--white);
+    }
+
+    .tab-btn.active {
+      background:   var(--yellow);
+      color:        var(--dark);
+      border-color: var(--yellow);
+      font-weight:  600;
+    }
+
+    /* ============================================================
+       MAIN CONTENT WRAPPER
+       ============================================================ */
+    .main {
+      background: var(--purple-deep);
+      position:   relative;
+    }
+
+    .main::before {
+      content:          '';
+      position:         absolute;
+      inset:            0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size:  32px 32px;
+      pointer-events:   none;
+    }
+
+    /* ============================================================
+       FAQ SECTIONS
+       ============================================================ */
+    .faq-section {
+      padding:  80px 28px;
+      position: relative;
+      z-index:  1;
+    }
+
+    .faq-section:not(:last-of-type) {
+      border-bottom: 1px solid rgba(155, 48, 255, 0.1);
+    }
+
+    .faq-section-inner {
+      max-width: 860px;
+      margin:    0 auto;
+    }
+
+    .faq-group-header {
+      display:       flex;
+      align-items:   center;
+      gap:           16px;
+      margin-bottom: 40px;
+    }
+
+    .faq-group-icon {
+      width:           56px;
+      height:          56px;
+      background:      linear-gradient(135deg, var(--purple-bright), var(--magenta));
+      border-radius:   16px;
+      display:         flex;
+      align-items:     center;
+      justify-content: center;
+      font-size:       26px;
+      flex-shrink:     0;
+      box-shadow:      0 8px 24px rgba(155, 48, 255, 0.2);
+    }
+
+    .faq-group-title {
+      font-family: var(--font-display);
+      font-size:   clamp(22px, 3vw, 30px);
+      font-weight: 700;
+      color:       var(--white);
+    }
+
+    .faq-group-count {
+      font-size:  13px;
+      color:      rgba(255, 255, 255, 0.4);
+      margin-top: 2px;
+    }
+
+    /* ============================================================
+       ACCORDION
+       ============================================================ */
+    .faq-list {
+      display:        flex;
+      flex-direction: column;
+      gap:            12px;
+    }
+
+    .faq-item {
+      background:    rgba(255, 255, 255, 0.04);
+      border:        1px solid rgba(255, 255, 255, 0.07);
+      border-radius: var(--radius-lg);
+      overflow:      hidden;
+      transition:    var(--transition);
+    }
+
+    .faq-item:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .faq-item.open {
+      background:    rgba(255, 255, 255, 0.07);
+      border-color:  rgba(250, 204, 21, 0.2);
+    }
+
+    .faq-q {
+      width:           100%;
+      display:         flex;
+      align-items:     center;
+      justify-content: space-between;
+      gap:             16px;
+      padding:         20px 24px;
+      background:      none;
+      color:           var(--white);
+      font-size:       15.5px;
+      font-weight:     600;
+      text-align:      left;
+      cursor:          pointer;
+      font-family:     var(--font-body);
+      transition:      var(--transition);
+    }
+
+    .faq-q:hover { color: var(--yellow); }
+
+    .faq-item.open .faq-q { color: var(--yellow); }
+
+    .faq-chevron {
+      flex-shrink:     0;
+      width:           28px;
+      height:          28px;
+      background:      rgba(255, 255, 255, 0.06);
+      border-radius:   50%;
+      display:         flex;
+      align-items:     center;
+      justify-content: center;
+      transition:      transform 0.4s ease;
+    }
+
+    .faq-chevron svg {
+      width:           14px;
+      height:          14px;
+      stroke:          rgba(255, 255, 255, 0.6);
+      fill:            none;
+      stroke-width:    2.5;
+      stroke-linecap:  round;
+      stroke-linejoin: round;
+    }
+
+    .faq-item.open .faq-chevron {
+      transform:  rotate(180deg);
+      background: rgba(250, 204, 21, 0.15);
+    }
+
+    .faq-item.open .faq-chevron svg { stroke: var(--yellow); }
+
+    .faq-a {
+      max-height: 0;
+      overflow:   hidden;
+      transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .faq-item.open .faq-a { max-height: 500px; }
+
+    .faq-a-inner {
+      padding:   0 24px 22px;
+      font-size: 15px;
+      color:     rgba(255, 255, 255, 0.72);
+      line-height: 1.7;
+    }
+
+    /* ============================================================
+       SCROLL REVEAL
+       ============================================================ */
+    .reveal {
+      opacity:    0;
+      transform:  translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.vis {
+      opacity:   1;
+      transform: translateY(0);
+    }
+
+    .reveal-d1 { transition-delay: 0.05s; }
+    .reveal-d2 { transition-delay: 0.1s; }
+    .reveal-d3 { transition-delay: 0.15s; }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    .footer {
+      background:  var(--header-bg);
+      backdrop-filter: blur(20px);
+      color:       var(--text-on-dark);
+      padding:     60px 28px 0;
+      border-top:  1px solid rgba(155, 48, 255, 0.12);
+    }
+
+    .footer-inner {
+      max-width: 1280px;
+      margin:    0 auto;
+    }
+
+    .footer-top {
+      display:               grid;
+      grid-template-columns: 1.6fr 1fr 1fr 1.3fr;
+      gap:                   40px;
+      padding-bottom:        40px;
+      border-bottom:         1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .footer-logo {
+      height:        44px;
+      margin-bottom: 14px;
+      filter:        brightness(1.1);
+    }
+
+    .footer-tagline {
+      font-size:     14px;
+      color:         rgba(255, 255, 255, 0.55);
+      line-height:   1.65;
+      margin-bottom: 22px;
+      max-width:     300px;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap:     10px;
+    }
+
+    .fs {
+      width:           42px;
+      height:          42px;
+      border-radius:   12px;
+      display:         flex;
+      align-items:     center;
+      justify-content: center;
+      transition:      var(--transition);
+    }
+
+    .fs:hover {
+      transform:  translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .fs svg {
+      width:  20px;
+      height: 20px;
+      fill:   #fff;
+    }
+
+    .fs-ig { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+    .fs-x  { background: #14171A; }
+    .fs-fb { background: #1877F2; }
+    .fs-tk { background: #111; }
+
+    .footer-col-title {
+      font-size:      11.5px;
+      font-weight:    600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color:          rgba(255, 255, 255, 0.35);
+      margin-bottom:  20px;
+      text-align:     left;
+    }
+
+    .footer-links {
+      list-style:   none;
+      text-align:   left;
+      padding-left: 0;
+      margin-left:  0;
+    }
+
+    .footer-links li { margin-bottom: 11px; }
+
+    .footer-links a {
+      font-size:  14.5px;
+      color:      rgba(255, 255, 255, 0.7);
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color:        var(--yellow);
+      padding-left: 4px;
+    }
+
+    .fci {
+      display:       flex;
+      gap:           10px;
+      align-items:   flex-start;
+      margin-bottom: 16px;
+      font-size:     14px;
+      color:         rgba(255, 255, 255, 0.7);
+      line-height:   1.55;
+      text-align:    left;
+    }
+
+    .fci svg {
+      flex-shrink:     0;
+      width:           16px;
+      height:          16px;
+      margin-top:      3px;
+      stroke:          var(--purple-bright);
+      fill:            none;
+      stroke-width:    2;
+      stroke-linecap:  round;
+      stroke-linejoin: round;
+    }
+
+    .footer-bottom {
+      padding:         22px 0;
+      display:         flex;
+      align-items:     center;
+      justify-content: space-between;
+      flex-wrap:       wrap;
+      gap:             12px;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color:     rgba(255, 255, 255, 0.35);
+    }
+
+    .footer-legal {
+      display: flex;
+      gap:     24px;
+    }
+
+    .footer-legal a {
+      font-size:  13px;
+      color:      rgba(255, 255, 255, 0.4);
+      transition: var(--transition);
+    }
+
+    .footer-legal a:hover { color: var(--yellow); }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 1024px) {
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-desktop { display: none; }
+      .nav-toggle  { display: flex; }
+      .nav-mobile  { display: block; }
+
+      .header-inner  { height: 80px; }
+      .logo-img      { height: 44px; }
+      .nav-mobile    { top: 80px; }
+      .tabs-bar      { top: 80px; }
+      .hero          { padding-top: 80px; }
+      .hero-inner    { padding: 44px 20px 70px; }
+      .faq-section   { padding: 60px 20px; }
+      .faq-q         { padding: 18px; font-size: 14.5px; }
+      .faq-a-inner   { padding: 0 18px 18px; }
+
+      .footer-top    { grid-template-columns: 1fr; gap: 28px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title { font-size: 28px; }
+      .tab-btn    { font-size: 13px; padding: 9px 16px; }
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header class="header" id="header">
+  <div class="header-inner">
+    <a href="/" class="logo-link">
+      <img src="https://bookleti.ng/wp-content/uploads/2026/03/20260303_202128-scaled-e1772574399392.png" alt="Leti" class="logo-img">
+    </a>
+    <nav class="nav-desktop">
+      <a href="/">Home</a>
+      <a href="/property-owner">Property Owner</a>
+      <a href="/investors">Investors</a>
+      <a href="/service-hub">Service Hub</a>
+      <a href="/contact-us">Contact Us</a>
+      <a href="/leti-stay-management" class="nav-highlight">Leti Stay Management</a>
+    </nav>
+    <div class="nav-toggle" id="navToggle" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</header>
+
+<nav class="nav-mobile" id="navMobile">
+  <a href="/">Home</a>
+  <a href="/property-owner">Property Owner</a>
+  <a href="/investors">Investors</a>
+  <a href="/service-hub">Service Hub</a>
+  <a href="/contact-us">Contact Us</a>
+  <a href="/leti-stay-management" class="nav-highlight">Leti Stay Management</a>
+</nav>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero">
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-inner">
+    <span class="hero-tag">
+      <span class="hero-tag-dot"></span>
+      Help Centre
+    </span>
+    <h1 class="hero-title">Frequently Asked<br><em>Questions</em></h1>
+    <p class="hero-desc">Everything you need to know about LETI &mdash; from how to invest and list your property, to how service providers get paid and what Leti Stay Management can do for you.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     FILTER TABS
+     ============================================================ -->
+<div class="tabs-bar">
+  <div class="tabs-inner">
+    <button class="tab-btn active" onclick="filterFAQ('all', this)">All (40)</button>
+    <button class="tab-btn" onclick="filterFAQ('investors', this)">&#128200; Investors</button>
+    <button class="tab-btn" onclick="filterFAQ('property', this)">&#127968; Property Owners</button>
+    <button class="tab-btn" onclick="filterFAQ('service', this)">&#128736;&#65039; Service Providers</button>
+    <button class="tab-btn" onclick="filterFAQ('management', this)">&#127963;&#65039; Leti Stay Management</button>
+  </div>
+</div>
+
+<!-- ============================================================
+     MAIN FAQ CONTENT
+     ============================================================ -->
+<div class="main" id="faqMain">
+
+  <!-- ====== INVESTORS ====== -->
+  <section class="faq-section" id="faq-investors">
+    <div class="faq-section-inner">
+      <div class="faq-group-header reveal">
+        <div class="faq-group-icon">&#128200;</div>
+        <div>
+          <h2 class="faq-group-title">Investors</h2>
+          <p class="faq-group-count">10 questions</p>
+        </div>
+      </div>
+      <div class="faq-list">
+
+        <div class="faq-item reveal reveal-d1">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            What exactly am I investing in when I invest in LETI?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">You are investing directly in LETI as a company &mdash; a marketplace platform that earns commission on every short-let booking, every home service completed, and every service provider onboarded. Your investment funds the completion of the mobile app, escrow infrastructure, marketing, and platform growth. In return, you receive either an equity stake in the company or a revenue-share percentage, depending on your investment tier.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-d1">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            What are the investment tiers and what does each one offer?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">LETI has four investment tiers: Tier 1 (&#8358;500K &ndash; &#8358;2M), Tier 2 (&#8358;2M &ndash; &#8358;5M), Tier 3 (&#8358;5M &ndash; &#8358;10M), and Tier 4 (&#8358;10M+). Each tier unlocks different participation benefits. Higher tiers gain stronger equity positions, priority allocation, and more direct access to founder communication. Detailed terms for each tier are provided after registration.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-d1">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            What is the minimum investment amount?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">The minimum investment is &#8358;500,000. This places you in Tier 1 and gives you access to early-stage equity or revenue-share participation. As the platform grows in value, early investors at even the minimum tier stand to benefit significantly from first-mover positioning.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-d1">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            What return can I expect on my investment?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Under the revenue-share structure, a &#8358;1,000,000 investor may receive a projected 15&ndash;25% return over 18&ndash;24 months, performance-based. Higher tiers qualify for higher participation benefits. LETI's projected monthly commission revenue at scale is &#8358;20M&ndash;&#8358;30M+ from bookings alone, with additional income from the Service Hub. Returns ultimately depend on platform growth and milestone achievement.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-d1">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            What is the difference between equity and revenue-share?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Equity means you own a percentage of LETI as a company. As the company grows in value, your equity appreciates and you may benefit from dividends or an exit event. Revenue-share means you receive a defined percentage of LETI's transaction revenue over a set period, tied directly to how much the platform earns. The best option for you depends on your investment goals and time horizon. Detailed terms are discussed after registration.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-d2">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            How does LETI make money, and how does that benefit me?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">LETI earns revenue through five streams: booking commission (5&ndash;12% on every short-let transaction), escrow processing fees, service provider registration fees (&#8358;3,000 one-time per provider), service transaction commission (10% on every completed job), and premium listing fees. Every stream directly contributes to the revenue pool from which investors benefit through equity appreciation or revenue-share.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-d2">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            When does LETI plan to expand beyond Lagos?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">LETI is launching in Lagos first, establishing market dominance and proving the model before expanding to other Nigerian cities and eventually across Africa. The timeline for expansion depends on platform performance and capital deployment. Early investors participate before national and continental scale &mdash; meaning they enter at the lowest valuation.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-d2">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            How do I communicate with the LETI founding team after investing?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">All registered investors receive direct communication with the founding team. This includes onboarding calls, access to quarterly performance reports, and a dedicated contact channel for investor queries. Investors in Tier 2 and above receive enhanced access to strategic discussions and milestone updates.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-d3">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            Is my investment protected? What happens if LETI doesn't hit its targets?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">As with any early-stage investment, there is inherent risk. LETI is transparent about this: returns under the revenue-share structure are performance-based and tied to growth milestones. For equity investors, the value of your stake reflects the platform's performance. LETI commits to full financial transparency through regular reporting. We encourage all investors to review detailed terms carefully and seek independent financial advice before committing.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-d3">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            How do I register as an investor?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Go to the Investors page and click "Register as an Investor." Fill out the registration form and our team will contact you within 24&ndash;48 hours with a detailed investment pack, participation terms, and next steps. There is no commitment required at the registration stage &mdash; it simply opens the conversation.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== PROPERTY OWNERS ====== -->
+  <section class="faq-section" id="faq-property">
+    <div class="faq-section-inner">
+      <div class="faq-group-header reveal">
+        <div class="faq-group-icon">&#127968;</div>
+        <div>
+          <h2 class="faq-group-title">Property Owners</h2>
+          <p class="faq-group-count">10 questions</p>
+        </div>
+      </div>
+      <div class="faq-list">
+
+        <div class="faq-item reveal reveal-d1">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            How do I list my property on LETI?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Go to the Property Owner page and click "List Your Property Now." Complete the listing form with your property details, location, pricing, and upload the required documentation (proof of ownership such as C of O, rental agreement, or equivalent). Once submitted, our team reviews your application and contacts you within 24&ndash;48 hours to verify and complete your onboarding.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-d1">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            What documents do I need to list my property?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">You will need to provide proof of ownership or right to list the property. This can be a Certificate of Occupancy (C of O), a rental agreement with your name on it, a lease deed, or any official document that establishes your authority over the property. If you are listing on behalf of the owner, you will need a written authorization from the owner plus the ownership documents.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-d1">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            How does LETI protect me from fake bank transfers and payment fraud?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Every booking on LETI goes through our escrow system. This means the guest's payment is secured and confirmed before you as the property owner receive any notification. There are no fake alerts, no transfer stories, and no need to manually verify payments. Once the booking is confirmed and the guest checks in, the funds are released directly to your linked account.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-d1">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            Can I still use an agent to manage my listing on LETI?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Yes, but with an important rule: only one authorized representative is permitted per listing. If you want someone else to manage your property listing on your behalf, they must have direct authorization from you and access to your original property documents. LETI does not allow chain-of-agent listings &mdash; the platform is designed to eliminate the middleman inflation problem, not recreate it.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-d2">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            How do I know who is renting my property? Are guests verified?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Yes. Every renter on LETI is verified through our KYC process, which includes BVN verification, a valid government-issued ID (driver's licence, national ID, or international passport), and proof of address. This data is securely stored in our system. In the event of any damage or dispute, we can provide the necessary information to support accountability.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-d2">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            How does the booking and communication system work?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Once a guest pays for a booking, they gain access to a chat and call channel connected directly to you, the property owner. This channel remains open for the full duration of the booking plus 24 hours after checkout for any last communication about forgotten items or handover matters. After that, the channel closes automatically, though a history is retained by both parties for reference.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-d2">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            What is the LETI Smart Lock and should I get one?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">The LETI Smart Lock is a keyless door access system that we recommend for all property owners. It eliminates the need to physically hand over keys. You generate a timed password for each guest, which automatically expires when their booking ends. You can also revoke access instantly from anywhere in the world. It supports passwords, physical key backup, and card reader access. Contact us via the Contact Us page to request installation.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-d3">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            What commission does LETI charge on bookings?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">LETI charges a commission of 5&ndash;12% on each completed short-let booking, depending on the listing tier and booking value. There are no upfront or subscription fees for property owners. The commission is only deducted when a booking is successfully completed, ensuring that LETI's interests are fully aligned with yours &mdash; we only earn when you earn.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-d3">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            What happens if a guest damages my property?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">LETI has a built-in dispute resolution system. If damage occurs, you can raise a report directly in the platform, submit photos, recordings, and written evidence. Our team investigates and, where the guest is found liable, we can facilitate a resolution including refund actions from the guest's account or flagging and banning the guest from the platform. Our verification system means every guest can be traced.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-d3">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            What are the benefits of listing early before the public launch?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Early listing partners receive priority placement in search results when the platform launches, meaning guests see your property first. You also gain early booking traffic advantage, reduced commission benefits during the early phase, and access to LETI's pre-launch marketing push. As the platform scales, early partners maintain strong visibility advantage and benefit from the trust that comes with an established listing history.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== SERVICE PROVIDERS ====== -->
+  <section class="faq-section" id="faq-service">
+    <div class="faq-section-inner">
+      <div class="faq-group-header reveal">
+        <div class="faq-group-icon">&#128736;&#65039;</div>
+        <div>
+          <h2 class="faq-group-title">Service Providers</h2>
+          <p class="faq-group-count">10 questions</p>
+        </div>
+      </div>
+      <div class="faq-list">
+
+        <div class="faq-item reveal reveal-d1">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            Who qualifies as a service provider on LETI Hub?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">LETI Hub accepts service providers across 10 categories: Hairstylist, Barber, Chef, Painter, Plumber, Nanny, Cleaner, Electrician, DJ, and Braider. If you offer a skilled service in any of these categories in Lagos, you qualify to register. You must be able to complete a verification process including identity confirmation and a brief skills assessment during onboarding.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-d1">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            How much does it cost to join LETI Hub?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">The early access registration fee is &#8358;3,000 one-time, with no monthly subscription and no hidden charges. This fee secures your early listing position, locks in your early member status, and gives you access to the platform before the public launch. As LETI scales, registration costs may increase &mdash; early members benefit most.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-d1">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            How does payment work on LETI Hub? When do I get paid?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">All payments go through LETI's escrow system. When a client books your service and you accept, the client is required to load the agreed amount into escrow before you begin. Once both you and the client confirm the job is complete, the funds are released instantly to your LETI wallet. You can withdraw from your wallet at any time. This eliminates the risk of non-payment entirely.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-d1">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            What commission does LETI take from my earnings?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">LETI takes 10% commission on every completed job starting from your second month. Your first full month on the platform is completely commission-free &mdash; every naira you earn in that first month is yours. From month two onward, the 10% commission is automatically deducted before funds are released to your wallet. There are no other charges.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-d2">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            How do I receive job requests? Do I have to search for clients?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">No, clients come to you. When a property owner or guest needs a service, they search in the app and see available providers near them. Your profile appears based on your distance from the client and your availability status. When a client selects you, you receive a notification on your app and can choose to accept or decline. No chasing, no cold calling.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-d2">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            Is there live tracking when I'm on my way to a client?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Yes. Once you accept a job and the client's payment is in escrow, LETI activates a live tracking view that shows the client your real-time location and estimated arrival time. When you arrive, you tap "Arrived" in the app &mdash; this automatically notifies the client. When the job is done, both you and the client tap "Job Completed" to trigger payment release.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-d2">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            What happens if a client is rude or treats me badly?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">LETI takes the safety and dignity of service providers very seriously. If a client behaves abusively, harasses you, or creates an unsafe situation, you can report it directly in the app with written descriptions, photos, or audio files as evidence. LETI's team will investigate. Depending on the severity, the client may receive a warning, suspension, or permanent ban from the platform. You will still receive your payment for the work done.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-d3">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            How do reviews and ratings work for service providers?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">After every completed job, clients can leave a verified rating and written review on your profile. These reviews are visible to all future clients and directly impact your visibility in search results &mdash; higher-rated providers appear earlier. A strong review history is your most powerful marketing tool on LETI. We encourage professionalism and consistency to build a profile that earns you repeat bookings.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-d3">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            Can I set my own availability and service area?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Yes. Through your LETI Hub dashboard, you can toggle your availability on or off at any time &mdash; meaning you only receive job notifications when you are ready to work. You can also set your preferred service radius, limiting job requests to areas within a comfortable distance from you. This gives you complete control over when and where you work.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-d3">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            How do I sign up as a service provider?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Go to the Service Hub page and click "Register as a Service Provider." Fill in your details including your service category, experience, and contact information, then pay the one-time &#8358;3,000 early access fee. Our team will review your application and guide you through the onboarding process, including identity verification and profile setup. Once approved, you are live on the platform and can begin receiving jobs.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== LETI STAY MANAGEMENT ====== -->
+  <section class="faq-section" id="faq-management">
+    <div class="faq-section-inner">
+      <div class="faq-group-header reveal">
+        <div class="faq-group-icon">&#127963;&#65039;</div>
+        <div>
+          <h2 class="faq-group-title">Leti Stay Management</h2>
+          <p class="faq-group-count">10 questions</p>
+        </div>
+      </div>
+      <div class="faq-list">
+
+        <div class="faq-item reveal reveal-d1">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            What is Leti Stay Management?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Leti Stay Management is a full-service short-let business solution launching in Lagos in July 2026. It serves three types of clients: people who want to start a short-let business from scratch and need full guidance, people who already have a property and want professional interior setup and platform listing, and people who already run a short-let business and need a trusted team to manage it completely on their behalf.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-d1">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            I know nothing about short-let. Can Leti Stay Management help me start?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Absolutely. This is exactly who Leti Stay Management is designed for. We start with a consultation where you tell us your vision, budget, and preferred location in Lagos. We then source the right apartment or land for you, design and furnish the interior, install the Smart Lock system, register you on the LETI platform, and market your property for the first 3 months free of charge. You are guided through every step.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-d1">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            What does the interior design service include?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Our interior design team transforms your apartment into a guest-ready short-let space. This includes furniture selection, decor, layout planning, photography, and styling &mdash; all designed to attract bookings and earn five-star reviews. We work within your budget and ensure the space tells a story that guests want to share on social media. Pricing for interior design is separate and transparent &mdash; you pay the tradespeople directly; our fee is for coordination and design management.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-d1">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            I live abroad. Can Leti still manage my property for me?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Yes &mdash; and this is one of the primary use cases for Leti Stay Management. If you own property in Lagos but are based outside Nigeria, we manage your property completely on your behalf. Bookings, guest communication, cleaning coordination, maintenance, and revenue reporting are all handled by our team. Your bank account is linked to the platform and payouts are made directly to you. You earn without being physically present.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-d2">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            What is the Smart Lock Kit and why does LETI recommend it?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">The LETI Smart Lock is a keyless door access device that we strongly recommend for all managed properties. It allows you to generate a unique digital password for each guest which automatically expires at the end of their booking. This eliminates the need for physical key handoffs, agents running around with keys, or any manual access management. You can also revoke access instantly from anywhere in the world. The device supports passwords, card key, and physical key backup.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-d2">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            Can I choose only some services from Leti Stay Management instead of the full package?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Yes. Leti Stay Management is modular. You can choose just property sourcing, just interior design, just Smart Lock installation, or just ongoing management. Each service is offered independently so you only pay for what you need. If you already have a property and just want us to design and list it, we can do that. If you just want the Smart Lock installed, that is available too.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-d2">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            How much does Leti Stay Management charge for ongoing management?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Leti Stay Management operates on a transparent, separate fee structure for each service type: sourcing fee, design coordination fee, and management fee. There are no hidden charges. Every cost is disclosed upfront and you make payments directly &mdash; we are not a middleman in your finances. Revenue from bookings goes directly to your linked account. Details and pricing are provided during your initial consultation.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-d3">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            What is included in the free 3-month promotion?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Every property managed by Leti Stay Management receives featured placement and an active marketing push for the first 3 months at no extra cost. This includes priority listing position in the LETI app, promotion on LETI's social media channels, and inclusion in any relevant marketing campaigns during that period. The goal is to ensure your property starts generating bookings from day one.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-d3">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            Can Leti help me buy land or build a custom short-let property?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Yes, this is our custom property option. If you want to buy land and build a short-let from the ground up, Leti Stay Management can assist with land sourcing (ensuring all documentation is proper), advising on the construction plan, coordinating workers for the build, designing the interior, and getting the finished property live on the LETI platform. This is a premium, fully tailored service with timelines and budgets agreed in advance.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal reveal-d3">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            When does Leti Stay Management launch and how do I get started?
+            <span class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Leti Stay Management officially launches in Lagos in July 2026. To get started before launch, you can visit the Leti Stay Management page and submit your interest through the management enquiry form. Our team will contact you to begin the consultation process. Early enquiries are given priority scheduling when we go live.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div><!-- end #faqMain -->
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <img src="https://bookleti.ng/wp-content/uploads/2026/03/20260303_202128-scaled-e1772574399392.png" alt="Leti" class="footer-logo">
+        <p class="footer-tagline">Africa's first structured short-let and home services marketplace. Book apartments. Hire professionals. All in one app.</p>
+        <div class="footer-socials">
+          <a href="https://www.instagram.com/letiapp.ng?igsh=MWxqY2p4ZjA3OXh2bA==" class="fs fs-ig" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+          <!-- FLAG: X (Twitter) — provide the correct profile URL to replace # -->
+          <a href="#" class="fs fs-x" aria-label="X">
+            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <!-- FLAG: Facebook — provide the correct page URL to replace # -->
+          <a href="#" class="fs fs-fb" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <!-- FLAG: TikTok — provide the correct profile URL to replace # -->
+          <a href="#" class="fs fs-tk" aria-label="TikTok">
+            <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Platform</h4>
+        <ul class="footer-links">
+          <li><a href="/investors">Investors</a></li>
+          <li><a href="/property-owner">Property Owners</a></li>
+          <li><a href="/service-hub">Service Hub</a></li>
+          <li><a href="/leti-stay-management">Leti Stay Management</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Company</h4>
+        <ul class="footer-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/contact-us">Contact Us</a></li>
+          <li><a href="/faq">FAQs</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Contact</h4>
+        <div class="fci">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>294, Herbert Macaulay Way,<br>Sabo Yaba, Lagos</span>
+        </div>
+        <div class="fci">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          <span>+234 913 373 0647</span>
+        </div>
+        <div class="fci">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span>letiappsocial@gmail.com</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">Copyright &copy; 2026 LETI. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="/privacy-policy">Privacy Policy</a>
+        <a href="/terms-and-conditions">Terms &amp; Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+
+  /* ============================================================
+     NAV TOGGLE
+     ============================================================ */
+  function toggleMenu() {
+    document.getElementById('navToggle').classList.toggle('open');
+    document.getElementById('navMobile').classList.toggle('open');
+  }
+
+  document.querySelectorAll('.nav-mobile a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      document.getElementById('navToggle').classList.remove('open');
+      document.getElementById('navMobile').classList.remove('open');
+    });
+  });
+
+  /* ============================================================
+     HEADER SCROLL DARKENING
+     ============================================================ */
+  window.addEventListener('scroll', function() {
+    document.getElementById('header').style.background =
+      window.pageYOffset > 80 ? 'rgba(45,8,69,0.97)' : 'rgba(45,8,69,0.94)';
+  }, { passive: true });
+
+  /* ============================================================
+     FAQ ACCORDION
+     ============================================================ */
+  function toggleFAQ(btn) {
+    var item   = btn.closest('.faq-item');
+    var isOpen = item.classList.contains('open');
+    item.closest('.faq-list').querySelectorAll('.faq-item.open').forEach(function(other) {
+      if (other !== item) {
+        other.classList.remove('open');
+      }
+    });
+    item.classList.toggle('open', !isOpen);
+  }
+
+  /* ============================================================
+     FILTER TABS
+     ============================================================ */
+  function filterFAQ(category, btn) {
+    document.querySelectorAll('.tab-btn').forEach(function(b) {
+      b.classList.remove('active');
+    });
+    btn.classList.add('active');
+
+    var sections = ['investors', 'property', 'service', 'management'];
+    sections.forEach(function(id) {
+      var el = document.getElementById('faq-' + id);
+      el.style.display = (category === 'all' || category === id) ? 'block' : 'none';
+    });
+  }
+
+  /* ============================================================
+     SCROLL REVEAL
+     ============================================================ */
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('vis');
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(function(el) {
+    revealObserver.observe(el);
+  });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,1916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LETI — For Property Owners</title>
+
+  <!-- FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+
+    /* ============================================================
+       CSS VARIABLES
+    ============================================================ */
+    :root {
+      --purple-deep:   #2D0845;
+      --purple-mid:    #6B1FA1;
+      --purple-bright: #9B30FF;
+      --magenta:       #D946EF;
+      --pink-glow:     #F472B6;
+      --yellow:        #FACC15;
+      --yellow-hover:  #EAB308;
+      --cream:         #FAF7F2;
+      --cream-light:   #FDFCFA;
+      --white:         #FFFFFF;
+      --dark:          #0F0A1A;
+      --text-dark:     #1E1333;
+      --text-mid:      #4A3D5C;
+      --text-light:    #8B7FA0;
+      --text-on-dark:  #E8E0F0;
+
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body:    'DM Sans', system-ui, sans-serif;
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 22px;
+      --radius-xl: 32px;
+
+      --shadow-card:  0 4px 24px rgba(45, 8, 69, 0.07);
+      --shadow-hover: 0 16px 48px rgba(45, 8, 69, 0.14);
+      --transition:   0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      --header-bg:    rgba(45, 8, 69, 0.94);
+    }
+
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *,
+    *::before,
+    *::after {
+      margin:     0;
+      padding:    0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior:          smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family:            var(--font-body);
+      color:                  var(--text-dark);
+      background:             var(--cream);
+      line-height:            1.6;
+      overflow-x:             hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+      max-width: 100%;
+      display:   block;
+    }
+
+    a {
+      text-decoration: none;
+      color:           inherit;
+    }
+
+    button {
+      border:      none;
+      cursor:      pointer;
+      font-family: inherit;
+    }
+
+
+    /* ============================================================
+       HEADER
+    ============================================================ */
+    .header {
+      position:                fixed;
+      top:                     0;
+      left:                    0;
+      right:                   0;
+      z-index:                 1000;
+      background:              var(--header-bg);
+      backdrop-filter:         blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom:           1px solid rgba(155, 48, 255, 0.12);
+      transition:              var(--transition);
+    }
+
+    .header-inner {
+      max-width:       1280px;
+      margin:          0 auto;
+      padding:         0 28px;
+      height:          88px;
+      display:         flex;
+      align-items:     center;
+      justify-content: space-between;
+    }
+
+    .logo-link {
+      display:     flex;
+      align-items: center;
+    }
+
+    .logo-img {
+      height: 50px;
+      width:  auto;
+      filter: brightness(1.1);
+    }
+
+    .nav-desktop {
+      display:     flex;
+      align-items: center;
+      gap:         4px;
+    }
+
+    .nav-desktop a {
+      color:          rgba(255, 255, 255, 0.85);
+      font-size:      13.5px;
+      font-weight:    500;
+      padding:        9px 15px;
+      border-radius:  var(--radius-sm);
+      transition:     var(--transition);
+      white-space:    nowrap;
+      letter-spacing: 0.2px;
+    }
+
+    .nav-desktop a:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color:      #fff;
+    }
+
+    .nav-desktop a.active {
+      color: var(--yellow);
+    }
+
+    .nav-desktop a.nav-highlight {
+      background:    var(--yellow);
+      color:         var(--dark);
+      font-weight:   600;
+      padding:       9px 18px;
+      border-radius: var(--radius-md);
+    }
+
+    .nav-desktop a.nav-highlight:hover {
+      background: var(--yellow-hover);
+      transform:  translateY(-1px);
+    }
+
+    .nav-toggle {
+      display:         none;
+      width:           44px;
+      height:          44px;
+      background:      rgba(255, 255, 255, 0.06);
+      border-radius:   var(--radius-sm);
+      flex-direction:  column;
+      align-items:     center;
+      justify-content: center;
+      gap:             5px;
+      cursor:          pointer;
+      transition:      var(--transition);
+    }
+
+    .nav-toggle:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .nav-toggle span {
+      display:       block;
+      width:         22px;
+      height:        2px;
+      background:    rgba(255, 255, 255, 0.9);
+      border-radius: 2px;
+      transition:    var(--transition);
+    }
+
+    .nav-toggle.open span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .nav-toggle.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-toggle.open span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+
+    /* ============================================================
+       MOBILE NAV
+    ============================================================ */
+    .nav-mobile {
+      display:       none;
+      position:      fixed;
+      top:           88px;
+      left:          0;
+      right:         0;
+      background:    var(--purple-deep);
+      border-bottom: 2px solid rgba(155, 48, 255, 0.15);
+      padding:       12px 24px 20px;
+      transform:     translateY(-120%);
+      transition:    transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index:       999;
+    }
+
+    .nav-mobile.open {
+      transform: translateY(0);
+    }
+
+    .nav-mobile a {
+      display:       block;
+      color:         rgba(255, 255, 255, 0.85);
+      font-size:     15.5px;
+      font-weight:   500;
+      padding:       14px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      transition:    var(--transition);
+    }
+
+    .nav-mobile a:last-child {
+      border-bottom: none;
+    }
+
+    .nav-mobile a:hover,
+    .nav-mobile a.active {
+      color: var(--yellow);
+    }
+
+    .nav-mobile a.nav-highlight {
+      background:    var(--yellow);
+      color:         var(--dark);
+      border-radius: var(--radius-sm);
+      text-align:    center;
+      margin-top:    10px;
+      font-weight:   600;
+      border-bottom: none;
+      padding:       14px;
+    }
+
+
+    /* ============================================================
+       BUTTONS
+    ============================================================ */
+    .btn-primary {
+      display:       inline-flex;
+      align-items:   center;
+      gap:           8px;
+      background:    var(--yellow);
+      color:         var(--dark);
+      font-size:     15px;
+      font-weight:   600;
+      padding:       15px 30px;
+      border-radius: var(--radius-md);
+      transition:    var(--transition);
+      box-shadow:    0 4px 24px rgba(250, 204, 21, 0.25);
+      position:      relative;
+      overflow:      hidden;
+    }
+
+    .btn-primary::before {
+      content:    '';
+      position:   absolute;
+      top:        0;
+      left:       -100%;
+      width:      100%;
+      height:     100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: 0.5s;
+    }
+
+    .btn-primary:hover::before {
+      left: 100%;
+    }
+
+    .btn-primary:hover {
+      background: var(--yellow-hover);
+      transform:  translateY(-2px);
+      box-shadow: 0 8px 32px rgba(250, 204, 21, 0.35);
+    }
+
+    .btn-secondary {
+      display:         inline-flex;
+      align-items:     center;
+      gap:             8px;
+      background:      rgba(255, 255, 255, 0.08);
+      color:           var(--white);
+      font-size:       15px;
+      font-weight:     500;
+      padding:         15px 30px;
+      border-radius:   var(--radius-md);
+      border:          1px solid rgba(255, 255, 255, 0.18);
+      transition:      var(--transition);
+      backdrop-filter: blur(8px);
+    }
+
+    .btn-secondary:hover {
+      background:   rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform:    translateY(-2px);
+    }
+
+    .btn-outline {
+      display:       inline-flex;
+      align-items:   center;
+      gap:           8px;
+      background:    transparent;
+      color:         var(--purple-bright);
+      font-size:     15px;
+      font-weight:   600;
+      padding:       14px 28px;
+      border-radius: var(--radius-md);
+      border:        2px solid var(--purple-bright);
+      transition:    var(--transition);
+    }
+
+    .btn-outline:hover {
+      background: var(--purple-bright);
+      color:      var(--white);
+      transform:  translateY(-2px);
+    }
+
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    .hero {
+      position:    relative;
+      min-height:  85vh;
+      display:     flex;
+      align-items: center;
+      padding-top: 88px;
+      overflow:    hidden;
+      background:  linear-gradient(
+        155deg,
+        var(--purple-deep)   0%,
+        #3D1260              25%,
+        var(--purple-mid)    45%,
+        var(--purple-bright) 65%,
+        var(--magenta)       85%,
+        var(--pink-glow)     100%
+      );
+    }
+
+    .hero-orb {
+      position:       absolute;
+      border-radius:  50%;
+      filter:         blur(80px);
+      pointer-events: none;
+      animation:      orbFloat 8s ease-in-out infinite;
+    }
+
+    .hero-orb-1 {
+      width:           350px;
+      height:          350px;
+      background:      rgba(217, 70, 239, 0.2);
+      top:             -80px;
+      right:           -60px;
+      animation-delay: 0s;
+    }
+
+    .hero-orb-2 {
+      width:           250px;
+      height:          250px;
+      background:      rgba(155, 48, 255, 0.15);
+      bottom:          10%;
+      left:            -60px;
+      animation-delay: -3s;
+    }
+
+    @keyframes orbFloat {
+      0%,  100% { transform: translate(0, 0) scale(1); }
+      33%        { transform: translate(30px, -20px) scale(1.05); }
+      66%        { transform: translate(-20px, 15px) scale(0.95); }
+    }
+
+    .hero::before {
+      content:          '';
+      position:         absolute;
+      inset:            0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size:  40px 40px;
+      pointer-events:   none;
+    }
+
+    .hero::after {
+      content:        '';
+      position:       absolute;
+      bottom:         0;
+      left:           0;
+      right:          0;
+      height:         120px;
+      background:     linear-gradient(to top, var(--cream), transparent);
+      pointer-events: none;
+      z-index:        2;
+    }
+
+    .hero-inner {
+      max-width:             1280px;
+      margin:                0 auto;
+      padding:               60px 28px 100px;
+      display:               grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap:                   60px;
+      align-items:           center;
+      position:              relative;
+      z-index:               1;
+    }
+
+    .hero-content {
+      animation: fadeIn 1s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-tag {
+      display:        inline-flex;
+      align-items:    center;
+      gap:            8px;
+      font-size:      13px;
+      font-weight:    600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color:          var(--yellow);
+      margin-bottom:  20px;
+      padding:        6px 14px;
+      background:     rgba(250, 204, 21, 0.1);
+      border:         1px solid rgba(250, 204, 21, 0.2);
+      border-radius:  50px;
+    }
+
+    .hero-tag-dot {
+      width:         6px;
+      height:        6px;
+      background:    var(--yellow);
+      border-radius: 50%;
+      animation:     pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%,  100% { opacity: 1; transform: scale(1); }
+      50%        { opacity: 0.5; transform: scale(1.5); }
+    }
+
+    .hero-title {
+      font-family:   var(--font-display);
+      font-size:     clamp(32px, 4.5vw, 54px);
+      font-weight:   700;
+      line-height:   1.12;
+      color:         var(--white);
+      margin-bottom: 24px;
+    }
+
+    .hero-title em {
+      font-style:              normal;
+      background:              linear-gradient(90deg, var(--yellow), #FDE68A, var(--yellow));
+      background-size:         200% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip:         text;
+      animation:               shimmer 4s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0%   { background-position: 100% 0; }
+      50%  { background-position: 0%   0; }
+      100% { background-position: 100% 0; }
+    }
+
+    .hero-desc {
+      font-size:     17px;
+      line-height:   1.75;
+      color:         rgba(255, 255, 255, 0.78);
+      max-width:     520px;
+      margin-bottom: 40px;
+    }
+
+    .hero-ctas {
+      display:   flex;
+      gap:       14px;
+      flex-wrap: wrap;
+    }
+
+    .hero-img-wrap {
+      animation:       fadeIn 1s ease-out 0.2s both;
+      display:         flex;
+      justify-content: center;
+    }
+
+    .hero-img-wrap img {
+      border-radius: var(--radius-xl);
+      box-shadow:    0 20px 60px rgba(0, 0, 0, 0.3);
+      max-height:    480px;
+      object-fit:    cover;
+    }
+
+
+    /* ============================================================
+       SECTIONS — SHARED STYLES
+    ============================================================ */
+    .section {
+      padding: 100px 28px;
+    }
+
+    .section-inner {
+      max-width: 1280px;
+      margin:    0 auto;
+    }
+
+    .section-tag {
+      display:        inline-flex;
+      align-items:    center;
+      gap:            6px;
+      font-size:      12px;
+      font-weight:    600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color:          var(--purple-bright);
+      margin-bottom:  14px;
+    }
+
+    .section-title {
+      font-family:   var(--font-display);
+      font-size:     clamp(26px, 3.8vw, 42px);
+      font-weight:   700;
+      line-height:   1.2;
+      color:         var(--text-dark);
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      font-size:   16.5px;
+      color:       var(--text-mid);
+      max-width:   640px;
+      line-height: 1.7;
+    }
+
+    .section-title-light    { color: var(--white); }
+    .section-subtitle-light { color: rgba(255, 255, 255, 0.75); }
+
+
+    /* ============================================================
+       THE PROBLEM
+    ============================================================ */
+    .problem-section {
+      background: var(--cream);
+    }
+
+    .problem-grid {
+      display:               grid;
+      grid-template-columns: 1fr 1fr;
+      gap:                   60px;
+      align-items:           center;
+      margin-top:            50px;
+    }
+
+    .problem-card {
+      background:    var(--white);
+      border-radius: var(--radius-lg);
+      padding:       40px;
+      border:        1px solid rgba(45, 8, 69, 0.06);
+      box-shadow:    var(--shadow-card);
+    }
+
+    .problem-card-title {
+      font-family:   var(--font-display);
+      font-size:     22px;
+      font-weight:   700;
+      color:         var(--text-dark);
+      margin-bottom: 16px;
+    }
+
+    .problem-card-intro {
+      font-size:     15.5px;
+      color:         var(--text-mid);
+      line-height:   1.7;
+      margin-bottom: 20px;
+    }
+
+    .problem-list {
+      list-style:     none;
+      display:        flex;
+      flex-direction: column;
+      gap:            12px;
+    }
+
+    .problem-list li {
+      display:     flex;
+      align-items: flex-start;
+      gap:         12px;
+      font-size:   15px;
+      color:       var(--text-mid);
+      line-height: 1.55;
+    }
+
+    .problem-list li::before {
+      content:      '';
+      flex-shrink:  0;
+      width:        8px;
+      height:       8px;
+      background:   #EF4444;
+      border-radius: 50%;
+      margin-top:   7px;
+    }
+
+    .problem-closer {
+      margin-top:  24px;
+      padding-top: 20px;
+      border-top:  1px solid rgba(45, 8, 69, 0.06);
+    }
+
+    .problem-closer p {
+      font-size:   15.5px;
+      color:       var(--text-mid);
+      line-height: 1.6;
+    }
+
+    .problem-closer strong {
+      color:       var(--purple-bright);
+      font-weight: 600;
+    }
+
+    .problem-visual {
+      display:        flex;
+      flex-direction: column;
+      gap:            16px;
+    }
+
+    .pain-stat {
+      background:    var(--white);
+      border-radius: var(--radius-md);
+      padding:       24px;
+      border-left:   4px solid #EF4444;
+      box-shadow:    var(--shadow-card);
+      transition:    var(--transition);
+    }
+
+    .pain-stat:hover {
+      transform:  translateX(6px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .pain-stat-title {
+      font-size:     16px;
+      font-weight:   600;
+      color:         var(--text-dark);
+      margin-bottom: 4px;
+    }
+
+    .pain-stat-text {
+      font-size:   13.5px;
+      color:       var(--text-mid);
+      line-height: 1.5;
+    }
+
+
+    /* ============================================================
+       HOW LETI FIXES IT
+    ============================================================ */
+    .solution-section {
+      background: var(--white);
+    }
+
+    .solution-grid {
+      display:               grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:                   24px;
+      margin-top:            50px;
+    }
+
+    .solution-card {
+      padding:       32px;
+      background:    var(--cream-light);
+      border-radius: var(--radius-lg);
+      border:        1px solid rgba(45, 8, 69, 0.04);
+      transition:    var(--transition);
+      position:      relative;
+      overflow:      hidden;
+    }
+
+    .solution-card::before {
+      content:          '';
+      position:         absolute;
+      top:              0;
+      left:             0;
+      right:            0;
+      height:           3px;
+      background:       linear-gradient(90deg, var(--purple-bright), var(--magenta));
+      transform:        scaleX(0);
+      transform-origin: left;
+      transition:       transform 0.5s ease;
+    }
+
+    .solution-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .solution-card:hover {
+      transform:  translateY(-6px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .solution-num {
+      display:         inline-flex;
+      align-items:     center;
+      justify-content: center;
+      width:           44px;
+      height:          44px;
+      background:      linear-gradient(135deg, var(--purple-bright), var(--magenta));
+      color:           var(--white);
+      font-weight:     700;
+      font-size:       18px;
+      border-radius:   12px;
+      margin-bottom:   18px;
+      box-shadow:      0 6px 20px rgba(155, 48, 255, 0.2);
+    }
+
+    .solution-card-title {
+      font-family:   var(--font-display);
+      font-size:     18px;
+      font-weight:   600;
+      color:         var(--text-dark);
+      margin-bottom: 8px;
+    }
+
+    .solution-card-text {
+      font-size:   14.5px;
+      color:       var(--text-mid);
+      line-height: 1.65;
+    }
+
+
+    /* ============================================================
+       SMART LOCK
+    ============================================================ */
+    .smartlock-section {
+      background: linear-gradient(135deg, var(--purple-deep), var(--purple-mid));
+      position:   relative;
+      overflow:   hidden;
+    }
+
+    .smartlock-section::before {
+      content:          '';
+      position:         absolute;
+      inset:            0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size:  32px 32px;
+    }
+
+    .smartlock-grid {
+      display:               grid;
+      grid-template-columns: 1fr 1fr;
+      gap:                   60px;
+      align-items:           center;
+      position:              relative;
+      z-index:               1;
+    }
+
+    .smartlock-visual {
+      display:         flex;
+      justify-content: center;
+      align-items:     center;
+    }
+
+    .smartlock-icon-wrap {
+      width:          200px;
+      height:         200px;
+      background:     rgba(250, 204, 21, 0.1);
+      border-radius:  50%;
+      display:        flex;
+      align-items:    center;
+      justify-content: center;
+      position:       relative;
+      animation:      lockPulse 3s ease-in-out infinite;
+    }
+
+    .smartlock-icon-wrap::before {
+      content:       '';
+      position:      absolute;
+      inset:         -20px;
+      border:        2px dashed rgba(250, 204, 21, 0.15);
+      border-radius: 50%;
+      animation:     lockSpin 20s linear infinite;
+    }
+
+    @keyframes lockPulse {
+      0%,  100% { box-shadow: 0 0 0 0 rgba(250, 204, 21, 0.15); }
+      50%        { box-shadow: 0 0 0 30px rgba(250, 204, 21, 0); }
+    }
+
+    @keyframes lockSpin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    .smartlock-icon-wrap svg {
+      width:        80px;
+      height:       80px;
+      stroke:       var(--yellow);
+      fill:         none;
+      stroke-width: 1.5;
+    }
+
+    .smartlock-features {
+      margin-top:     28px;
+      display:        flex;
+      flex-direction: column;
+      gap:            16px;
+    }
+
+    .smartlock-feat {
+      display:     flex;
+      gap:         14px;
+      align-items: flex-start;
+    }
+
+    .smartlock-feat-icon {
+      flex-shrink:     0;
+      width:           36px;
+      height:          36px;
+      background:      rgba(250, 204, 21, 0.15);
+      border-radius:   10px;
+      display:         flex;
+      align-items:     center;
+      justify-content: center;
+    }
+
+    .smartlock-feat-icon svg {
+      width:           18px;
+      height:          18px;
+      stroke:          var(--yellow);
+      fill:            none;
+      stroke-width:    2;
+      stroke-linecap:  round;
+      stroke-linejoin: round;
+    }
+
+    .smartlock-feat-text {
+      font-size:   15px;
+      color:       rgba(255, 255, 255, 0.8);
+      line-height: 1.6;
+    }
+
+    .smartlock-feat-text strong {
+      color:       var(--yellow);
+      font-weight: 600;
+    }
+
+    .smartlock-ctas {
+      margin-top: 32px;
+      display:    flex;
+      gap:        14px;
+      flex-wrap:  wrap;
+    }
+
+
+    /* ============================================================
+       WHY LIST ON LETI
+    ============================================================ */
+    .whylist-section {
+      background: var(--cream);
+    }
+
+    .whylist-grid {
+      display:               grid;
+      grid-template-columns: 1fr 1fr;
+      gap:                   40px;
+      margin-top:            50px;
+    }
+
+    .whylist-col-title {
+      font-family:    var(--font-display);
+      font-size:      20px;
+      font-weight:    600;
+      color:          var(--text-dark);
+      margin-bottom:  20px;
+      padding-bottom: 12px;
+      border-bottom:  2px solid var(--purple-bright);
+    }
+
+    .whylist-items {
+      display:        flex;
+      flex-direction: column;
+      gap:            14px;
+    }
+
+    .whylist-item {
+      display:       flex;
+      gap:           12px;
+      align-items:   flex-start;
+      padding:       14px;
+      background:    var(--white);
+      border-radius: var(--radius-md);
+      border:        1px solid rgba(45, 8, 69, 0.04);
+      transition:    var(--transition);
+    }
+
+    .whylist-item:hover {
+      transform:  translateX(4px);
+      box-shadow: var(--shadow-card);
+    }
+
+    .whylist-item-icon {
+      flex-shrink:     0;
+      width:           32px;
+      height:          32px;
+      background:      var(--yellow);
+      border-radius:   8px;
+      display:         flex;
+      align-items:     center;
+      justify-content: center;
+    }
+
+    .whylist-item-icon svg {
+      width:           16px;
+      height:          16px;
+      stroke:          var(--dark);
+      fill:            none;
+      stroke-width:    2.5;
+      stroke-linecap:  round;
+      stroke-linejoin: round;
+    }
+
+    .whylist-item-text {
+      font-size:   14.5px;
+      color:       var(--text-mid);
+      line-height: 1.55;
+    }
+
+    .whylist-item-text strong {
+      color: var(--text-dark);
+    }
+
+
+    /* ============================================================
+       REVENUE CTA
+    ============================================================ */
+    .revenue-section {
+      background: linear-gradient(
+        155deg,
+        var(--purple-deep)   0%,
+        var(--purple-mid)    40%,
+        var(--magenta)       80%,
+        var(--purple-bright) 100%
+      );
+      text-align: center;
+      position:   relative;
+      overflow:   hidden;
+    }
+
+    .revenue-section::before {
+      content:        '';
+      position:       absolute;
+      top:            -100px;
+      left:           50%;
+      transform:      translateX(-50%);
+      width:          500px;
+      height:         500px;
+      background:     radial-gradient(circle, rgba(250, 204, 21, 0.06), transparent 70%);
+      pointer-events: none;
+    }
+
+    .revenue-inner {
+      max-width: 700px;
+      margin:    0 auto;
+      position:  relative;
+      z-index:   1;
+    }
+
+    .revenue-points {
+      display:         flex;
+      flex-wrap:       wrap;
+      justify-content: center;
+      gap:             12px;
+      margin:          32px 0;
+    }
+
+    .revenue-point {
+      background:    rgba(255, 255, 255, 0.08);
+      border:        1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 50px;
+      padding:       10px 20px;
+      font-size:     14px;
+      color:         rgba(255, 255, 255, 0.85);
+      font-weight:   500;
+      transition:    var(--transition);
+    }
+
+    .revenue-point:hover {
+      background: rgba(255, 255, 255, 0.14);
+      transform:  translateY(-2px);
+    }
+
+    .revenue-equation {
+      margin:      28px 0;
+      font-family: var(--font-display);
+      font-size:   clamp(18px, 2.5vw, 24px);
+      color:       var(--yellow);
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    .footer {
+      background:      var(--header-bg);
+      backdrop-filter: blur(20px);
+      color:           var(--text-on-dark);
+      padding:         60px 28px 0;
+      border-top:      1px solid rgba(155, 48, 255, 0.12);
+    }
+
+    .footer-inner {
+      max-width: 1280px;
+      margin:    0 auto;
+    }
+
+    .footer-top {
+      display:               grid;
+      grid-template-columns: 1.6fr 1fr 1fr 1.3fr;
+      gap:                   40px;
+      padding-bottom:        40px;
+      border-bottom:         1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .footer-logo {
+      height:        44px;
+      margin-bottom: 14px;
+      filter:        brightness(1.1);
+    }
+
+    .footer-tagline {
+      font-size:     14px;
+      color:         rgba(255, 255, 255, 0.55);
+      line-height:   1.65;
+      margin-bottom: 22px;
+      max-width:     300px;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap:     10px;
+    }
+
+    .footer-social {
+      width:           42px;
+      height:          42px;
+      border-radius:   12px;
+      display:         flex;
+      align-items:     center;
+      justify-content: center;
+      transition:      var(--transition);
+      overflow:        hidden;
+    }
+
+    .footer-social:hover {
+      transform:  translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .footer-social svg {
+      width:    20px;
+      height:   20px;
+      position: relative;
+      z-index:  1;
+    }
+
+    .footer-social--ig  { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+    .footer-social--ig  svg { fill: #fff; }
+    .footer-social--x   { background: #14171A; }
+    .footer-social--x   svg { fill: #fff; }
+    .footer-social--fb  { background: #1877F2; }
+    .footer-social--fb  svg { fill: #fff; }
+    .footer-social--tk  { background: #111; }
+    .footer-social--tk  svg { fill: #fff; }
+
+    .footer-col-title {
+      font-size:      11.5px;
+      font-weight:    600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color:          rgba(255, 255, 255, 0.35);
+      margin-bottom:  20px;
+      text-align:     left;
+    }
+
+    .footer-links {
+      list-style:   none;
+      text-align:   left;
+      padding-left: 0;
+      margin-left:  0;
+    }
+
+    .footer-links li {
+      margin-bottom: 11px;
+    }
+
+    .footer-links a {
+      font-size:  14.5px;
+      color:      rgba(255, 255, 255, 0.7);
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color:        var(--yellow);
+      padding-left: 4px;
+    }
+
+    .footer-contact-item {
+      display:       flex;
+      gap:           10px;
+      align-items:   flex-start;
+      margin-bottom: 16px;
+      font-size:     14px;
+      color:         rgba(255, 255, 255, 0.7);
+      line-height:   1.55;
+      text-align:    left;
+    }
+
+    .footer-contact-item svg {
+      flex-shrink:     0;
+      width:           16px;
+      height:          16px;
+      margin-top:      3px;
+      stroke:          var(--purple-bright);
+      fill:            none;
+      stroke-width:    2;
+      stroke-linecap:  round;
+      stroke-linejoin: round;
+    }
+
+    .footer-bottom {
+      padding:         22px 0;
+      display:         flex;
+      align-items:     center;
+      justify-content: space-between;
+      flex-wrap:       wrap;
+      gap:             12px;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color:     rgba(255, 255, 255, 0.35);
+    }
+
+    .footer-legal {
+      display: flex;
+      gap:     24px;
+    }
+
+    .footer-legal a {
+      font-size:  13px;
+      color:      rgba(255, 255, 255, 0.4);
+      transition: var(--transition);
+    }
+
+    .footer-legal a:hover {
+      color: var(--yellow);
+    }
+
+
+    /* ============================================================
+       SCROLL REVEAL
+    ============================================================ */
+    .reveal {
+      opacity:    0;
+      transform:  translateY(35px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.vis {
+      opacity:   1;
+      transform: translateY(0);
+    }
+
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+    .reveal-d4 { transition-delay: 0.4s; }
+    .reveal-d5 { transition-delay: 0.5s; }
+
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 1024px) {
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        text-align:            center;
+        gap:                   40px;
+      }
+
+      .hero-desc {
+        margin: 0 auto 40px;
+      }
+
+      .hero-img-wrap {
+        order: -1;
+      }
+
+      .problem-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .solution-grid {
+        grid-template-columns: 1fr;
+        max-width:             500px;
+        margin:                50px auto 0;
+      }
+
+      .smartlock-grid {
+        grid-template-columns: 1fr;
+        text-align:            center;
+      }
+
+      .smartlock-visual {
+        order: -1;
+      }
+
+      .smartlock-features {
+        align-items: center;
+      }
+
+      .smartlock-feat {
+        max-width: 400px;
+      }
+
+      .smartlock-ctas {
+        justify-content: center;
+      }
+
+      .whylist-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+        gap:                   32px;
+      }
+
+    }
+
+    @media (max-width: 768px) {
+
+      .nav-desktop {
+        display: none;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      .nav-mobile {
+        display: block;
+      }
+
+      .header-inner {
+        height: 80px;
+      }
+
+      .logo-img {
+        height: 44px;
+      }
+
+      .nav-mobile {
+        top: 80px;
+      }
+
+      .hero {
+        padding-top: 80px;
+        min-height:  auto;
+      }
+
+      .hero-inner {
+        padding: 36px 20px 60px;
+      }
+
+      .section {
+        padding: 70px 20px;
+      }
+
+      .hero-img-wrap img {
+        max-height: 340px;
+      }
+
+      .revenue-points {
+        flex-direction: column;
+        align-items:    center;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap:                   28px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align:     center;
+      }
+
+    }
+
+    @media (max-width: 480px) {
+
+      .hero-title {
+        font-size: 28px;
+      }
+
+      .hero .btn-primary,
+      .hero .btn-secondary {
+        width:           100%;
+        justify-content: center;
+      }
+
+      .smartlock-icon-wrap {
+        width:  150px;
+        height: 150px;
+      }
+
+      .smartlock-icon-wrap svg {
+        width:  60px;
+        height: 60px;
+      }
+
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="/" class="logo-link">
+        <img
+          src="https://bookleti.ng/wp-content/uploads/2026/03/20260303_202128-scaled-e1772574399392.png"
+          alt="Leti"
+          class="logo-img"
+        >
+      </a>
+      <nav class="nav-desktop">
+        <a href="/">Home</a>
+        <a href="/property-owner" class="active">Property Owner</a>
+        <a href="/investors">Investors</a>
+        <a href="/service-hub">Service Hub</a>
+        <a href="/contact-us">Contact Us</a>
+        <a href="/leti-stay-management" class="nav-highlight">Leti Stay Management</a>
+      </nav>
+      <div class="nav-toggle" id="navToggle" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE NAV -->
+  <nav class="nav-mobile" id="navMobile">
+    <a href="/">Home</a>
+    <a href="/property-owner" class="active">Property Owner</a>
+    <a href="/investors">Investors</a>
+    <a href="/service-hub">Service Hub</a>
+    <a href="/contact-us">Contact Us</a>
+    <a href="/leti-stay-management" class="nav-highlight">Leti Stay Management</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-inner">
+
+      <div class="hero-content">
+        <span class="hero-tag">
+          <span class="hero-tag-dot"></span>
+          For Property Owners
+        </span>
+        <h1 class="hero-title">
+          Your Property Deserves<br>
+          Better Than <em>Middlemen</em>
+        </h1>
+        <p class="hero-desc">
+          Stop losing money to agent chains who inflate your prices and delay your payments.
+          LETI gives you a direct line to verified guests, escrow-protected payments, and a
+          built-in team of service professionals — all from one platform. List once. Earn properly.
+        </p>
+        <!-- FLAG: CTA links to /property-owners-form (plural). Confirm: is the correct slug /property-owner-form or /property-owners-form? -->
+        <div class="hero-ctas">
+          <a href="/property-owners-form" class="btn-primary">
+            List Your Property Now
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-img-wrap">
+        <img
+          src="https://bookleti.ng/wp-content/uploads/2026/03/leti_image_5.png"
+          alt="Property Owner using Leti"
+        >
+      </div>
+
+    </div>
+  </section>
+
+  <!-- THE PROBLEM -->
+  <section class="section problem-section" id="problem">
+    <div class="section-inner">
+      <div style="text-align: center;" class="reveal">
+        <span class="section-tag">&#9888;&#65039; The Problem</span>
+        <h2 class="section-title">The Short-Let Industry Is Broken</h2>
+        <p class="section-subtitle" style="margin: 0 auto;">
+          If you own or manage a short-let property in Nigeria, you already know the daily
+          frustrations that come with it.
+        </p>
+      </div>
+      <div class="problem-grid">
+
+        <div class="problem-card reveal">
+          <h3 class="problem-card-title">What You're Dealing With Right Now</h3>
+          <p class="problem-card-intro">
+            As a property owner in Nigeria's short-let market, these problems aren't new to you:
+          </p>
+          <ul class="problem-list">
+            <li>Guests cancel at the last minute and you lose income with no protection</li>
+            <li>Agents sit between you and your money, delaying payments for days or weeks</li>
+            <li>Fraud and fake bank transfers are a constant risk with no verification system</li>
+            <li>Finding reliable cleaners and maintenance workers is a never-ending headache</li>
+            <li>You're managing bookings through WhatsApp, calls, and scattered spreadsheets</li>
+            <li>Multiple agents list your property at wildly different prices — destroying your brand</li>
+          </ul>
+          <div class="problem-closer">
+            <p>
+              Most property owners are running their short-let business without any real structure.
+              No verification. No payment protection. No accountability.
+            </p>
+            <p style="margin-top: 12px;"><strong>Leti changes all of that.</strong></p>
+          </div>
+        </div>
+
+        <div class="problem-visual reveal reveal-d2">
+          <div class="pain-stat">
+            <div class="pain-stat-title">Price Inflation</div>
+            <div class="pain-stat-text">
+              By the time 3–5 agents pass your listing around, your &#8358;100K apartment is being
+              marketed at &#8358;160K+ — pricing out guests and making you look overpriced.
+            </div>
+          </div>
+          <div class="pain-stat">
+            <div class="pain-stat-title">Zero Accountability</div>
+            <div class="pain-stat-text">
+              When a guest damages your property, good luck tracing them through a chain of agents
+              who don't even have their real name.
+            </div>
+          </div>
+          <div class="pain-stat">
+            <div class="pain-stat-title">Payment Delays</div>
+            <div class="pain-stat-text">
+              Agents collect from the guest, take their cut, then "forget" to send your share for
+              days. Meanwhile, you're covering maintenance costs out of pocket.
+            </div>
+          </div>
+          <div class="pain-stat">
+            <div class="pain-stat-title">Unreliable Vendors</div>
+            <div class="pain-stat-text">
+              You spend more time chasing cleaners and plumbers than actually earning from your property.
+            </div>
+          </div>
+          <div class="pain-stat">
+            <div class="pain-stat-title">No Digital Records</div>
+            <div class="pain-stat-text">
+              Bookings happen over WhatsApp. No confirmations. No receipts. No history. If there's
+              a dispute, it's your word against theirs.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW LETI FIXES IT -->
+  <section class="section solution-section" id="solution">
+    <div class="section-inner">
+      <div style="text-align: center;" class="reveal">
+        <span class="section-tag">&#128272; How Leti Fixes It</span>
+        <h2 class="section-title">Five Layers of Protection for Your Property</h2>
+        <p class="section-subtitle" style="margin: 0 auto;">
+          Leti doesn't just list your property — it protects your income, verifies your guests,
+          and gives you a team of professionals on demand.
+        </p>
+      </div>
+      <div class="solution-grid">
+
+        <div class="solution-card reveal reveal-d1">
+          <div class="solution-num">1</div>
+          <h3 class="solution-card-title">Escrow Payment Protection</h3>
+          <p class="solution-card-text">
+            Every booking payment is held in escrow before check-in. No fake bank alerts. No
+            transfer stories. The money is confirmed and secured before any guest steps foot in
+            your property.
+          </p>
+        </div>
+
+        <div class="solution-card reveal reveal-d2">
+          <div class="solution-num">2</div>
+          <h3 class="solution-card-title">Verified Guest System</h3>
+          <p class="solution-card-text">
+            Every renter on Leti is verified with BVN, a valid government ID, and proof of
+            address. If anything happens, we know exactly who was in your property — and so do you.
+          </p>
+        </div>
+
+        <div class="solution-card reveal reveal-d3">
+          <div class="solution-num">3</div>
+          <h3 class="solution-card-title">Integrated Service Hub</h3>
+          <p class="solution-card-text">
+            Need a cleaner between bookings? A plumber for an emergency? A chef for a guest
+            request? Access verified professionals directly inside the platform — no more
+            chasing vendors.
+          </p>
+        </div>
+
+        <div class="solution-card reveal reveal-d1">
+          <div class="solution-num">4</div>
+          <h3 class="solution-card-title">Structured Booking System</h3>
+          <p class="solution-card-text">
+            Automated booking confirmations, digital records of every transaction, and a
+            communication channel that only opens after payment. Everything is documented,
+            everything is traceable.
+          </p>
+        </div>
+
+        <div class="solution-card reveal reveal-d2">
+          <div class="solution-num">5</div>
+          <h3 class="solution-card-title">No Middle Agents</h3>
+          <p class="solution-card-text">
+            Your property. Your listing. Your price. Guests book directly from you through the
+            platform — no hidden third-party markups, no agent chains, no one inflating your
+            rate behind your back.
+          </p>
+        </div>
+
+        <div
+          class="solution-card reveal reveal-d3"
+          style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background: linear-gradient(135deg, rgba(155,48,255,0.06), rgba(217,70,239,0.06));"
+        >
+          <div style="font-size: 40px; margin-bottom: 12px;">&#128170;</div>
+          <h3 class="solution-card-title">You're in Control</h3>
+          <p class="solution-card-text">
+            Set your own rates, manage your own availability, and communicate directly with
+            guests — all within a secure, structured system that works for you.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SMART LOCK -->
+  <section class="section smartlock-section" id="smartlock">
+    <div class="section-inner">
+      <div class="smartlock-grid">
+
+        <div class="smartlock-visual reveal">
+          <div class="smartlock-icon-wrap">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0110 0v4"/>
+              <circle cx="12" cy="16" r="1"/>
+              <path d="M12 17v2"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="smartlock-content reveal reveal-d2">
+          <span class="section-tag" style="color: var(--yellow);">&#128273; Smart Lock Kit</span>
+          <h2 class="section-title section-title-light">Go Keyless. Go Self-Managed.</h2>
+          <p class="section-subtitle section-subtitle-light">
+            Eliminate the need for anyone to physically hand over keys. LETI's Smart Lock Kit
+            lets you manage property access entirely from your phone — secure, timed, and
+            fully automated.
+          </p>
+          <div class="smartlock-features">
+            <div class="smartlock-feat">
+              <div class="smartlock-feat-icon">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <p class="smartlock-feat-text">
+                <strong>Timed access codes</strong> — generate a unique password for each guest
+                that automatically expires when their booking ends
+              </p>
+            </div>
+            <div class="smartlock-feat">
+              <div class="smartlock-feat-icon">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <p class="smartlock-feat-text">
+                <strong>No physical keys</strong> — guests let themselves in with a code.
+                No agents running around. No key exchanges.
+              </p>
+            </div>
+            <div class="smartlock-feat">
+              <div class="smartlock-feat-icon">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <p class="smartlock-feat-text">
+                <strong>Change passwords anytime</strong> — if you need to revoke access
+                instantly, update the code from anywhere in the world
+              </p>
+            </div>
+            <div class="smartlock-feat">
+              <div class="smartlock-feat-icon">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <p class="smartlock-feat-text">
+                <strong>Professional installation</strong> — we handle setup. Works with
+                your existing door. No major renovations needed.
+              </p>
+            </div>
+          </div>
+          <div class="smartlock-ctas">
+            <a href="/contact-us" class="btn-primary">Contact Us for Smart Lock</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY LIST ON LETI -->
+  <section class="section whylist-section" id="whylist">
+    <div class="section-inner">
+      <div style="text-align: center;" class="reveal">
+        <span class="section-tag">&#11088; Why List on Leti</span>
+        <h2 class="section-title">Smart Property Owners Are Joining Early</h2>
+        <p class="section-subtitle" style="margin: 0 auto;">
+          The earlier you list, the more you gain. Here's what early partners receive — and
+          what happens as Leti scales across Nigeria.
+        </p>
+      </div>
+      <div class="whylist-grid">
+
+        <div class="reveal">
+          <h3 class="whylist-col-title">Early Partner Benefits</h3>
+          <div class="whylist-items">
+            <div class="whylist-item">
+              <div class="whylist-item-icon">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <p class="whylist-item-text">
+                <strong>Priority placement</strong> — when the platform launches, your property
+                shows up first in search results
+              </p>
+            </div>
+            <div class="whylist-item">
+              <div class="whylist-item-icon">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <p class="whylist-item-text">
+                <strong>Early booking traffic advantage</strong> — be the first property renters
+                see when they open the app
+              </p>
+            </div>
+            <div class="whylist-item">
+              <div class="whylist-item-icon">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <p class="whylist-item-text">
+                <strong>Reduced commission</strong> during the early phase — keep more of every booking
+              </p>
+            </div>
+            <div class="whylist-item">
+              <div class="whylist-item-icon">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <p class="whylist-item-text">
+                <strong>Access to pre-launch marketing</strong> — your property gets promoted
+                before the public launch
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal reveal-d2">
+          <h3 class="whylist-col-title">As Leti Scales</h3>
+          <div class="whylist-items">
+            <div class="whylist-item">
+              <div class="whylist-item-icon">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <p class="whylist-item-text">
+                <strong>Strong visibility advantage</strong> — early listers maintain top rankings
+                as the platform grows
+              </p>
+            </div>
+            <div class="whylist-item">
+              <div class="whylist-item-icon">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <p class="whylist-item-text">
+                <strong>Trusted brand association</strong> — being on Leti signals quality, safety,
+                and professionalism to every guest
+              </p>
+            </div>
+            <div class="whylist-item">
+              <div class="whylist-item-icon">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <p class="whylist-item-text">
+                <strong>Higher occupancy rates</strong> — structured bookings + verified guests =
+                more repeat stays and referrals
+              </p>
+            </div>
+            <div class="whylist-item">
+              <div class="whylist-item-icon">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <p class="whylist-item-text">
+                <strong>Add-on revenue</strong> — guests can order services (chef, cleaning, decor)
+                through your listing, increasing per-booking value
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- REVENUE CTA -->
+  <section class="section revenue-section">
+    <div class="revenue-inner reveal">
+      <span class="section-tag" style="color: var(--yellow);">&#128176; How Leti Makes You Money</span>
+      <h2 class="section-title section-title-light" style="margin: 0 auto 8px;">
+        Increase Revenue, Not Just Bookings
+      </h2>
+      <p class="section-subtitle section-subtitle-light" style="margin: 0 auto;">
+        Leti doesn't just bring you guests — it builds a system around your property that
+        generates more income at every touchpoint.
+      </p>
+      <div class="revenue-points">
+        <span class="revenue-point">Reduce vacancy periods</span>
+        <span class="revenue-point">Eliminate guest fraud</span>
+        <span class="revenue-point">Increase repeat bookings</span>
+        <span class="revenue-point">Build guest trust &amp; loyalty</span>
+        <span class="revenue-point">Offer add-on services</span>
+      </div>
+      <div class="revenue-equation">
+        More structure = more bookings.<br>
+        More bookings = higher revenue.
+      </div>
+      <!-- FLAG: CTA links to /property-owners-form (plural). Confirm correct slug. -->
+      <a href="/property-owners-form" class="btn-primary" style="margin-top: 12px;">
+        List Your Property Now
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+
+        <div class="footer-brand">
+          <img
+            src="https://bookleti.ng/wp-content/uploads/2026/03/20260303_202128-scaled-e1772574399392.png"
+            alt="Leti"
+            class="footer-logo"
+          >
+          <p class="footer-tagline">
+            Africa's first structured short-let and home services marketplace.
+            Book apartments. Hire professionals. All in one app.
+          </p>
+          <div class="footer-socials">
+            <a href="https://www.instagram.com/letiapp.ng?igsh=MWxqY2p4ZjA3OXh2bA==" class="footer-social footer-social--ig" aria-label="Instagram">
+              <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <!-- FLAG: X (Twitter) — provide the correct profile URL to replace # -->
+            <a href="#" class="footer-social footer-social--x" aria-label="X">
+              <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <!-- FLAG: Facebook — provide the correct page URL to replace # -->
+            <a href="#" class="footer-social footer-social--fb" aria-label="Facebook">
+              <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <!-- FLAG: TikTok — provide the correct profile URL to replace # -->
+            <a href="#" class="footer-social footer-social--tk" aria-label="TikTok">
+              <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Platform</h4>
+          <ul class="footer-links">
+            <li><a href="/investors">Investors</a></li>
+            <li><a href="/property-owner">Property Owners</a></li>
+            <li><a href="/service-hub">Service Hub</a></li>
+            <li><a href="/leti-stay-management">Leti Stay Management</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Company</h4>
+          <ul class="footer-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/contact-us">Contact Us</a></li>
+            <li><a href="/faq">FAQs</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Contact</h4>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            <span>294, Herbert Macaulay Way,<br>Sabo Yaba, Lagos</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+            </svg>
+            <span>+234 913 373 0647</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            <span>letiappsocial@gmail.com</span>
+          </div>
+        </div>
+
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">Copyright &copy; 2026 LETI. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="/privacy-policy">Privacy Policy</a>
+          <a href="/terms-and-conditions">Terms &amp; Conditions</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+
+    // NAV TOGGLE
+    function toggleMenu() {
+      document.getElementById('navToggle').classList.toggle('open');
+      document.getElementById('navMobile').classList.toggle('open');
+    }
+
+    document.querySelectorAll('.nav-mobile a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        document.getElementById('navToggle').classList.remove('open');
+        document.getElementById('navMobile').classList.remove('open');
+      });
+    });
+
+
+    // SCROLL REVEAL
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) e.target.classList.add('vis');
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(function (el) { obs.observe(el); });
+
+
+    // HEADER SCROLL
+    window.addEventListener('scroll', function () {
+      var h = document.getElementById('header');
+      h.style.background = window.pageYOffset > 80
+        ? 'rgba(45, 8, 69, 0.97)'
+        : 'rgba(45, 8, 69, 0.94)';
+    }, { passive: true });
+
+  </script>
+</body>
+</html>
